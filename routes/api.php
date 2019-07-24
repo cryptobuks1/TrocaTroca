@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
     Route::resource('states', 'StateController', ['only' => ['index', 'show']]);
+    Route::resource('cities', 'CityController', ['except' => ['create', 'edit']]);
 });
