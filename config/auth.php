@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => TrocaTroca\User::class,
+            'model' => TrocaTroca\Models\User::class,
         ],
 
         // 'users' => [
