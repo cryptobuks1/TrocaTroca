@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitiesTable extends Migration
+class CreateSectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('sectors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('city_name');
-            $table->bigInteger('state_id')->unsigned();
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->string('sector_name');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +28,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('sectors');
     }
 }

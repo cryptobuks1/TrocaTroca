@@ -4,7 +4,7 @@ namespace TrocaTroca\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CityUpdateRequest extends FormRequest
+class SectorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class CityUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'city_name' => 'required|max:30|unique:cities,city_name'
+            'sector_name' => 'required|max:30|unique:sectors,sector_name'
         ];
     }
 }

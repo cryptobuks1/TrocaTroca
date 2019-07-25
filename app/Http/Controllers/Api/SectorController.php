@@ -7,13 +7,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use TrocaTroca\Http\Controllers\Controller;
-use TrocaTroca\Http\Requests\CityCreateRequest;
-use TrocaTroca\Http\Requests\CityUpdateRequest;
-use TrocaTroca\Http\Resources\CityResource;
-use TrocaTroca\Models\City;
+use TrocaTroca\Http\Requests\SectorRequest;
+use TrocaTroca\Http\Resources\SectorResource;
+use TrocaTroca\Models\Sector;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class SectorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,67 +21,67 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::paginate(10);
-        return CityResource::collection($cities);
+        $sectors = Sector::paginate(10);
+        return SectorResource::collection($sectors);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param CityCreateRequest $request
+     * @param SectorRequest $request
      * @return Response
      */
-    public function store(CityCreateRequest $request)
+    public function store(SectorRequest $request)
     {
-        $city = City::create($request->all());
-        return $city;
+        $sector = Sector::create($request->all());
+        return $sector;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \TrocaTroca\Models\City $city
-     * @return CityResource
+     * @param Sector $sector
+     * @return SectorResource
      */
-    public function show(City $city)
+    public function show(Sector $sector)
     {
-        return new CityResource($city);
+        return new SectorResource($sector);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param CityUpdateRequest $request
-     * @param  \TrocaTroca\Models\City $city
+     * @param SectorRequest $request
+     * @param Sector $sector
      * @return Response
      */
-    public function update(CityUpdateRequest $request, City $city)
+    public function update(SectorRequest $request, Sector $sector)
     {
-        $city->fill($request->all());
-        $city->save();
+        $sector->fill($request->all());
+        $sector->save();
         return response()->json([], 204);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \TrocaTroca\Models\City $city
+     * @param Sector $sector
      * @return Response
      * @throws \Exception
      */
-    public function destroy(City $city)
+    public function destroy(Sector $sector)
     {
-        $city->delete();
+        $sector->delete();
         return response()->json([], 204);
     }
 
     /**
-     * @param City $city
+     * @param Sector $sector
      * @return JsonResponse
      */
-    public function restore(City $city)
+    public function restore(Sector $sector)
     {
-        $city->restore();
+        $sector->restore();
         return response()->json([], 204);
     }
 
