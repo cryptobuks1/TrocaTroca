@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TurnsTableSeeder::class);
         $this->call(TypesTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
+        $this->call(ExchangesTableSeeder::class);
     }
 }
