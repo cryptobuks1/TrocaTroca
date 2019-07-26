@@ -31,4 +31,5 @@ Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
     Route::resource('groups', 'GroupController', ['only' => ['index', 'show']]);
     Route::resource('turns', 'TurnController', ['only' => ['index', 'show']]);
     Route::resource('types', 'TypeController', ['only' => ['index', 'show']]);
+    Route::resource('statuses', 'StatusController', ['only' => ['index', 'show']]);
 });
