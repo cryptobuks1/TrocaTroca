@@ -20,7 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
     Route::patch('cities/{city}/restore', 'CityController@restore');
     Route::patch('sectors/{srctor}/restore', 'SectorController@restore');
+    Route::patch('units/{unit}/restore', 'UnitController@restore');
     Route::resource('states', 'StateController', ['only' => ['index', 'show']]);
     Route::resource('cities', 'CityController', ['except' => ['create', 'edit']]);
     Route::resource('sectors', 'SectorController', ['except' => ['create', 'edit']]);
+    Route::resource('units', 'UnitController', ['except' => ['create', 'edit']]);
 });
