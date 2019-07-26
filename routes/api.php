@@ -25,4 +25,5 @@ Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
     Route::resource('cities', 'CityController', ['except' => ['create', 'edit']]);
     Route::resource('sectors', 'SectorController', ['except' => ['create', 'edit']]);
     Route::resource('units', 'UnitController', ['except' => ['create', 'edit']]);
+    Route::resource('units.sectors', 'UnitSectorController', ['only' => ['index', 'store', 'destroy']]);
 });

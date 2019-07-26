@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use TrocaTroca\Models\Sector;
 use TrocaTroca\Models\Unit;
 
 class UnitsTableSeeder extends Seeder
@@ -12,6 +13,12 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Unit::class, 15)->create();
+        $sectors = Sector::all();
+        factory(Unit::class, 15)
+            ->create()
+            ->each(function (Unit $unit) use ($sectors) {
+                 $sectorId = $sectors->random()->id;
+                 $unit->sectors()->attach($sectorId);
+            });
     }
 }

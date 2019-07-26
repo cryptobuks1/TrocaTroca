@@ -3,6 +3,7 @@
 namespace TrocaTroca\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
@@ -18,5 +19,13 @@ class Unit extends Model
     public function city()
     {
         return $this->belongsTo(City::class)->withTrashed();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function sectors()
+    {
+        return $this->belongsToMany(Sector::class);
     }
 }
