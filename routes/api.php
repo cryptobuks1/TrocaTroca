@@ -42,4 +42,5 @@ Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
     Route::resource('types', 'TypeController', ['only' => ['index', 'show']]);
     Route::resource('statuses', 'StatusController', ['only' => ['index', 'show']]);
     Route::resource('exchanges', 'ExchangeController', ['only' => ['index', 'store', 'show']]);
+    Route::resource('logs', 'LogController', ['only' => ['index', 'store', 'show']]);
 });

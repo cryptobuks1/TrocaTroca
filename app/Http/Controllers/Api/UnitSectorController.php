@@ -2,6 +2,8 @@
 
 namespace TrocaTroca\Http\Controllers\Api;
 
+use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -39,6 +41,11 @@ class UnitSectorController extends Controller
         $sectorsAttachedId = $changed['attached'];
         /** @var Collection $sectors */
         $sectors = Sector::whereIn('id', $sectorsAttachedId)->get();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Cadastrou Setores da Unidade"
+        ]);
         return $sectors->count() ? response()->json(new UnitSectorResource($unit), 201) : $sectors;
     }
 
@@ -52,6 +59,11 @@ class UnitSectorController extends Controller
     public function destroy(Unit $unit, Sector $sector)
     {
         $unit->sectors()->detach($sector->id);
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Removeu Setores da Unidade"
+        ]);
         return response()->json([], 204);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace TrocaTroca\Http\Controllers\Api;
 
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use TrocaTroca\Events\ExchangeAuthorizedEvent;
 use TrocaTroca\Events\ExchangeCanceledEvent;
@@ -70,6 +72,11 @@ class ExchangeController extends Controller
     {
         $exchange = Exchange::create($request->all());
         event(new ExchangeCreatedEvent($exchange));
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Cadastrou Troca"
+        ]);
         $exchange->refresh();
 
         return new ExchangeResource($exchange);
@@ -97,6 +104,11 @@ class ExchangeController extends Controller
         $exchange->fill($input);
         $exchange->save();
         event(new ExchangeConfirmedEvent($exchange));
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Confirmou Troca"
+        ]);
         return new ExchangeResource($exchange);
     }
 
@@ -113,6 +125,11 @@ class ExchangeController extends Controller
         $exchange->fill($input);
         $exchange->save();
         event(new ExchangeAuthorizedEvent($exchange));
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Autorizou Troca"
+        ]);
         return new ExchangeResource($exchange);
     }
     /**
@@ -128,6 +145,11 @@ class ExchangeController extends Controller
         $exchange->fill($input);
         $exchange->save();
         event(new ExchangeDeclinedEvent($exchange));
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Rejeitou Troca"
+        ]);
         return new ExchangeResource($exchange);
     }
     /**
@@ -143,6 +165,11 @@ class ExchangeController extends Controller
         $exchange->fill($input);
         $exchange->save();
         event(new ExchangeCanceledEvent($exchange));
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Cancelou Troca"
+        ]);
         return new ExchangeResource($exchange);
     }
     /**
@@ -157,6 +184,11 @@ class ExchangeController extends Controller
         $input = $request->only(['status_id', 'date_conclusion']);
         $exchange->fill($input);
         $exchange->save();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Concluiu Troca"
+        ]);
         return new ExchangeResource($exchange);
     }
     /**
@@ -171,6 +203,11 @@ class ExchangeController extends Controller
         $input = $request->only(['status_id', 'date_pending']);
         $exchange->fill($input);
         $exchange->save();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Troca Ficou Pendente"
+        ]);
         return new ExchangeResource($exchange);
     }
 }

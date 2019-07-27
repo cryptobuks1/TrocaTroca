@@ -2,6 +2,8 @@
 
 namespace TrocaTroca\Http\Controllers\Api;
 
+use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -34,6 +36,11 @@ class SectorController extends Controller
     public function store(SectorRequest $request)
     {
         $sector = Sector::create($request->all());
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Cadastrou Setor"
+        ]);
         return $sector;
     }
 
@@ -59,6 +66,11 @@ class SectorController extends Controller
     {
         $sector->fill($request->all());
         $sector->save();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Atualizou Setor"
+        ]);
         return response()->json([], 204);
     }
 
@@ -72,6 +84,11 @@ class SectorController extends Controller
     public function destroy(Sector $sector)
     {
         $sector->delete();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Removeu Setor"
+        ]);
         return response()->json([], 204);
     }
 
@@ -82,6 +99,11 @@ class SectorController extends Controller
     public function restore(Sector $sector)
     {
         $sector->restore();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Restaurou Setor"
+        ]);
         return response()->json([], 204);
     }
 

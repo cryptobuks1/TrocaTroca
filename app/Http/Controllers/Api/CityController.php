@@ -2,16 +2,19 @@
 
 namespace TrocaTroca\Http\Controllers\Api;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use TrocaTroca\Http\Controllers\Controller;
 use TrocaTroca\Http\Requests\CityCreateRequest;
 use TrocaTroca\Http\Requests\CityUpdateRequest;
 use TrocaTroca\Http\Resources\CityResource;
 use TrocaTroca\Models\City;
 use Illuminate\Http\Request;
+use TrocaTroca\Models\Log;
 
 class CityController extends Controller
 {
@@ -35,6 +38,11 @@ class CityController extends Controller
     public function store(CityCreateRequest $request)
     {
         $city = City::create($request->all());
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Cadastrou Cidade"
+        ]);
         return $city;
     }
 
@@ -60,6 +68,11 @@ class CityController extends Controller
     {
         $city->fill($request->all());
         $city->save();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Atualizou Cidade"
+        ]);
         return response()->json([], 204);
     }
 
@@ -73,6 +86,11 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         $city->delete();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Removeu Cidade"
+        ]);
         return response()->json([], 204);
     }
 
@@ -83,6 +101,11 @@ class CityController extends Controller
     public function restore(City $city)
     {
         $city->restore();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Restaurou Cidade"
+        ]);
         return response()->json([], 204);
     }
 

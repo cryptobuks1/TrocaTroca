@@ -2,6 +2,8 @@
 
 namespace TrocaTroca\Http\Controllers\Api;
 
+use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -34,6 +36,11 @@ class UnitController extends Controller
     public function store(UnitCreateRequest $request)
     {
         $unit = Unit::create($request->all());
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Cadastrou Unidade"
+        ]);
         return $unit;
     }
 
@@ -59,6 +66,11 @@ class UnitController extends Controller
     {
         $unit->fill($request->all());
         $unit->save();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Atualizou Unidade"
+        ]);
         return response()->json([], 204);
     }
 
@@ -72,6 +84,11 @@ class UnitController extends Controller
     public function destroy(Unit $unit)
     {
         $unit->delete();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Removeu Unidade"
+        ]);
         return response()->json([], 204);
     }
 
@@ -82,6 +99,11 @@ class UnitController extends Controller
     public function restore(Unit $unit)
     {
         $unit->restore();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Restaurou Unidade"
+        ]);
         return response()->json([], 204);
     }
 

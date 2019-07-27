@@ -2,6 +2,8 @@
 
 namespace TrocaTroca\Http\Controllers\Api;
 
+use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -35,6 +37,11 @@ class UserController extends Controller
     {
         $user = User::create($request->all());
         event(new UserCreatedEvent($user));
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Cadastrou Usuário"
+        ]);
         return $user;
     }
 
@@ -60,6 +67,11 @@ class UserController extends Controller
     {
         $user->fill($request->all());
         $user->save();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Atualizou Usuário"
+        ]);
         return response()->json([], 204);
     }
 
@@ -73,6 +85,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Removeu Usuário"
+        ]);
         return response()->json([], 204);
     }
 
@@ -83,6 +100,11 @@ class UserController extends Controller
     public function restore(User $user)
     {
         $user->restore();
+        DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon::now(),
+            'action' => "Restaurou Usuário"
+        ]);
         return response()->json([], 204);
     }
 
