@@ -13,8 +13,23 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'TrocaTroca\Events\Event' => [
-            'TrocaTroca\Listeners\EventListener',
+        'TrocaTroca\Events\UserCreatedEvent' => [
+            'TrocaTroca\Listeners\SendEmailToDefinedPassword',
+        ],
+        'TrocaTroca\Events\ExchangeCreatedEvent' => [
+            'TrocaTroca\Listeners\SendEmailToExchangeCreatedUsers',
+        ],
+        'TrocaTroca\Events\ExchangeConfirmedEvent' => [
+            'TrocaTroca\Listeners\SendEmailToExchangeComfirmedUser',
+        ],
+        'TrocaTroca\Events\ExchangeDeclinedEvent' => [
+            'TrocaTroca\Listeners\SendEmailToExchangeDeclinedUser',
+        ],
+        'TrocaTroca\Events\ExchangeAuthorizedEvent' => [
+            'TrocaTroca\Listeners\SendEmailToExchangeAuthorizedUsers',
+        ],
+        'TrocaTroca\Events\ExchangeCanceledEvent' => [
+            'TrocaTroca\Listeners\SendEmailToExchangeCanceledUsers',
         ],
     ];
 

@@ -3,9 +3,12 @@
 namespace TrocaTroca\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Exchange extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
         'unit_id',
         'sector_id',

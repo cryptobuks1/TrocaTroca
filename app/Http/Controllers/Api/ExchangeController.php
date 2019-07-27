@@ -3,6 +3,11 @@
 namespace TrocaTroca\Http\Controllers\Api;
 
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use TrocaTroca\Events\ExchangeAuthorizedEvent;
+use TrocaTroca\Events\ExchangeCanceledEvent;
+use TrocaTroca\Events\ExchangeConfirmedEvent;
+use TrocaTroca\Events\ExchangeCreatedEvent;
+use TrocaTroca\Events\ExchangeDeclinedEvent;
 use TrocaTroca\Http\Controllers\Controller;
 use TrocaTroca\Http\Requests\ExchangeAuthorizeRequest;
 use TrocaTroca\Http\Requests\ExchangeCancelRequest;
@@ -14,6 +19,7 @@ use TrocaTroca\Http\Requests\ExchangePendingRequest;
 use TrocaTroca\Http\Resources\ExchangeResource;
 use TrocaTroca\Models\Exchange;
 use Illuminate\Http\Request;
+use TrocaTroca\Notifications\ExchangeCreatedNotification;
 
 class ExchangeController extends Controller
 {
@@ -63,7 +69,9 @@ class ExchangeController extends Controller
     public function store(ExchangeCreateRequest $request)
     {
         $exchange = Exchange::create($request->all());
+        event(new ExchangeCreatedEvent($exchange));
         $exchange->refresh();
+
         return new ExchangeResource($exchange);
     }
     /**
@@ -88,6 +96,7 @@ class ExchangeController extends Controller
         $input = $request->only(['status_id', 'date_confirmation']);
         $exchange->fill($input);
         $exchange->save();
+        event(new ExchangeConfirmedEvent($exchange));
         return new ExchangeResource($exchange);
     }
 
@@ -103,6 +112,7 @@ class ExchangeController extends Controller
         $input = $request->only(['status_id', 'date_autorization']);
         $exchange->fill($input);
         $exchange->save();
+        event(new ExchangeAuthorizedEvent($exchange));
         return new ExchangeResource($exchange);
     }
     /**
@@ -117,6 +127,7 @@ class ExchangeController extends Controller
         $input = $request->only(['status_id', 'date_declination']);
         $exchange->fill($input);
         $exchange->save();
+        event(new ExchangeDeclinedEvent($exchange));
         return new ExchangeResource($exchange);
     }
     /**
@@ -131,6 +142,7 @@ class ExchangeController extends Controller
         $input = $request->only(['status_id', 'date_cancelation']);
         $exchange->fill($input);
         $exchange->save();
+        event(new ExchangeCanceledEvent($exchange));
         return new ExchangeResource($exchange);
     }
     /**

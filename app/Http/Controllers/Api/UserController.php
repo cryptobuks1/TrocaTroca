@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use TrocaTroca\Events\UserCreatedEvent;
 use TrocaTroca\Http\Controllers\Controller;
 use TrocaTroca\Http\Requests\UserCreateRequest;
 use TrocaTroca\Http\Resources\UserResource;
@@ -33,6 +34,7 @@ class UserController extends Controller
     public function store(UserCreateRequest $request)
     {
         $user = User::create($request->all());
+        event(new UserCreatedEvent($user));
         return $user;
     }
 
