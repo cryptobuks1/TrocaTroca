@@ -3,6 +3,7 @@
 namespace TrocaTroca\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use TrocaTroca\Http\Middleware\CorsMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -19,6 +20,7 @@ class Kernel extends HttpKernel
         \TrocaTroca\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \TrocaTroca\Http\Middleware\TrustProxies::class,
+        CorsMiddleware::class
     ];
 
     /**

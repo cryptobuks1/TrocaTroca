@@ -1,0 +1,19 @@
+<div class="col col-md-4 offset-4" *ngIf="showMessageError">
+  <alert-error [(show)]="showMessageError">Credenciais inválidas</alert-error>
+</div>
+<form class="form-signin" (submit)="submit()">
+  <img class="mb-6" src='assets/images/TrocaTurno.jpg' alt="" horizontal-align="middle" width="300" height="250">
+  <p></p>
+  <p></p>
+  <h1 class="h3 mb-3 font-weight-normal">Gestão de Trocas de Turnos - Login</h1>
+  <label for="key" class="sr-only">Chave</label>
+  <input type="text" id="key" class="form-control" name="key" placeholder="Digite o sua Chave" required autofocus
+         [(ngModel)]="credentials.key">
+  <label for="password" class="sr-only">Senha</label>
+  <input type="password" id="password" name="password"  class="form-control" placeholder="Digite a sua Senha" required
+         [(ngModel)]="credentials.password">
+
+  <button class="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
+  {{credentials | json}}}
+  <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
+</form>

@@ -1,0 +1,17 @@
+<form (submit)="submit()">
+  <modal (onHide)="hideModal($event)">
+    <h5 modal-title>
+      Nova Categoria
+    </h5>
+    <div modal-body>
+      <div class="form-group">
+        <label for="city_name">Nome</label>
+        <input type="text" class="form-control" id="city_name" name="name" required [(ngModel)]="city.city_name">
+      </div>
+    </div>
+    <div modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      <button type="submit" class="btn btn-success">Salvar</button>
+    </div>
+  </modal>
+</form>
