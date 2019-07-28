@@ -1,22 +1,22 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
 import {HttpErrorResponse} from "@angular/common/http";
-import {City} from "../../../../model";
-import {CityHttpService} from "../../../../services/http/city-http.service";
+import {Unit} from "../../../../model";
+import {UnitHttpService} from "../../../../services/http/unit-http.service";
 
 @Component({
-    selector: 'city-edit-modal',
-    templateUrl: './city-edit-modal.component.html',
-    styleUrls: ['./city-edit-modal.component.css']
+  selector: 'unit-edit-modal',
+  templateUrl: './unit-edit-modal.component.html',
+  styleUrls: ['./unit-edit-modal.component.css']
 })
-export class CityEditModalComponent implements OnInit {
+export class UnitEditModalComponent implements OnInit {
 
-    city: City = {
-        city_name: '',
-        state: null
+    unit: Unit = {
+        unit_name: '',
+        city: null
     };
 
-    _cityId: number;
+    _unitId: number;
 
     @ViewChild(ModalComponent)
     modal: ModalComponent;
@@ -26,25 +26,25 @@ export class CityEditModalComponent implements OnInit {
     @Output()
     onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
 
-    constructor(public cityHttp: CityHttpService) {
+    constructor(public unitHttp: UnitHttpService) {
     }
 
     ngOnInit() {
     }
 
     @Input()
-    set cityId(value) {
-        this._cityId = value;
-        if (this._cityId) {
-            this.cityHttp.get(this._cityId)
-                .subscribe(city => this.city = city)
+    set unitId(value) {
+        this._unitId = value;
+        if (this._unitId) {
+            this.unitHttp.get(this._unitId)
+                .subscribe(unit => this.unit = unit)
         }
     }
 
     submit() {
-        this.cityHttp.update(this._cityId, this.city)
-            .subscribe((city) => {
-                this.onSuccess.emit(city);
+        this.unitHttp.update(this._unitId, this.unit)
+            .subscribe((unit) => {
+                this.onSuccess.emit(unit);
                 this.modal.hide();
             }, error => this.onError.emit(error));
     }

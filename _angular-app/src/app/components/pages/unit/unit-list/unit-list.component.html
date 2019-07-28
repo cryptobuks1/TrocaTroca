@@ -1,0 +1,49 @@
+<div class="row">
+  <h1>Listagem de Unidades</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td colspan="5">
+        <button class="btn btn-success" (click)="unitInsertService.showModalInsert()">Nova Unidade</button>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 50%">Nome</th>
+      <th style="width: 10%">Cidade</th>
+      <th style="width: 10%">Estado</th>
+      <th style="width: 10%">Sigla</th>
+      <th style="width: 10%">Criado Em</th>
+      <th style="width: 10%">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let unit of units | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+      <td>{{ unit.unit_name }}</td>
+      <td>{{ unit.city.city_name }}</td>
+      <td>{{ unit.city.state.state_name }}</td>
+      <td>{{ unit.city.state.initials }}</td>
+      <td>{{ unit.created_at | date: 'dd/MM/yyyy' }}</td>
+      <td>
+        <a href="javascript:void(0)" (click)="unitEditService.showModalEdit(unit.id)">
+          <i class="fas fa-edit"></i>
+        </a>
+        |
+        <a href="javascript:void(0)" (click)="unitDeleteService.showModalDelete(unit.id)">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+          (pageChange)="pageChanged($event)"
+          previousLabel="Anterior"
+          nextLabel="Próximo"
+  ></pagination-controls>
+</div>
+<unit-new-modal (onSuccess)="unitInsertService.onInsertSuccess($event)"
+                (onError)="unitInsertService.onInsertError($event)"></unit-new-modal>
+<unit-edit-modal [unitId]="unitId" (onSuccess)="unitEditService.onEditSuccess($event)"
+                 (onError)="unitEditService.onEditError($event)"></unit-edit-modal>
+<unit-delete-modal [unitId]="unitId" (onSuccess)="unitDeleteService.onDeleteSuccess($event)"
+                   (onError)="unitDeleteService.onDeleteError($event)"></unit-delete-modal>

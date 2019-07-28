@@ -20,3 +20,11 @@ export interface Sector {
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
+
+export interface Unit {
+    id?: number;
+    unit_name: string;
+    city: City;
+    readonly created_at?: {date: string};
+    readonly updated_at?: {date: string};
+}

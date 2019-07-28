@@ -17,6 +17,10 @@ import { SectorListComponent } from './components/pages/sector/sector-list/secto
 import { SectorEditModalComponent } from './components/pages/sector/sector-edit-modal/sector-edit-modal.component';
 import { SectorNewModalComponent } from './components/pages/sector/sector-new-modal/sector-new-modal.component';
 import { SectorDeleteModalComponent } from './components/pages/sector/sector-delete-modal/sector-delete-modal.component';
+import { UnitListComponent } from './components/pages/unit/unit-list/unit-list.component';
+import { UnitEditModalComponent } from './components/pages/unit/unit-edit-modal/unit-edit-modal.component';
+import { UnitNewModalComponent } from './components/pages/unit/unit-new-modal/unit-new-modal.component';
+import { UnitDeleteModalComponent } from './components/pages/unit/unit-delete-modal/unit-delete-modal.component';
 
 const routes: Routes = [
     {
@@ -27,6 +31,9 @@ const routes: Routes = [
     },
     {
         path: 'sectors/list', component: SectorListComponent
+    },
+    {
+        path: 'units/list', component: UnitListComponent
     },
     { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
@@ -44,7 +51,11 @@ const routes: Routes = [
     SectorListComponent,
     SectorEditModalComponent,
     SectorNewModalComponent,
-    SectorDeleteModalComponent
+    SectorDeleteModalComponent,
+    UnitListComponent,
+    UnitEditModalComponent,
+    UnitNewModalComponent,
+    UnitDeleteModalComponent
   ],
   imports: [
     BrowserModule,
