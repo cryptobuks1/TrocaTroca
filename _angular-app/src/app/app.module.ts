@@ -21,6 +21,8 @@ import { UnitListComponent } from './components/pages/unit/unit-list/unit-list.c
 import { UnitEditModalComponent } from './components/pages/unit/unit-edit-modal/unit-edit-modal.component';
 import { UnitNewModalComponent } from './components/pages/unit/unit-new-modal/unit-new-modal.component';
 import { UnitDeleteModalComponent } from './components/pages/unit/unit-delete-modal/unit-delete-modal.component';
+import { UnitSectorListComponent } from './components/pages/unit-sector/unit-sector-list/unit-sector-list.component';
+import { UnitSectorNewModalComponent } from './components/pages/unit-sector/unit-sector-new-modal/unit-sector-new-modal.component';
 
 const routes: Routes = [
     {
@@ -34,6 +36,9 @@ const routes: Routes = [
     },
     {
         path: 'units/list', component: UnitListComponent
+    },
+    {
+        path: 'units/:unit/sectors/list', component: UnitSectorListComponent
     },
     { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
@@ -55,7 +60,9 @@ const routes: Routes = [
     UnitListComponent,
     UnitEditModalComponent,
     UnitNewModalComponent,
-    UnitDeleteModalComponent
+    UnitDeleteModalComponent,
+    UnitSectorListComponent,
+    UnitSectorNewModalComponent
   ],
   imports: [
     BrowserModule,

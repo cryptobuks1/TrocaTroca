@@ -8,12 +8,12 @@
       </td>
     </tr>
     <tr>
-      <th style="width: 50%">Nome</th>
+      <th style="width: 45%">Nome</th>
       <th style="width: 10%">Cidade</th>
       <th style="width: 10%">Estado</th>
       <th style="width: 10%">Sigla</th>
       <th style="width: 10%">Criado Em</th>
-      <th style="width: 10%">Ações</th>
+      <th style="width: 15%">Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -30,6 +30,10 @@
         |
         <a href="javascript:void(0)" (click)="unitDeleteService.showModalDelete(unit.id)">
           <i class="fas fa-trash-alt"></i>
+        </a>
+        |
+        <a href="javascript:void(0)" [routerLink]="['/units', unit.id, 'sectors', 'list']">
+          Setores
         </a>
       </td>
     </tr>

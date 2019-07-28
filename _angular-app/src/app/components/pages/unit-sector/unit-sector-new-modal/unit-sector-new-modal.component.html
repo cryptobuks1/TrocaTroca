@@ -1,0 +1,9 @@
+<form class="form-inline" (submit)="submit()">
+  <div class="col-auto">
+    <label for="sectors[]"><b>Setores</b></label>
+    <select class="form-control" name="sectors[]" id="sectors[]" [(ngModel)]="sectorsId" multiple>
+      <option *ngFor="let sector of sectors" [ngValue]="sector.id">{{sector.sector_name}}</option>
+    </select>
+  </div>
+  <button class="btn btn-success" type="submit">Incluir Setores</button>
+</form>

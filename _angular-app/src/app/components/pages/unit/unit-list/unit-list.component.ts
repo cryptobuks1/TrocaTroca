@@ -50,7 +50,7 @@ export class UnitListComponent implements OnInit {
     }
 
     getUnits() {
-        this.unitHttp.list(this.pagination.page)
+        this.unitHttp.list({ page: this.pagination.page})
             .subscribe(response => {
                 this.units = response.data;
                 this.pagination.totalItems = response.meta.total

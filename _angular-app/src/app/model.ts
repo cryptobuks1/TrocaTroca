@@ -28,3 +28,8 @@ export interface Unit {
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
+
+export interface UnitSector {
+    unit: Unit;
+    sectors: Sector[];
+}

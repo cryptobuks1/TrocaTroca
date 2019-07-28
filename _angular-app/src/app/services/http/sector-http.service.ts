@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {Sector} from "../../model";
+import {SearchParams, SearchParamsBuilder} from "./http-resource";
 
 @Injectable({
     providedIn: 'root'
@@ -14,12 +15,10 @@ export class SectorHttpService {
     constructor(private http: HttpClient) {
     }
 
-    list(page: number): Observable<{ data: Array<Sector>, meta: any }> {
+    list(searchParams: SearchParams): Observable<{ data: Array<Sector>, meta: any }> {
         const token = window.localStorage.getItem('token');
         const params = new HttpParams({
-            fromObject: {
-                page: page + ""
-            }
+            fromObject: new SearchParamsBuilder(searchParams).makeObject()
         });
         return this.http.get<{ data: Array<Sector>, meta }>(this.baseUrl, {
             headers: {

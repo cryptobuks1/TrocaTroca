@@ -50,7 +50,7 @@ export class CityListComponent implements OnInit {
     }
 
     getCities() {
-        this.cityHttp.list(this.pagination.page)
+        this.cityHttp.list({ page: this.pagination.page})
             .subscribe(response => {
                 this.cities = response.data;
                 this.pagination.totalItems = response.meta.total

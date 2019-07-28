@@ -50,7 +50,7 @@ export class SectorListComponent implements OnInit {
     }
 
     getSectors() {
-        this.sectorHttp.list(this.pagination.page)
+        this.sectorHttp.list({ page: this.pagination.page})
             .subscribe(response => {
                 this.sectors = response.data;
                 this.pagination.totalItems = response.meta.total
