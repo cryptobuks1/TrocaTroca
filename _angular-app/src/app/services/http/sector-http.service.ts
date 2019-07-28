@@ -4,65 +4,41 @@ import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {Sector} from "../../model";
 import {SearchParams, SearchParamsBuilder} from "./http-resource";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class SectorHttpService {
 
-    private baseUrl = 'http://localhost:8000/api/sectors';
+    private baseUrl = `${environment.api.url}/sectors`;
 
     constructor(private http: HttpClient) {
     }
 
     list(searchParams: SearchParams): Observable<{ data: Array<Sector>, meta: any }> {
-        const token = window.localStorage.getItem('token');
         const params = new HttpParams({
             fromObject: new SearchParamsBuilder(searchParams).makeObject()
         });
-        return this.http.get<{ data: Array<Sector>, meta }>(this.baseUrl, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
+        return this.http.get<{ data: Array<Sector>, meta }>(this.baseUrl);
     }
 
     get(id: number): Observable<Sector> {
-        const token = window.localStorage.getItem('token');
-        return this.http.get<{ data: Sector }>(`${this.baseUrl}/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        return this.http.get<{ data: Sector }>(`${this.baseUrl}/${id}`)
             .pipe(map(response => response.data))
     }
 
     create(data: Sector): Observable<Sector> {
-        const token = window.localStorage.getItem('token');
-        return this.http.post<{ data: Sector }>(this.baseUrl, data, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        return this.http.post<{ data: Sector }>(this.baseUrl, data)
             .pipe(map(response => response.data))
     }
 
     update(id: number, data: Sector) {
-        const token = window.localStorage.getItem('token');
-        return this.http.put<{ data: Sector }>(`${this.baseUrl}/${id}`, data, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        return this.http.put<{ data: Sector }>(`${this.baseUrl}/${id}`, data)
             .pipe(map(response => response.data))
     }
 
     destroy(id: number): Observable<any> {
-        const token = window.localStorage.getItem('token');
-        return this.http.delete(`${this.baseUrl}/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        return this.http.delete(`${this.baseUrl}/${id}`)
     }
 }

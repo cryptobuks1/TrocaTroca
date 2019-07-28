@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {RouterModule, Routes} from "@angular/router";
 import { CityListComponent } from './components/pages/city/city-list/city-list.component';
 import { AlertErrorComponent } from './components/bootstrap/alert-error/alert-error.component';
 import { ModalComponent } from './components/bootstrap/modal/modal.component';
@@ -27,28 +26,21 @@ import { UserListComponent } from './components/pages/user/user-list/user-list.c
 import { UserEditModalComponent } from './components/pages/user/user-edit-modal/user-edit-modal.component';
 import { UserNewModalComponent } from './components/pages/user/user-new-modal/user-new-modal.component';
 import { UserDeleteModalComponent } from './components/pages/user/user-delete-modal/user-delete-modal.component';
+import { NavbarComponent } from './components/bootstrap/navbar/navbar.component';
+import {AppRoutingModule} from "./app-routing/app-routing.module";
+import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
+import {AuthService} from "./services/auth.service";
 
-const routes: Routes = [
-    {
-        path: 'login', component: LoginComponent
-    },
-    {
-        path: 'cities/list', component: CityListComponent
-    },
-    {
-        path: 'sectors/list', component: SectorListComponent
-    },
-    {
-        path: 'units/list', component: UnitListComponent
-    },
-    {
-        path: 'units/:unit/sectors/list', component: UnitSectorListComponent
-    },
-    {
-        path: 'users/list', component: UserListComponent
-    },
-    { path: '', redirectTo: '/login', pathMatch: 'full'}
-];
+function jwtFactory(authservice: AuthService) {
+    return {
+        whitelistedDomains: [
+            new RegExp('localhost:8000/*')
+        ],
+        tokenGetter: () => {
+            return authservice.getToken()
+        }
+    }
+}
 
 @NgModule({
   declarations: [
@@ -73,14 +65,22 @@ const routes: Routes = [
     UserListComponent,
     UserEditModalComponent,
     UserNewModalComponent,
-    UserDeleteModalComponent
+    UserDeleteModalComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, {enableTracing: true}),
-    NgxPaginationModule
+    NgxPaginationModule,
+    AppRoutingModule,
+    JwtModule.forRoot({
+        jwtOptionsProvider: {
+            provide: JWT_OPTIONS,
+            useFactory: jwtFactory,
+            deps: [AuthService]
+        }
+      })
   ],
   providers: [],
   bootstrap: [AppComponent]

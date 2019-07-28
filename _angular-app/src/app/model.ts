@@ -45,3 +45,9 @@ export interface User {
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
+
+export interface UserLogado {
+    id?: number;
+    key: string;
+    email: string;
+}

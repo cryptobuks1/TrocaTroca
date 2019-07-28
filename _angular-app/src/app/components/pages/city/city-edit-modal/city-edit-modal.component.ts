@@ -37,7 +37,12 @@ export class CityEditModalComponent implements OnInit {
         this._cityId = value;
         if (this._cityId) {
             this.cityHttp.get(this._cityId)
-                .subscribe(city => this.city = city)
+                .subscribe((city) => this.city = city,
+                    responseError => {
+                        if (responseError.status === 401) {
+                            this.modal.hide();
+                        }
+                    });
         }
     }
 

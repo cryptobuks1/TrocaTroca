@@ -36,7 +36,12 @@ export class SectorEditModalComponent implements OnInit {
         this._sectorId = value;
         if (this._sectorId) {
             this.sectorHttp.get(this._sectorId)
-                .subscribe(sector => this.sector = sector)
+                .subscribe(sector => this.sector = sector,
+                    responseError => {
+                        if (responseError.status === 401) {
+                            this.modal.hide();
+                        }
+                    });
         }
     }
 

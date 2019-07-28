@@ -37,7 +37,12 @@ export class UnitEditModalComponent implements OnInit {
         this._unitId = value;
         if (this._unitId) {
             this.unitHttp.get(this._unitId)
-                .subscribe(unit => this.unit = unit)
+                .subscribe(unit => this.unit = unit,
+                    responseError => {
+                        if (responseError.status === 401) {
+                            this.modal.hide();
+                        }
+                    });
         }
     }
 
