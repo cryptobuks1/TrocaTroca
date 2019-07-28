@@ -13,3 +13,10 @@ export interface City {
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
+
+export interface Sector {
+    id?: number;
+    sector_name: string;
+    readonly created_at?: {date: string};
+    readonly updated_at?: {date: string};
+}

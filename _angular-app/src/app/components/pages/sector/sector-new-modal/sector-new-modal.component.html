@@ -1,12 +1,12 @@
 <form (submit)="submit()">
   <modal (onHide)="hideModal($event)">
     <h5 modal-title>
-      Nova Cidade
+      Novo Setor
     </h5>
     <div modal-body>
       <div class="form-group">
         <label for="city_name">Nome</label>
-        <input type="text" class="form-control" id="city_name" name="name" required [(ngModel)]="city.city_name">
+        <input type="text" class="form-control" id="city_name" name="name" required [(ngModel)]="sector.sector_name">
       </div>
     </div>
     <div modal-footer>

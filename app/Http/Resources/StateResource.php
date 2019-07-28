@@ -15,6 +15,7 @@ class StateResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'state_name' => $this->state_name,
             'initials' => $this->initials,
             'created_at' => $this->created_at,

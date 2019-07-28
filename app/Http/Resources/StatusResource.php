@@ -15,6 +15,7 @@ class StatusResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'status_name' => $this->status_name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

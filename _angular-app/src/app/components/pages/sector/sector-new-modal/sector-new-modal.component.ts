@@ -1,19 +1,18 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {HttpErrorResponse} from "@angular/common/http";
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
-import {CityHttpService} from "../../../../services/http/city-http.service";
-import {City} from "../../../../model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Sector} from "../../../../model";
+import {SectorHttpService} from "../../../../services/http/sector-http.service";
 
 @Component({
-    selector: 'city-new-modal',
-    templateUrl: './city-new-modal.component.html',
-    styleUrls: ['./city-new-modal.component.css']
+    selector: 'sector-new-modal',
+    templateUrl: './sector-new-modal.component.html',
+    styleUrls: ['./sector-new-modal.component.css']
 })
-export class CityNewModalComponent implements OnInit {
+export class SectorNewModalComponent implements OnInit {
 
-    city: City = {
-        city_name: '',
-        state: null
+    sector: Sector = {
+        sector_name: ''
     };
 
     @ViewChild(ModalComponent)
@@ -22,17 +21,17 @@ export class CityNewModalComponent implements OnInit {
     @Output() onSuccess: EventEmitter<any> = new EventEmitter<any>();
     @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
 
-    constructor(public cityHttp: CityHttpService) {
+    constructor(public sectorHttp: SectorHttpService) {
     }
 
     ngOnInit() {
     }
 
     submit() {
-        this.cityHttp.create(this.city)
-            .subscribe((city) => {
-                console.log(city);
-                this.onSuccess.emit(city);
+        this.sectorHttp.create(this.sector)
+            .subscribe((sector) => {
+                console.log(sector);
+                this.onSuccess.emit(sector);
                 this.modal.hide();
                 //this.getCities();
             }, error => this.onError.emit(error));

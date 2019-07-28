@@ -20,7 +20,7 @@
             <td>{{ city.city_name }}</td>
             <td>{{ city.state.state_name }}</td>
             <td>{{ city.state.initials }}</td>
-            <td>{{ city.created_at.date | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ city.created_at | date: 'dd/MM/yyyy' }}</td>
             <td>
                 <a href="javascript:void(0)" (click)="cityEditService.showModalEdit(city.id)">
                     <i class="fas fa-edit"></i>

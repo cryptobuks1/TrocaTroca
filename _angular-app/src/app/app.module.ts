@@ -13,6 +13,10 @@ import { CityNewModalComponent } from './components/pages/city/city-new-modal/ci
 import { CityEditModalComponent } from './components/pages/city/city-edit-modal/city-edit-modal.component';
 import { CityDeleteModalComponent } from './components/pages/city/city-delete-modal/city-delete-modal.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { SectorListComponent } from './components/pages/sector/sector-list/sector-list.component';
+import { SectorEditModalComponent } from './components/pages/sector/sector-edit-modal/sector-edit-modal.component';
+import { SectorNewModalComponent } from './components/pages/sector/sector-new-modal/sector-new-modal.component';
+import { SectorDeleteModalComponent } from './components/pages/sector/sector-delete-modal/sector-delete-modal.component';
 
 const routes: Routes = [
     {
@@ -21,8 +25,11 @@ const routes: Routes = [
     {
         path: 'cities/list', component: CityListComponent
     },
+    {
+        path: 'sectors/list', component: SectorListComponent
+    },
     { path: '', redirectTo: '/login', pathMatch: 'full'}
-]
+];
 
 @NgModule({
   declarations: [
@@ -33,7 +40,11 @@ const routes: Routes = [
     ModalComponent,
     CityNewModalComponent,
     CityEditModalComponent,
-    CityDeleteModalComponent
+    CityDeleteModalComponent,
+    SectorListComponent,
+    SectorEditModalComponent,
+    SectorNewModalComponent,
+    SectorDeleteModalComponent
   ],
   imports: [
     BrowserModule,
