@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use TrocaTroca\Http\Controllers\Controller;
+use TrocaTroca\Http\Filters\CityFilter;
 use TrocaTroca\Http\Requests\CityCreateRequest;
 use TrocaTroca\Http\Requests\CityUpdateRequest;
 use TrocaTroca\Http\Resources\CityResource;
@@ -25,7 +26,10 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::paginate(10);
+        $filter = app(CityFilter::class);
+        $filterQuery = City::with('state')->filtered($filter);
+        $cities = $filterQuery->paginate(5);
+        //$cities = City::with('state')->paginate();
         return CityResource::collection($cities);
     }
 

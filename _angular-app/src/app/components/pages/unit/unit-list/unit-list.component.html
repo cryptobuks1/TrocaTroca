@@ -3,21 +3,26 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <td colspan="5">
+      <td colspan="2">
         <button class="btn btn-success" (click)="unitInsertService.showModalInsert()">Nova Unidade</button>
+      </td>
+      <td colspan="7">
+        <unit-search-form (onSearch)="search($event)"></unit-search-form>
       </td>
     </tr>
     <tr>
-      <th style="width: 45%">Nome</th>
-      <th style="width: 10%">Cidade</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">Id</th>
+      <th style="width: 35%" [sortColumn]="sortColumn" columnName="unit_name" (onSort)="sort($event)">Nome</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="city_name" (onSort)="sort($event)">Cidade</th>
       <th style="width: 10%">Estado</th>
       <th style="width: 10%">Sigla</th>
-      <th style="width: 10%">Criado Em</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
       <th style="width: 15%">Ações</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let unit of units | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+      <td>{{ unit.id }}</td>
       <td>{{ unit.unit_name }}</td>
       <td>{{ unit.city.city_name }}</td>
       <td>{{ unit.city.state.state_name }}</td>

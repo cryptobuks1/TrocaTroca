@@ -16,12 +16,14 @@ import {UnitDeleteService} from "./unit-delete.service";
 export class UnitListComponent implements OnInit {
 
     units: Array<Unit> = [];
-    page = 1;
+
     pagination = {
         page: 1,
         totalItems: 0,
         itemsPerPage: 5
     };
+
+    sortColumn = {column: '', sort: ''};
 
     @ViewChild(UnitNewModalComponent)
     unitNewModal: UnitNewModalComponent;
@@ -33,6 +35,7 @@ export class UnitListComponent implements OnInit {
     unitDeleteModal: UnitDeleteModalComponent;
 
     unitId: number;
+    searchText: string;
 
     constructor(
         public unitHttp: UnitHttpService,
@@ -40,17 +43,21 @@ export class UnitListComponent implements OnInit {
         protected unitEditService: UnitEditService,
         protected unitDeleteService: UnitDeleteService
     ) {
-    }
-
-    ngOnInit() {
         this.unitInsertService.unitListComponent = this;
         this.unitEditService.unitListComponent = this;
         this.unitDeleteService.unitListComponent = this;
+    }
+
+    ngOnInit() {
         this.getUnits();
     }
 
     getUnits() {
-        this.unitHttp.list({ page: this.pagination.page})
+        this.unitHttp.list({
+            page: this.pagination.page,
+            sort: this.sortColumn.column === '' ? null : this.sortColumn,
+            search: this.searchText
+        })
             .subscribe(response => {
                 this.units = response.data;
                 this.pagination.totalItems = response.meta.total
@@ -59,6 +66,15 @@ export class UnitListComponent implements OnInit {
 
     pageChanged(page) {
         this.pagination.page = page;
+        this.getUnits();
+    }
+
+    sort(sortColumn) {
+        this.getUnits();
+    }
+
+    search(search) {
+        this.searchText = search;
         this.getUnits();
     }
 

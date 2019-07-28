@@ -17,8 +17,9 @@ export class UserHttpService {
     }
 
     list(searchParams: SearchParams): Observable<{ data: Array<User>, meta: any }> {
+        const sParams = new SearchParamsBuilder(searchParams).makeObject();
         const params = new HttpParams({
-            fromObject: new SearchParamsBuilder(searchParams).makeObject()
+            fromObject: (<any>sParams)
         });
         return this.http.get<{ data: Array<User>, meta }>(this.baseUrl, {
             params,

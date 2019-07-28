@@ -30,6 +30,11 @@ import { NavbarComponent } from './components/bootstrap/navbar/navbar.component'
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {AuthService} from "./services/auth.service";
+import { SortColumnComponent } from './components/common/sort-column/sort-column.component';
+import { SectorSearchFormComponent } from './components/pages/sector/sector-search-form/sector-search-form.component';
+import { CitySearchFormComponent } from './components/pages/city/city-search-form/city-search-form.component';
+import { UnitSearchFormComponent } from './components/pages/unit/unit-search-form/unit-search-form.component';
+import { UserSearchFormComponent } from './components/pages/user/user-search-form/user-search-form.component';
 
 function jwtFactory(authservice: AuthService) {
     return {
@@ -66,7 +71,12 @@ function jwtFactory(authservice: AuthService) {
     UserEditModalComponent,
     UserNewModalComponent,
     UserDeleteModalComponent,
-    NavbarComponent
+    NavbarComponent,
+    SortColumnComponent,
+    SectorSearchFormComponent,
+    CitySearchFormComponent,
+    UnitSearchFormComponent,
+    UserSearchFormComponent
   ],
   imports: [
     BrowserModule,

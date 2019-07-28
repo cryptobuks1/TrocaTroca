@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use TrocaTroca\Http\Controllers\Controller;
+use TrocaTroca\Http\Filters\SectorFilter;
 use TrocaTroca\Http\Requests\SectorRequest;
 use TrocaTroca\Http\Resources\SectorResource;
 use TrocaTroca\Models\Sector;
@@ -21,9 +22,15 @@ class SectorController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sectors = Sector::paginate(10);
+        /** @var SectorFilter  $filter */
+        $filter = app(SectorFilter::class);
+        /** @var Builder $filterQuery */
+        $filterQuery = Sector::filtered($filter);
+        //$sectors = $request->has('all') ? Sector::all() : Sector::paginate(10);
+        //$sectors = $filterQuery->get();
+        $sectors = $request->has('all') ? $filterQuery->get() : $filterQuery->paginate(5);
         return SectorResource::collection($sectors);
     }
 

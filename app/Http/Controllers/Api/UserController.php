@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use TrocaTroca\Events\UserCreatedEvent;
 use TrocaTroca\Http\Controllers\Controller;
+use TrocaTroca\Http\Filters\UserFilter;
 use TrocaTroca\Http\Requests\UserCreateRequest;
 use TrocaTroca\Http\Resources\UserResource;
 use TrocaTroca\Models\User;
@@ -23,7 +24,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $filter = app(UserFilter::class);
+        $filterQuery = User::with('unit', 'sector')->filtered($filter);
+        $users = $filterQuery->paginate(5);
+        //$users = User::with('unit', 'sector')->paginate(5);
         return UserResource::collection($users);
     }
 

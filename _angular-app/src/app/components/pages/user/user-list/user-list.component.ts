@@ -16,12 +16,14 @@ import {UserDeleteService} from "./user-delete.service";
 export class UserListComponent implements OnInit {
 
     users: Array<User> = [];
-    page = 1;
+
     pagination = {
         page: 1,
         totalItems: 0,
         itemsPerPage: 5
     };
+
+    sortColumn = {column: '', sort: ''};
 
     @ViewChild(UserNewModalComponent)
     userNewModal: UserNewModalComponent;
@@ -33,6 +35,7 @@ export class UserListComponent implements OnInit {
     userDeleteModal: UserDeleteModalComponent;
 
     userId: number;
+    searchText: string;
 
     constructor(
         public userHttp: UserHttpService,
@@ -50,7 +53,11 @@ export class UserListComponent implements OnInit {
     }
 
     getUsers() {
-        this.userHttp.list({page: this.pagination.page})
+        this.userHttp.list({
+            page: this.pagination.page,
+            sort: this.sortColumn.column === '' ? null : this.sortColumn,
+            search: this.searchText
+        })
             .subscribe(response => {
                 this.users = response.data;
                 this.pagination.totalItems = response.meta.total
@@ -59,6 +66,15 @@ export class UserListComponent implements OnInit {
 
     pageChange(page) {
         this.pagination.page = page;
+        this.getUsers();
+    }
+
+    sort(sortColumn) {
+        this.getUsers();
+    }
+
+    search(search) {
+        this.searchText = search;
         this.getUsers();
     }
 

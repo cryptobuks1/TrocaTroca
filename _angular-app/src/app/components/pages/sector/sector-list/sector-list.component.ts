@@ -16,12 +16,14 @@ import {SectorDeleteService} from "./sector-delete.service";
 export class SectorListComponent implements OnInit {
 
     sectors: Array<Sector> = [];
-    page = 1;
+
     pagination = {
         page: 1,
         totalItems: 0,
         itemsPerPage: 5
     };
+
+    sortColumn = {column: '', sort: ''};
 
     @ViewChild(SectorNewModalComponent)
     sectorNewModal: SectorNewModalComponent;
@@ -33,6 +35,7 @@ export class SectorListComponent implements OnInit {
     sectorDeleteModal: SectorDeleteModalComponent;
 
     sectorId: number;
+    searchText: string;
 
     constructor(
         public sectorHttp: SectorHttpService,
@@ -40,17 +43,21 @@ export class SectorListComponent implements OnInit {
         protected sectorEditService: SectorEditService,
         protected sectorDeleteService: SectorDeleteService
     ) {
-    }
-
-    ngOnInit() {
         this.sectorInsertService.sectorListComponent = this;
         this.sectorEditService.sectorListComponent = this;
         this.sectorDeleteService.sectorListComponent = this;
+    }
+
+    ngOnInit() {
         this.getSectors();
     }
 
     getSectors() {
-        this.sectorHttp.list({ page: this.pagination.page})
+        this.sectorHttp.list({
+            page: this.pagination.page,
+            sort: this.sortColumn.column === '' ? null : this.sortColumn,
+            search: this.searchText
+        })
             .subscribe(response => {
                 this.sectors = response.data;
                 this.pagination.totalItems = response.meta.total
@@ -59,6 +66,15 @@ export class SectorListComponent implements OnInit {
 
     pageChanged(page) {
         this.pagination.page = page;
+        this.getSectors();
+    }
+
+    sort(sortColumn) {
+        this.getSectors();
+    }
+
+    search(search) {
+        this.searchText = search;
         this.getSectors();
     }
 

@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use TrocaTroca\Http\Controllers\Controller;
+use TrocaTroca\Http\Filters\UnitFilter;
 use TrocaTroca\Http\Requests\UnitCreateRequest;
 use TrocaTroca\Http\Resources\UnitResource;
 use TrocaTroca\Models\Unit;
@@ -23,7 +24,10 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units = Unit::paginate(10);
+        $filter = app(UnitFilter::class);
+        $filterQuery = Unit::with('city')->filtered($filter);
+        $units = $filterQuery->paginate(5);
+        //$units = Unit::with()->paginate();
         return UnitResource::collection($units);
     }
 

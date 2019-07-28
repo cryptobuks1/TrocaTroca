@@ -17,10 +17,13 @@ export class SectorHttpService {
     }
 
     list(searchParams: SearchParams): Observable<{ data: Array<Sector>, meta: any }> {
+        const sParams = new SearchParamsBuilder(searchParams).makeObject();
         const params = new HttpParams({
-            fromObject: new SearchParamsBuilder(searchParams).makeObject()
+            fromObject: (<any>sParams)
         });
-        return this.http.get<{ data: Array<Sector>, meta }>(this.baseUrl);
+        return this.http.
+            get<{ data: Array<Sector>, meta: any }>
+            (this.baseUrl, {params});
     }
 
     get(id: number): Observable<Sector> {

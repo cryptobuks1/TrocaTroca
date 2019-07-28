@@ -17,10 +17,11 @@ export class UnitHttpService {
     }
 
     list(searchParams: SearchParams): Observable<{ data: Array<Unit>, meta: any }> {
+        const sParams = new SearchParamsBuilder(searchParams).makeObject();
         const params = new HttpParams({
-            fromObject: new SearchParamsBuilder(searchParams).makeObject()
+            fromObject: (<any>sParams)
         });
-        return this.http.get<{ data: Array<Unit>, meta }>(this.baseUrl);
+        return this.http.get<{ data: Array<Unit>, meta }>(this.baseUrl, {params});
     }
 
     get(id: number): Observable<Unit> {

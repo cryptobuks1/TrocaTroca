@@ -3,18 +3,23 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <td colspan="5">
+      <td colspan="2">
         <button class="btn btn-success" (click)="sectorInsertService.showModalInsert()">Novo Setor</button>
+      </td>
+      <td colspan="5">
+        <sector-search-form (onSearch)="search($event)"></sector-search-form>
       </td>
     </tr>
     <tr>
-      <th style="width: 80%">Nome</th>
-      <th style="width: 10%">Criado Em</th>
-      <th style="width: 10%">Ações</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">Id</th>
+      <th style="width: 50%" [sortColumn]="sortColumn" columnName="sector_name" (onSort)="sort($event)">Nome</th>
+      <th style="width: 20%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
+      <th style="width: 20%">Ações</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let sector of sectors | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+      <td>{{ sector.id }}</td>
       <td>{{ sector.sector_name }}</td>
       <td>{{ sector.created_at | date: 'dd/MM/yyyy' }}</td>
       <td>

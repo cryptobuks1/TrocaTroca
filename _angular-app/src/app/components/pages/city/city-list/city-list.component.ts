@@ -16,12 +16,14 @@ import {CityDeleteService} from "./city-delete.service";
 export class CityListComponent implements OnInit {
 
     cities: Array<City> = [];
-    page = 1;
+
     pagination = {
         page: 1,
         totalItems: 0,
         itemsPerPage: 5
     };
+
+    sortColumn = {column: '', sort: ''};
 
     @ViewChild(CityNewModalComponent)
     cityNewModal: CityNewModalComponent;
@@ -33,6 +35,7 @@ export class CityListComponent implements OnInit {
     cityDeleteModal: CityDeleteModalComponent;
 
     cityId: number;
+    searchText: string;
 
     constructor(
         public cityHttp: CityHttpService,
@@ -40,17 +43,21 @@ export class CityListComponent implements OnInit {
         protected cityEditService: CityEditService,
         protected cityDeleteService: CityDeleteService
     ) {
-    }
-
-    ngOnInit() {
         this.cityInsertService.cityListComponent = this;
         this.cityEditService.cityListComponent = this;
         this.cityDeleteService.cityListComponent = this;
+    }
+
+    ngOnInit() {
         this.getCities();
     }
 
     getCities() {
-        this.cityHttp.list({ page: this.pagination.page})
+        this.cityHttp.list({
+            page: this.pagination.page,
+            sort: this.sortColumn.column === '' ? null : this.sortColumn,
+            search: this.searchText
+        })
             .subscribe(response => {
                 this.cities = response.data;
                 this.pagination.totalItems = response.meta.total
@@ -59,6 +66,15 @@ export class CityListComponent implements OnInit {
 
     pageChanged(page) {
         this.pagination.page = page;
+        this.getCities();
+    }
+
+    sort(sortColumn) {
+        this.getCities();
+    }
+
+    search(search) {
+        this.searchText = search;
         this.getCities();
     }
 
