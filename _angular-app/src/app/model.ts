@@ -33,3 +33,15 @@ export interface UnitSector {
     unit: Unit;
     sectors: Sector[];
 }
+
+export interface User {
+    id?: number;
+    unit: Unit;
+    sector: Sector;
+    key: string;
+    username: string;
+    email: string;
+    password?: string;
+    readonly created_at?: {date: string};
+    readonly updated_at?: {date: string};
+}

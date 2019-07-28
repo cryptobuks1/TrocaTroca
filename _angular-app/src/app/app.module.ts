@@ -23,6 +23,10 @@ import { UnitNewModalComponent } from './components/pages/unit/unit-new-modal/un
 import { UnitDeleteModalComponent } from './components/pages/unit/unit-delete-modal/unit-delete-modal.component';
 import { UnitSectorListComponent } from './components/pages/unit-sector/unit-sector-list/unit-sector-list.component';
 import { UnitSectorNewModalComponent } from './components/pages/unit-sector/unit-sector-new-modal/unit-sector-new-modal.component';
+import { UserListComponent } from './components/pages/user/user-list/user-list.component';
+import { UserEditModalComponent } from './components/pages/user/user-edit-modal/user-edit-modal.component';
+import { UserNewModalComponent } from './components/pages/user/user-new-modal/user-new-modal.component';
+import { UserDeleteModalComponent } from './components/pages/user/user-delete-modal/user-delete-modal.component';
 
 const routes: Routes = [
     {
@@ -39,6 +43,9 @@ const routes: Routes = [
     },
     {
         path: 'units/:unit/sectors/list', component: UnitSectorListComponent
+    },
+    {
+        path: 'users/list', component: UserListComponent
     },
     { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
@@ -62,7 +69,11 @@ const routes: Routes = [
     UnitNewModalComponent,
     UnitDeleteModalComponent,
     UnitSectorListComponent,
-    UnitSectorNewModalComponent
+    UnitSectorNewModalComponent,
+    UserListComponent,
+    UserEditModalComponent,
+    UserNewModalComponent,
+    UserDeleteModalComponent
   ],
   imports: [
     BrowserModule,
