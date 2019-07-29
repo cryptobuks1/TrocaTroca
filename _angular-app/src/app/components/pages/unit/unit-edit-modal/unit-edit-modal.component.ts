@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Unit} from "../../../../model";
 import {UnitHttpService} from "../../../../services/http/unit-http.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import fieldsOptions from "../../unit/unit-form/unit-fields-options";
 
 @Component({
   selector: 'unit-edit-modal',
@@ -11,12 +12,9 @@ import {UnitHttpService} from "../../../../services/http/unit-http.service";
 })
 export class UnitEditModalComponent implements OnInit {
 
-    unit: Unit = {
-        unit_name: '',
-        city: null
-    };
-
     _unitId: number;
+
+    form: FormGroup;
 
     @ViewChild(ModalComponent)
     modal: ModalComponent;
@@ -26,7 +24,15 @@ export class UnitEditModalComponent implements OnInit {
     @Output()
     onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
 
-    constructor(public unitHttp: UnitHttpService) {
+    constructor(
+        public unitHttp: UnitHttpService,
+        private formBuilder: FormBuilder
+    ) {
+        const maxlength = fieldsOptions.unit_name.validationMessage.maxlength;
+        this.form = this.formBuilder.group({
+            unit_name: ['', [Validators.required, Validators.maxLength(maxlength)]],
+            city_id: null
+        });
     }
 
     ngOnInit() {
@@ -37,7 +43,7 @@ export class UnitEditModalComponent implements OnInit {
         this._unitId = value;
         if (this._unitId) {
             this.unitHttp.get(this._unitId)
-                .subscribe(unit => this.unit = unit,
+                .subscribe(unit => this.form.patchValue(unit),
                     responseError => {
                         if (responseError.status === 401) {
                             this.modal.hide();
@@ -47,7 +53,7 @@ export class UnitEditModalComponent implements OnInit {
     }
 
     submit() {
-        this.unitHttp.update(this._unitId, this.unit)
+        this.unitHttp.update(this._unitId, this.form.value)
             .subscribe((unit) => {
                 this.onSuccess.emit(unit);
                 this.modal.hide();

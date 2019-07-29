@@ -32,6 +32,15 @@ class UnitController extends Controller
     }
 
     /**
+     * @return AnonymousResourceCollection
+     */
+    public function indexAll()
+    {
+        $units = Unit::all();
+        return UnitResource::collection($units);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param UnitCreateRequest $request

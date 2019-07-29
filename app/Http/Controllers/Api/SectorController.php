@@ -35,6 +35,15 @@ class SectorController extends Controller
     }
 
     /**
+     * @return AnonymousResourceCollection
+     */
+    public function indexAll()
+    {
+        $sectors = Sector::all();
+        return SectorResource::collection($sectors);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param SectorRequest $request

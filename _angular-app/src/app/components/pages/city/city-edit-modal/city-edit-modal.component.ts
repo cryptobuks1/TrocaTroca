@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
 import {HttpErrorResponse} from "@angular/common/http";
-import {City} from "../../../../model";
 import {CityHttpService} from "../../../../services/http/city-http.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import fieldsOptions from "../../city/city-form/city-fields-options";
 
 @Component({
     selector: 'city-edit-modal',
@@ -11,12 +12,9 @@ import {CityHttpService} from "../../../../services/http/city-http.service";
 })
 export class CityEditModalComponent implements OnInit {
 
-    city: City = {
-        city_name: '',
-        state: null
-    };
-
     _cityId: number;
+
+    form: FormGroup;
 
     @ViewChild(ModalComponent)
     modal: ModalComponent;
@@ -26,7 +24,15 @@ export class CityEditModalComponent implements OnInit {
     @Output()
     onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
 
-    constructor(public cityHttp: CityHttpService) {
+    constructor(
+        public cityHttp: CityHttpService,
+        private formBuilder: FormBuilder
+    ) {
+        const maxlength = fieldsOptions.city_name.validationMessage.maxlength;
+        this.form = this.formBuilder.group({
+            city_name: ['', [Validators.required, Validators.maxLength(maxlength)]],
+            state_id: true
+        });
     }
 
     ngOnInit() {
@@ -37,7 +43,7 @@ export class CityEditModalComponent implements OnInit {
         this._cityId = value;
         if (this._cityId) {
             this.cityHttp.get(this._cityId)
-                .subscribe((city) => this.city = city,
+                .subscribe((city) => this.form.patchValue(city),
                     responseError => {
                         if (responseError.status === 401) {
                             this.modal.hide();
@@ -47,7 +53,7 @@ export class CityEditModalComponent implements OnInit {
     }
 
     submit() {
-        this.cityHttp.update(this._cityId, this.city)
+        this.cityHttp.update(this._cityId, this.form.value)
             .subscribe((city) => {
                 this.onSuccess.emit(city);
                 this.modal.hide();
@@ -60,6 +66,10 @@ export class CityEditModalComponent implements OnInit {
 
     hideModal($event: Event) {
         console.log($event);
+    }
+
+    get fieldsOptions(): any {
+        return fieldsOptions;
     }
 
 }

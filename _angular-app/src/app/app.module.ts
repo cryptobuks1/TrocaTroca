@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/pages/login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { CityListComponent } from './components/pages/city/city-list/city-list.component';
 import { AlertErrorComponent } from './components/bootstrap/alert-error/alert-error.component';
@@ -35,6 +35,14 @@ import { SectorSearchFormComponent } from './components/pages/sector/sector-sear
 import { CitySearchFormComponent } from './components/pages/city/city-search-form/city-search-form.component';
 import { UnitSearchFormComponent } from './components/pages/unit/unit-search-form/unit-search-form.component';
 import { UserSearchFormComponent } from './components/pages/user/user-search-form/user-search-form.component';
+import { SectorFormComponent } from './components/pages/sector/sector-form/sector-form.component';
+import { FieldErrorComponent } from './components/bootstrap/field-error/field-error.component';
+import { IsInvalidDirective } from './directives/is-invalid.directive';
+import { ListErrorComponent } from './components/bootstrap/list-error/list-error.component';
+import { CardErrorComponent } from './components/bootstrap/card-error/card-error.component';
+import { CityFormComponent } from './components/pages/city/city-form/city-form.component';
+import { UnitFormComponent } from './components/pages/unit/unit-form/unit-form.component';
+import { UserFormComponent } from './components/pages/user/user-form/user-form.component';
 
 function jwtFactory(authservice: AuthService) {
     return {
@@ -76,7 +84,15 @@ function jwtFactory(authservice: AuthService) {
     SectorSearchFormComponent,
     CitySearchFormComponent,
     UnitSearchFormComponent,
-    UserSearchFormComponent
+    UserSearchFormComponent,
+    SectorFormComponent,
+    FieldErrorComponent,
+    IsInvalidDirective,
+    ListErrorComponent,
+    CardErrorComponent,
+    CityFormComponent,
+    UnitFormComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +100,7 @@ function jwtFactory(authservice: AuthService) {
     HttpClientModule,
     NgxPaginationModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     JwtModule.forRoot({
         jwtOptionsProvider: {
             provide: JWT_OPTIONS,

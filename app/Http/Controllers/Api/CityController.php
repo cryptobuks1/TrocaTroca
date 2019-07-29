@@ -34,6 +34,15 @@ class CityController extends Controller
     }
 
     /**
+     * @return AnonymousResourceCollection
+     */
+    public function indexAll()
+    {
+        $cities = City::all();
+        return CityResource::collection($cities);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param CityCreateRequest $request
@@ -68,7 +77,7 @@ class CityController extends Controller
      * @param  \TrocaTroca\Models\City $city
      * @return Response
      */
-    public function update(CityUpdateRequest $request, City $city)
+    public function update(CityCreateRequest $request, City $city)
     {
         $city->fill($request->all());
         $city->save();

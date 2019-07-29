@@ -36,6 +36,10 @@ Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
         Route::get('exchanges/cadastradas', 'ExchangeController@indexCadastro');
         Route::get('exchanges/confirm', 'ExchangeController@indexConfirm');
         Route::get('exchanges/authorize', 'ExchangeController@indexAuthorize');
+        Route::get('cities/all', 'CityController@indexAll');
+        Route::get('sectors/all', 'SectorController@indexAll');
+        Route::get('units/all', 'UnitController@indexAll');
+        Route::get('users/all', 'UserController@indexAll');
         Route::resource('states', 'StateController', ['only' => ['index', 'show']]);
         Route::resource('cities', 'CityController', ['except' => ['create', 'edit']]);
         Route::resource('sectors', 'SectorController', ['except' => ['create', 'edit']]);

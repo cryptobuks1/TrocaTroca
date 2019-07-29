@@ -1,8 +1,9 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {User} from "../../../../model";
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from "@angular/common/http";
 import {UserHttpService} from "../../../../services/http/user-http.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import fieldsOptions from "../../user/user-form/user-fields-options";
 
 @Component({
   selector: 'user-new-modal',
@@ -11,13 +12,8 @@ import {UserHttpService} from "../../../../services/http/user-http.service";
 })
 export class UserNewModalComponent implements OnInit {
 
-    user: User = {
-        key: '',
-        username: '',
-        email: '',
-        sector: null,
-        unit: null
-    };
+    form: FormGroup;
+    errors = {};
 
     @ViewChild(ModalComponent)
     modal: ModalComponent;
@@ -30,20 +26,42 @@ export class UserNewModalComponent implements OnInit {
 
 
     constructor(
-        private http: HttpClient,
-        private userHttp: UserHttpService
+        private userHttp: UserHttpService,
+        private formBuilder: FormBuilder
     ) {
+        const maxlength = fieldsOptions.username.validationMessage.maxlength;
+        const maxlength2 = fieldsOptions.password.validationMessage.maxlength;
+        const minlength = fieldsOptions.password.validationMessage.minlength;
+        this.form = this.formBuilder.group({
+            username: ['', [Validators.required, Validators.maxLength(maxlength)]],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.maxLength(maxlength2), Validators.minLength(minlength)]],
+            unit_id: null,
+            sector_id: null
+        });
     }
 
     ngOnInit() {
     }
 
     submit() {
-        this.userHttp.create(this.user)
+        this.userHttp.create(this.form.value)
             .subscribe((user) => {
+                this.form.reset({
+                    username: '',
+                    email: '',
+                    password: '',
+                    unit_id: null,
+                    sector_id: null
+                });
                 this.onSuccess.emit(user);
                 this.modal.hide();
-            }, error => this.onError.emit(error));
+            }, responseError => {
+                if (responseError.status === 422) {
+                    this.errors = responseError.error.errors;
+                }
+                this.onError.emit(responseError)
+            });
     }
 
     showModal() {
@@ -54,4 +72,7 @@ export class UserNewModalComponent implements OnInit {
         console.log($event);
     }
 
+    showErrors() {
+        return Object.keys(this.errors).length != 0;
+    }
 }

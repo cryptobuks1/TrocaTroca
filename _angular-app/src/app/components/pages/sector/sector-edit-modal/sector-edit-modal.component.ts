@@ -3,6 +3,7 @@ import {ModalComponent} from "../../../bootstrap/modal/modal.component";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Sector} from "../../../../model";
 import {SectorHttpService} from "../../../../services/http/sector-http.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'sector-edit-modal',
@@ -11,11 +12,9 @@ import {SectorHttpService} from "../../../../services/http/sector-http.service";
 })
 export class SectorEditModalComponent implements OnInit {
 
-    sector: Sector = {
-        sector_name: ''
-    };
-
     _sectorId: number;
+
+    form: FormGroup;
 
     @ViewChild(ModalComponent)
     modal: ModalComponent;
@@ -25,7 +24,13 @@ export class SectorEditModalComponent implements OnInit {
     @Output()
     onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
 
-    constructor(public sectorHttp: SectorHttpService) {
+    constructor(
+        public sectorHttp: SectorHttpService,
+        private formBuilder: FormBuilder
+    ) {
+        this.form = this.formBuilder.group({
+            sector_name: ''
+        });
     }
 
     ngOnInit() {
@@ -36,7 +41,7 @@ export class SectorEditModalComponent implements OnInit {
         this._sectorId = value;
         if (this._sectorId) {
             this.sectorHttp.get(this._sectorId)
-                .subscribe(sector => this.sector = sector,
+                .subscribe(sector => this.form.patchValue(sector),
                     responseError => {
                         if (responseError.status === 401) {
                             this.modal.hide();
@@ -46,7 +51,7 @@ export class SectorEditModalComponent implements OnInit {
     }
 
     submit() {
-        this.sectorHttp.update(this._sectorId, this.sector)
+        this.sectorHttp.update(this._sectorId, this.form.value)
             .subscribe((sector) => {
                 this.onSuccess.emit(sector);
                 this.modal.hide();

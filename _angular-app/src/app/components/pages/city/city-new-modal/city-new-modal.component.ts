@@ -2,7 +2,8 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {HttpErrorResponse} from "@angular/common/http";
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
 import {CityHttpService} from "../../../../services/http/city-http.service";
-import {City} from "../../../../model";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import fieldsOptions from "../../city/city-form/city-fields-options";
 
 @Component({
     selector: 'city-new-modal',
@@ -11,10 +12,8 @@ import {City} from "../../../../model";
 })
 export class CityNewModalComponent implements OnInit {
 
-    city: City = {
-        city_name: '',
-        state: null
-    };
+    form: FormGroup;
+    errors = {};
 
     @ViewChild(ModalComponent)
     modal: ModalComponent;
@@ -22,20 +21,36 @@ export class CityNewModalComponent implements OnInit {
     @Output() onSuccess: EventEmitter<any> = new EventEmitter<any>();
     @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
 
-    constructor(public cityHttp: CityHttpService) {
+    constructor(
+        public cityHttp: CityHttpService,
+        private formBuilder: FormBuilder
+    ) {
+        const maxlength = fieldsOptions.city_name.validationMessage.maxlength;
+        this.form = this.formBuilder.group({
+            city_name: ['', [Validators.required, Validators.maxLength(maxlength)]],
+            state_id: null
+        });
     }
 
     ngOnInit() {
     }
 
     submit() {
-        this.cityHttp.create(this.city)
+        this.cityHttp.create(this.form.value)
             .subscribe((city) => {
                 console.log(city);
+                this.form.reset({
+                    city_name: '',
+                    state_id: null
+                });
                 this.onSuccess.emit(city);
                 this.modal.hide();
-                //this.getCities();
-            }, error => this.onError.emit(error));
+            }, responseError => {
+                if (responseError.status === 422) {
+                    this.errors = responseError.error.errors;
+                }
+                this.onError.emit(responseError)
+            });
     }
 
     showModal() {
@@ -46,4 +61,7 @@ export class CityNewModalComponent implements OnInit {
         console.log($event);
     }
 
+    showErrors() {
+        return Object.keys(this.errors).length != 0;
+    }
 }

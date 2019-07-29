@@ -1,0 +1,61 @@
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.username.id">{{fieldsOptions.username.label}}</label>
+  <input type="text"
+         class="form-control"
+         [id]="fieldsOptions.username.id"
+         [maxlength]="fieldsOptions.username.validationMessage.maxlength"
+         isInvalid name="username" required formControlName="username">
+  <field-error [field]="form.get('username')"
+               [label]="fieldsOptions.username.label"
+               [messages]="fieldsOptions.username.validationMessage">
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.email.id">{{fieldsOptions.email.label}}</label>
+  <input type="text"
+         class="form-control"
+         [id]="fieldsOptions.email.id"
+         [maxlength]="fieldsOptions.username.validationMessage.maxlength"
+         isInvalid name="email" required formControlName="email">
+  <field-error [field]="form.get('email')"
+               [label]="fieldsOptions.email.label"
+               [messages]="fieldsOptions.email.validationMessage">
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.password.id">{{fieldsOptions.password.label}}</label>
+  <input type="password"
+         class="form-control"
+         [id]="fieldsOptions.password.id"
+         [maxlength]="fieldsOptions.password.validationMessage.maxlength"
+         [minlength]="fieldsOptions.password.validationMessage.minlength"
+         isInvalid name="password" required formControlName="password">
+  <field-error [field]="form.get('password')"
+               [label]="fieldsOptions.password.label"
+               [messages]="fieldsOptions.password.validationMessage">
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.unit_id.id">{{fieldsOptions.unit_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="unit_id" [id]="fieldsOptions.unit_id.id"
+          formControlName="unit_id">
+    <option *ngFor="let unit of units" [ngValue]="unit.id">{{unit.unit_name}}</option>
+  </select>
+  <field-error [field]="form.get('unit_id')"
+               [label]="fieldsOptions.unit_id.label"
+               [messages]="fieldsOptions.unit_id.validationMessage">
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.sector_id.id">{{fieldsOptions.sector_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="sector_id" [id]="fieldsOptions.sector_id.id"
+          formControlName="sector_id">
+    <option *ngFor="let sector of sectors" [ngValue]="sector.id">{{sector.sector_name}}</option>
+  </select>
+  <field-error [field]="form.get('sector_id')"
+               [label]="fieldsOptions.sector_id.label"
+               [messages]="fieldsOptions.sector_id.validationMessage">
+  </field-error>
+</div>

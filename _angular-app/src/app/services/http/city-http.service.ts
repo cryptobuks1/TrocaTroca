@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {City} from "../../model";
+import {City, CityUpdated} from "../../model";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {SearchParams, SearchParamsBuilder} from "./http-resource";
@@ -22,6 +22,10 @@ export class CityHttpService {
             fromObject: (<any>sParams)
         });
         return this.http.get<{ data: Array<City>, meta }>(this.baseUrl, {params});
+    }
+
+    listAll(): Observable<{ data: Array<City> }> {
+        return this.http.get<{ data: Array<City> }>(`${this.baseUrl}/all`);
     }
 
     get(id: number): Observable<City> {

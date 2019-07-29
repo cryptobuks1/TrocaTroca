@@ -32,6 +32,15 @@ class UserController extends Controller
     }
 
     /**
+     * @return AnonymousResourceCollection
+     */
+    public function indexAll()
+    {
+        $users = User::all();
+        return UserResource::collection($users);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param UserCreateRequest $request

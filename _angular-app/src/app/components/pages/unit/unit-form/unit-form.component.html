@@ -1,0 +1,25 @@
+<div class="form-group"  [formGroup]="form">
+  <label [for]="fieldsOptions.unit_name.id">{{fieldsOptions.unit_name.label}}</label>
+  <input type="text"
+         class="form-control"
+         [id]="fieldsOptions.unit_name.id"
+         [maxlength]="fieldsOptions.unit_name.validationMessage.maxlength"
+         isInvalid name="unit_name" required formControlName="unit_name">
+  <field-error [field]="form.get('unit_name')"
+               [label]="fieldsOptions.unit_name.label"
+               [messages]="fieldsOptions.unit_name.validationMessage">
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.city_id.id">{{fieldsOptions.city_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="city_id" [id]="fieldsOptions.city_id.id"
+          formControlName="city_id">
+    <option *ngFor="let city of cities" [ngValue]="city.id">{{city.city_name}}</option>
+  </select>
+  <field-error [field]="form.get('city_id')"
+               [label]="fieldsOptions.city_id.label"
+               [messages]="fieldsOptions.city_id.validationMessage">
+  </field-error>
+</div>
+

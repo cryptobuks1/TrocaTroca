@@ -14,6 +14,14 @@ export interface City {
     readonly updated_at?: {date: string};
 }
 
+export interface CityUpdated {
+    id?: number;
+    city_name: string;
+    state_id: number;
+    readonly created_at?: {date: string};
+    readonly updated_at?: {date: string};
+}
+
 export interface Sector {
     id?: number;
     sector_name: string;

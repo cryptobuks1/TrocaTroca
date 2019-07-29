@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SearchParams, SearchParamsBuilder} from "./http-resource";
-import {User} from "../../model";
+import {City, User} from "../../model";
 import {map} from "rxjs/operators";
 import {environment} from "../../../environments/environment";
 
@@ -24,6 +24,10 @@ export class UserHttpService {
         return this.http.get<{ data: Array<User>, meta }>(this.baseUrl, {
             params,
         });
+    }
+
+    listAll(): Observable<{ data: Array<User> }> {
+        return this.http.get<{ data: Array<User> }>(`${this.baseUrl}/all`);
     }
 
     get(id: number): Observable<User> {

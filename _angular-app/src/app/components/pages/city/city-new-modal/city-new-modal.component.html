@@ -1,17 +1,17 @@
-<form (submit)="submit()">
+<form (submit)="submit()" [formGroup]="form">
   <modal (onHide)="hideModal($event)">
     <h5 modal-title>
       Nova Cidade
     </h5>
     <div modal-body>
-      <div class="form-group">
-        <label for="city_name">Nome</label>
-        <input type="text" class="form-control" id="city_name" name="city_name" required [(ngModel)]="city.city_name">
-      </div>
+      <card-error *ngIf="showErrors()">
+        <list-error [errors]="errors"></list-error>
+      </card-error>
+      <city-form [form]="form"></city-form>
     </div>
     <div modal-footer>
       <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
-      <button type="submit" class="btn btn-success">Salvar</button>
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid">Salvar</button>
     </div>
   </modal>
 </form>

@@ -1,0 +1,12 @@
+<div class="form-group"  [formGroup]="form">
+  <label [for]="fieldsOptions.sector_name.id">{{fieldsOptions.sector_name.label}}</label>
+  <input type="text"
+         class="form-control"
+         [id]="fieldsOptions.sector_name.id"
+         [maxlength]="fieldsOptions.sector_name.validationMessage.maxlength"
+         isInvalid name="sector_name" required formControlName="sector_name">
+  <field-error [field]="form.get('sector_name')"
+                [label]="fieldsOptions.sector_name.label"
+               [messages]="fieldsOptions.sector_name.validationMessage">
+  </field-error>
+</div>

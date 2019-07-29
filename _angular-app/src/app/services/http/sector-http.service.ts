@@ -26,6 +26,10 @@ export class SectorHttpService {
             (this.baseUrl, {params});
     }
 
+    listAll(): Observable<{ data: Array<Sector> }> {
+        return this.http.get<{ data: Array<Sector> }>(`${this.baseUrl}/all`);
+    }
+
     get(id: number): Observable<Sector> {
         return this.http.get<{ data: Sector }>(`${this.baseUrl}/${id}`)
             .pipe(map(response => response.data))

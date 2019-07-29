@@ -1,17 +1,14 @@
-<form (submit)="submit()">
+<form (submit)="submit()" [formGroup]="form">
   <modal (onHide)="hideModal($event)">
     <h5 modal-title>
-      Editar Unidade - {{ unit.unit_name}}
+      Editar Unidade - {{ form.get('unit_name').value }}
     </h5>
     <div modal-body>
-      <div class="form-group">
-        <label for="unit_name">Nome</label>
-        <input type="text" class="form-control" id="unit_name" name="unit_name" required [(ngModel)]="unit.unit_name">
-      </div>
+      <unit-form [form]="form"></unit-form>
     </div>
     <div modal-footer>
       <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
-      <button type="submit" class="btn btn-success">Editar</button>
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid">Editar</button>
     </div>
   </modal>
 </form>
