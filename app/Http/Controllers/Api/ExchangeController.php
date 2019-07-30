@@ -32,10 +32,10 @@ class ExchangeController extends Controller
      */
     public function index()
     {
-        //$filter = app(ExchangeFilter::class);
-        //$filterQuery = Exchange::filtered($filter);
-        //$exchanges = $filter->hasFilterParamter() ? $filterQuery->get() : $filterQuery->paginate(10);
-        $exchanges = Exchange::paginate(10);
+        $filter = app(ExchangeFilter::class);
+        $filterQuery = Exchange::filtered($filter);
+        $exchanges = $filterQuery->paginate(5);
+        //$exchanges = Exchange::paginate(10);
         return ExchangeResource::collection($exchanges);
     }
     /**
@@ -43,7 +43,10 @@ class ExchangeController extends Controller
      */
     public function indexCadastro()
     {
-        $exchanges = Exchange::where('status_id', 2)->paginate(10);
+        $filter = app(ExchangeFilter::class);
+        $filterQuery = Exchange::where('status_id', 2)->filtered($filter);
+        $exchanges = $filterQuery->paginate(5);
+        //$exchanges = Exchange::where('status_id', 2)->paginate(10);
         return ExchangeResource::collection($exchanges);
     }
     /**
@@ -51,7 +54,10 @@ class ExchangeController extends Controller
      */
     public function indexConfirm()
     {
-        $exchanges = Exchange::where('status_id', 5)->paginate(10);
+        $filter = app(ExchangeFilter::class);
+        $filterQuery = Exchange::where('status_id', 5)->filtered($filter);
+        $exchanges = $filterQuery->paginate(5);
+        //$exchanges = Exchange::where('status_id', 5)->paginate(10);
         return ExchangeResource::collection($exchanges);
     }
     /**
@@ -59,7 +65,10 @@ class ExchangeController extends Controller
      */
     public function indexAuthorize()
     {
-        $exchanges = Exchange::where('status_id', 1)->paginate(10);
+        $filter = app(ExchangeFilter::class);
+        $filterQuery = Exchange::where('status_id', 1)->filtered($filter);
+        $exchanges = $filterQuery->paginate(5);
+        //$exchanges = Exchange::where('status_id', 1)->paginate(10);
         return ExchangeResource::collection($exchanges);
     }
     /**

@@ -4,10 +4,12 @@ namespace TrocaTroca\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Mnabialek\LaravelEloquentFilter\Traits\Filterable;
 
 class Exchange extends Model
 {
     use Notifiable;
+    use Filterable;
 
     protected $fillable = [
         'unit_id',
