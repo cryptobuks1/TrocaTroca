@@ -43,6 +43,20 @@ import { CardErrorComponent } from './components/bootstrap/card-error/card-error
 import { CityFormComponent } from './components/pages/city/city-form/city-form.component';
 import { UnitFormComponent } from './components/pages/unit/unit-form/unit-form.component';
 import { UserFormComponent } from './components/pages/user/user-form/user-form.component';
+import { ExchangeListComponent } from './components/pages/exchange/exchange-list/exchange-list.component';
+import { ExchangeNewModalComponent } from './components/pages/exchange/exchange-new-modal/exchange-new-modal.component';
+import { ExchangeFormComponent } from './components/pages/exchange/exchange-form/exchange-form.component';
+import { ExchangeSearchFormComponent } from './components/pages/exchange/exchange-search-form/exchange-search-form.component';
+import { ExchangeViewModalComponent } from './components/pages/exchange/exchange-view-modal/exchange-view-modal.component';
+import { ExchangeConfirmModalComponent } from './components/pages/exchange/exchange-confirm-modal/exchange-confirm-modal.component';
+import { ExchangeConclusionModalComponent } from './components/pages/exchange/exchange-conclusion-modal/exchange-conclusion-modal.component';
+import { ExchangeAuthorizeModalComponent } from './components/pages/exchange/exchange-authorize-modal/exchange-authorize-modal.component';
+import { ExchangeListCadastradasComponent } from './components/pages/exchange/exchange-list-cadastradas/exchange-list-cadastradas.component';
+import { ExchangeDeclineModalComponent } from './components/pages/exchange/exchange-decline-modal/exchange-decline-modal.component';
+import { ExchangeListConfirmedComponent } from './components/pages/exchange/exchange-list-confirmed/exchange-list-confirmed.component';
+import { ExchangeCancelModalComponent } from './components/pages/exchange/exchange-cancel-modal/exchange-cancel-modal.component';
+import { ExchangePendingModalComponent } from './components/pages/exchange/exchange-pending-modal/exchange-pending-modal.component';
+import { ExchangeListAuthorizedComponent } from './components/pages/exchange/exchange-list-authorized/exchange-list-authorized.component';
 
 function jwtFactory(authservice: AuthService) {
     return {
@@ -92,7 +106,21 @@ function jwtFactory(authservice: AuthService) {
     CardErrorComponent,
     CityFormComponent,
     UnitFormComponent,
-    UserFormComponent
+    UserFormComponent,
+    ExchangeListComponent,
+    ExchangeNewModalComponent,
+    ExchangeFormComponent,
+    ExchangeSearchFormComponent,
+    ExchangeViewModalComponent,
+    ExchangeConfirmModalComponent,
+    ExchangeConclusionModalComponent,
+    ExchangeAuthorizeModalComponent,
+    ExchangeListCadastradasComponent,
+    ExchangeDeclineModalComponent,
+    ExchangeListConfirmedComponent,
+    ExchangeCancelModalComponent,
+    ExchangePendingModalComponent,
+    ExchangeListAuthorizedComponent
   ],
   imports: [
     BrowserModule,

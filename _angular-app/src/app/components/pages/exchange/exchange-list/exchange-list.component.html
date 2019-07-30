@@ -1,0 +1,49 @@
+<div class="row">
+  <h1>Listagem de Trocas</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td colspan="2">
+        <button class="btn btn-success" (click)="exchangeInsertService.showModalInsert()">Nova Troca</button>
+      </td>
+      <td colspan="5">
+        <exchange-search-form (onSearch)="search($event)"></exchange-search-form>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="unit" (onSort)="sort($event)">Unidade</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="sector" (onSort)="sort($event)">Setor</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="user1" (onSort)="sort($event)">Nome</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="user2" (onSort)="sort($event)">Nome</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="date" (onSort)="sort($event)">Data</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="status" (onSort)="sort($event)">Situação</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
+      <th style="width: 15%">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exchange of exchanges | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+      <td>{{exchange.unit.unit_name}}</td>
+      <td>{{exchange.sector.sector_name}}</td>
+      <td>{{exchange.user1.username}}</td>
+      <td>{{exchange.user2.username}}</td>
+      <td>{{exchange.date | date: 'dd/MM/yyyy'}}</td>
+      <td>{{exchange.status.status_name}}</td>
+      <td>{{exchange.created_at | date: 'dd/MM/yyyy'}}</td>
+      <td>
+        <a href="javascript:void(0)" (click)="exchangeViewService.showModalView(exchange.id)">
+          <i class="fas fa-street-view"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+          (pageChange)="pageChange($event)"
+          previousLabel="Anterior"
+          nextLabel="Próximo"
+  ></pagination-controls>
+</div>
+<exchange-new-modal (onSuccess)="exchangeInsertService.onInsertSuccess($event)"
+                    (onError)="exchangeInsertService.onInsertError($event)"></exchange-new-modal>
+<exchange-view-modal [exchangeId]="exchangeId" (onError)="exchangeViewService.onViewError($event)"></exchange-view-modal>

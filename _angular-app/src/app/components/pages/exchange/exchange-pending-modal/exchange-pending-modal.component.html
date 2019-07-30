@@ -1,0 +1,12 @@
+<modal (onHide)="hideModal($event)">
+  <h5 modal-title>
+    Tornar Troca Pendente
+  </h5>
+  <div modal-body>
+    Deseja tornar a troca de {{ exchangePending?.user1.username }} com {{ exchangePending?.user2.username }} pendente ?
+  </div>
+  <div modal-footer>
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+    <button type="submit" class="btn btn-danger" (click)="pending()">Confirmar</button>
+  </div>
+</modal>

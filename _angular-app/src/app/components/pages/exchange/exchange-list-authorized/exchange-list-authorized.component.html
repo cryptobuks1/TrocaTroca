@@ -1,0 +1,49 @@
+<div class="row">
+  <h1>Listagem de Trocas Autorizadas</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td colspan="3">
+        <exchange-search-form (onSearch)="search($event)"></exchange-search-form>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="unit" (onSort)="sort($event)">Unidade</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="sector" (onSort)="sort($event)">Setor</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="user1" (onSort)="sort($event)">Nome</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="user2" (onSort)="sort($event)">Nome</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="date" (onSort)="sort($event)">Data</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Autorizada Em</th>
+      <th style="width: 10%">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exchange of exchangesAuthorize | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+      <td>{{exchange.unit.unit_name}}</td>
+      <td>{{exchange.sector.sector_name}}</td>
+      <td>{{exchange.user1.username}}</td>
+      <td>{{exchange.user2.username}}</td>
+      <td>{{exchange.date | date: 'dd/MM/yyyy'}}</td>
+      <td>{{exchange.date_autorization | date: 'dd/MM/yyyy'}}</td>
+      <td>
+        <a href="javascript:void(0)" (click)="exchangeConclusionService.showModalConclusion(exchange.id)">
+          <i class="fas fa-calendar-check"></i>
+        </a>
+        |
+        <a href="javascript:void(0)" (click)="exchangePendingService.showModalPending(exchange.id)">
+          <i class="fas fa-question"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+          (pageChange)="pageChange($event)"
+          previousLabel="Anterior"
+          nextLabel="Próximo"
+  ></pagination-controls>
+</div>
+<exchange-conclusion-modal [exchangeId]="exchangeId" (onSuccess)="exchangeConclusionService.onConclusionSuccess($event)"
+                           (onError)="exchangeConclusionService.onConclusionError($event)"></exchange-conclusion-modal>
+<exchange-pending-modal [exchangeId]="exchangeId" (onSuccess)="exchangePendingService.onPendingSuccess($event)"
+                        (onError)="exchangePendingService.onPendingError($event)"></exchange-pending-modal>

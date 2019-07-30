@@ -7,6 +7,10 @@ import {SectorListComponent} from "../components/pages/sector/sector-list/sector
 import {UnitListComponent} from "../components/pages/unit/unit-list/unit-list.component";
 import {UnitSectorListComponent} from "../components/pages/unit-sector/unit-sector-list/unit-sector-list.component";
 import {UserListComponent} from "../components/pages/user/user-list/user-list.component";
+import {ExchangeListComponent} from "../components/pages/exchange/exchange-list/exchange-list.component";
+import {ExchangeListCadastradasComponent} from "../components/pages/exchange/exchange-list-cadastradas/exchange-list-cadastradas.component";
+import {ExchangeListConfirmedComponent} from "../components/pages/exchange/exchange-list-confirmed/exchange-list-confirmed.component";
+import {ExchangeListAuthorizedComponent} from "../components/pages/exchange/exchange-list-authorized/exchange-list-authorized.component";
 
 const routes: Routes =[
     {
@@ -26,6 +30,18 @@ const routes: Routes =[
     },
     {
         path: 'users/list', component: UserListComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'exchanges/list', component: ExchangeListComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'exchanges/confirm', component: ExchangeListCadastradasComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'exchanges/authorize', component: ExchangeListConfirmedComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'exchanges/conclusion', component: ExchangeListAuthorizedComponent, canActivate: [AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

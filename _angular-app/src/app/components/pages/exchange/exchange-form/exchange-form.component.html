@@ -1,0 +1,129 @@
+<div class="form-group" [formGroup]="form">
+<label [for]="fieldsOptions.unit_id.id">{{fieldsOptions.unit_id.label}}</label>
+<select class="form-control" isInvalid
+        name="unit_id" [id]="fieldsOptions.unit_id.id"
+        [(ngModel)]="unitId" formControlName="unit_id">
+  <option *ngFor="let unit of unit" [ngValue]="unit.id">{{unit.unit_name}}</option>
+</select>
+<field-error [field]="form.get('unit_id')"
+             [label]="fieldsOptions.unit_id.label"
+             [messages]="fieldsOptions.unit_id.validationMessage">
+
+</field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.sector_id.id">{{fieldsOptions.sector_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="sector_id" [id]="fieldsOptions.sector_id.id"
+          [(ngModel)]="sectorId" formControlName="sector_id">
+    <option *ngFor="let sector of sector" [ngValue]="sector.id">{{sector.sector_name}}</option>
+  </select>
+  <field-error [field]="form.get('sector_id')"
+               [label]="fieldsOptions.sector_id.label"
+               [messages]="fieldsOptions.sector_id.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.user1_id.id">{{fieldsOptions.user1_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="user1_id" [id]="fieldsOptions.user1_id.id"
+          [(ngModel)]="user1Id" formControlName="user1_id">
+    <option *ngFor="let user of user" [ngValue]="user.id">{{user.username}}</option>
+  </select>
+  <field-error [field]="form.get('user1_id')"
+               [label]="fieldsOptions.user1_id.label"
+               [messages]="fieldsOptions.user1_id.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.group1_id.id">{{fieldsOptions.group1_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="group1_id" [id]="fieldsOptions.group1_id.id"
+          [(ngModel)]="group1Id" formControlName="group1_id">
+    <option *ngFor="let group of group" [ngValue]="group.id">{{group.group_name}}</option>
+  </select>
+  <field-error [field]="form.get('group1_id')"
+               [label]="fieldsOptions.group1_id.label"
+               [messages]="fieldsOptions.group1_id.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.user2_id.id">{{fieldsOptions.user2_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="user2_id" [id]="fieldsOptions.user2_id.id"
+          [(ngModel)]="user2Id" formControlName="user2_id">
+    <option *ngFor="let user of user" [ngValue]="user.id">{{user.username}}</option>
+  </select>
+  <field-error [field]="form.get('user2_id')"
+               [label]="fieldsOptions.user2_id.label"
+               [messages]="fieldsOptions.user2_id.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.group2_id.id">{{fieldsOptions.group2_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="group2_id" [id]="fieldsOptions.group2_id.id"
+          [(ngModel)]="group2Id" formControlName="group2_id">
+    <option *ngFor="let group of group" [ngValue]="group.id">{{group.group_name}}</option>
+  </select>
+  <field-error [field]="form.get('group2_id')"
+               [label]="fieldsOptions.group2_id.label"
+               [messages]="fieldsOptions.group2_id.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.date.id">{{fieldsOptions.date.label}}</label>
+  <input type="date" class="form-control"
+         isInvalid [id]="fieldsOptions.date.id"
+         name="date" required
+         formControlName="date">
+  <field-error [field]="form.get('date')"
+               [label]="fieldsOptions.date.label"
+               [messages]="fieldsOptions.date.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.turn_id.id">{{fieldsOptions.turn_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="turn_id" [id]="fieldsOptions.turn_id.id"
+          [(ngModel)]="turnId" formControlName="turn_id">
+    <option *ngFor="let turn of turn" [ngValue]="turn.id">{{turn.turn_name}}</option>
+  </select>
+  <field-error [field]="form.get('turn_id')"
+               [label]="fieldsOptions.turn_id.label"
+               [messages]="fieldsOptions.turn_id.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.type1_id.id">{{fieldsOptions.type1_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="type1_id" [id]="fieldsOptions.type1_id.id"
+          [(ngModel)]="type1Id" formControlName="type1_id">
+    <option *ngFor="let type of type" [ngValue]="type.id">{{type.type_name}}</option>
+  </select>
+  <field-error [field]="form.get('type1_id')"
+               [label]="fieldsOptions.type1_id.label"
+               [messages]="fieldsOptions.type1_id.validationMessage">
+
+  </field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.type2_id.id">{{fieldsOptions.type2_id.label}}</label>
+  <select class="form-control" isInvalid
+          name="type2_id" [id]="fieldsOptions.type2_id.id"
+          [(ngModel)]="type2Id" formControlName="type2_id">
+    <option *ngFor="let type of type" [ngValue]="type.id">{{type.type_name}}</option>
+  </select>
+  <field-error [field]="form.get('type2_id')"
+               [label]="fieldsOptions.type2_id.label"
+               [messages]="fieldsOptions.type2_id.validationMessage">
+
+  </field-error>
+</div>

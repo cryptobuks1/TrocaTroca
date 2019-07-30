@@ -1,0 +1,12 @@
+<modal (onHide)="hideModal($event)">
+  <h5 modal-title>
+    Autorizar Troca
+  </h5>
+  <div modal-body>
+    Deseja autorizar a troca de {{ exchangeAuthorize?.user1.username }} com {{ exchangeAuthorize?.user2.username }} ?
+  </div>
+  <div modal-footer>
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+    <button type="submit" class="btn btn-danger" (click)="authorize()">Confirmar</button>
+  </div>
+</modal>

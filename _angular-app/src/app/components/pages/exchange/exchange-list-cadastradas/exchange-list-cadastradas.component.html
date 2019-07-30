@@ -1,0 +1,49 @@
+<div class="row">
+  <h1>Listagem de Trocas Cadastradas</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td colspan="3">
+        <exchange-search-form (onSearch)="search($event)"></exchange-search-form>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="unit" (onSort)="sort($event)">Unidade</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="sector" (onSort)="sort($event)">Setor</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="user1" (onSort)="sort($event)">Nome</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="user2" (onSort)="sort($event)">Nome</th>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="date" (onSort)="sort($event)">Data</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Cadastrada Em</th>
+      <th style="width: 10%">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exchange of exchangesCadastradas | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+      <td>{{exchange.unit.unit_name}}</td>
+      <td>{{exchange.sector.sector_name}}</td>
+      <td>{{exchange.user1.username}}</td>
+      <td>{{exchange.user2.username}}</td>
+      <td>{{exchange.date}}</td>
+      <td>{{exchange.created_at | date: 'dd/MM/yyyy'}}</td>
+      <td>
+        <a href="javascript:void(0)" (click)="exchangeConfirmService.showModalConfirm(exchange.id)">
+          <i class="fas fa-handshake"></i>
+        </a>
+        |
+        <a href="javascript:void(0)" (click)="exchangeDeclineService.showModalDecline(exchange.id)">
+          <i class="fas fa-thumbs-down"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+          (pageChange)="pageChange($event)"
+          previousLabel="Anterior"
+          nextLabel="Próximo"
+  ></pagination-controls>
+</div>
+<exchange-confirm-modal [exchangeId]="exchangeId" (onSuccess)="exchangeConfirmService.onConfirmSuccess($event)"
+                        (onError)="exchangeConfirmService.onConfirmError($event)"></exchange-confirm-modal>
+<exchange-decline-modal [exchangeId]="exchangeId" (onSuccess)="exchangeDeclineService.onDeclineSuccess($event)"
+                        (onError)="exchangeDeclineService.onDeclineError($event)"></exchange-decline-modal>

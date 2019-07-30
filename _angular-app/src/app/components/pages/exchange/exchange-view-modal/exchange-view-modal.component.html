@@ -1,0 +1,63 @@
+<modal (onHide)="hideModal($event)">
+  <h5 modal-title>Visualizar Troca</h5>
+  <div modal-body>
+    <div class="form-group">
+      <label for="unit">Unidade</label>
+      <input type="text" class="form-control" id="unit" name="unit"
+             disabled="true" [(ngModel)]="exchange?.unit.unit_name">
+    </div>
+    <div class="form-group">
+      <label for="sector">Setor</label>
+      <input type="text" class="form-control" id="sector" name="sector"
+             disabled="true" [(ngModel)]="exchange?.sector.sector_name">
+    </div>
+    <div class="form-group">
+      <label for="user1">Usuário</label>
+      <input type="text" class="form-control" id="user1" name="user1"
+             disabled="true" [(ngModel)]="exchange?.user1.username">
+    </div>
+    <div class="form-group">
+      <label for="group1">Grupo</label>
+      <input type="text" class="form-control" id="group1" name="group1"
+             disabled="true" [(ngModel)]="exchange?.group1.group_name">
+    </div>
+    <div class="form-group">
+      <label for="user2">Usuário</label>
+      <input type="text" class="form-control" id="user2" name="user2"
+             disabled="true" [(ngModel)]="exchange?.user2.username">
+    </div>
+    <div class="form-group">
+      <label for="group2">Grupo</label>
+      <input type="text" class="form-control" id="group2" name="group2"
+             disabled="true" [(ngModel)]="exchange?.group2.group_name">
+    </div>
+    <div class="form-group">
+      <label for="date">Data</label>
+      <input type="date" class="form-control" id="date" name="date"
+             disabled="true" value="{{exchange?.date}}">
+    </div>
+    <div class="form-group">
+      <label for="turn">Turno</label>
+      <input type="text" class="form-control" id="turn" name="turn"
+             disabled="true" [(ngModel)]="exchange?.turn.turn_name">
+    </div>
+    <div class="form-group">
+      <label for="type1">Turno</label>
+      <input type="text" class="form-control" id="type1" name="type1"
+             disabled="true" [(ngModel)]="exchange?.type1.type_name">
+    </div>
+    <div class="form-group">
+      <label for="type2">Turno</label>
+      <input type="text" class="form-control" id="type2" name="type2"
+             disabled="true" [(ngModel)]="exchange?.type2.type_name">
+    </div>
+    <div class="form-group">
+      <label for="status">Situação</label>
+      <input type="text" class="form-control" id="status" name="status"
+             disabled="true" [(ngModel)]="exchange?.status.status_name">
+    </div>
+  </div>
+  <div modal-footer>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+  </div>
+</modal>
