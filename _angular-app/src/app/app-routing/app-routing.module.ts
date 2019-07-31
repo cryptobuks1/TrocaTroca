@@ -11,10 +11,15 @@ import {ExchangeListComponent} from "../components/pages/exchange/exchange-list/
 import {ExchangeListCadastradasComponent} from "../components/pages/exchange/exchange-list-cadastradas/exchange-list-cadastradas.component";
 import {ExchangeListConfirmedComponent} from "../components/pages/exchange/exchange-list-confirmed/exchange-list-confirmed.component";
 import {ExchangeListAuthorizedComponent} from "../components/pages/exchange/exchange-list-authorized/exchange-list-authorized.component";
+import {DashboardComponent} from "../components/pages/dashboard/dashboard.component";
+import {LogListComponent} from "../components/pages/log/log-list/log-list.component";
 
 const routes: Routes =[
     {
         path: 'login', component: LoginComponent
+    },
+    {
+        path: 'dashboard', component:DashboardComponent, canActivate: [AuthGuard]
     },
     {
         path: 'cities/list', component: CityListComponent, canActivate: [AuthGuard]
@@ -42,6 +47,9 @@ const routes: Routes =[
     },
     {
         path: 'exchanges/conclusion', component: ExchangeListAuthorizedComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'logs', component: LogListComponent, canActivate: [AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

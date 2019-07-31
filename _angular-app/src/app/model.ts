@@ -209,3 +209,10 @@ export interface ExchangeDecline {
     status_id: number;
     date_declination: Date;
 }
+
+export interface Log {
+    id?: number;
+    user: User;
+    date: Date;
+    action: string;
+}

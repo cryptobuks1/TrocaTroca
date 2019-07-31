@@ -5,6 +5,7 @@ namespace TrocaTroca\Http\Controllers\Api;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use TrocaTroca\Http\Controllers\Controller;
+use TrocaTroca\Http\Filters\LogFilter;
 use TrocaTroca\Http\Requests\LogRequest;
 use TrocaTroca\Http\Resources\LogResource;
 use TrocaTroca\Models\Log;
@@ -19,7 +20,10 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Log::paginate(10);
+        $filter = app(LogFilter::class);
+        $filterQuery = Log::with('user')->filtered($filter);
+        $logs = $filterQuery->paginate(5);
+        //$logs = Log::paginate(5);
         return LogResource::collection($logs);
     }
 

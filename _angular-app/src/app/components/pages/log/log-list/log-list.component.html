@@ -1,0 +1,35 @@
+<div class="row">
+  <h1>Listagem de Logs</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td colspan="2">
+        <sector-search-form (onSearch)="search($event)"></sector-search-form>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 10%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">Id</th>
+      <th style="width: 20%" [sortColumn]="sortColumn" columnName="username" (onSort)="sort($event)">Nome</th>
+      <th style="width: 20%" [sortColumn]="sortColumn" columnName="unit_name" (onSort)="sort($event)">Unidade</th>
+      <th style="width: 20%" [sortColumn]="sortColumn" columnName="sector_name" (onSort)="sort($event)">Setor</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="action" (onSort)="sort($event)">Ação</th>
+      <th style="width: 15%" [sortColumn]="sortColumn" columnName="date" (onSort)="sort($event)">Criado Em</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let log of logs | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page, totalItems: pagination.totalItems}">
+      <td>{{ log.id }}</td>
+      <td>{{ log.user.username }}</td>
+      <td>{{ log.user.unit.unit_name }}</td>
+      <td>{{ log.user.sector.sector_name }}</td>
+      <td>{{ log.action }}</td>
+      <td>{{ log.date | date: 'dd/MM/yyyy' }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+          (pageChange)="pageChanged($event)"
+          previousLabel="Anterior"
+          nextLabel="Próximo"
+  ></pagination-controls>
+</div>

@@ -57,6 +57,9 @@ import { ExchangeListConfirmedComponent } from './components/pages/exchange/exch
 import { ExchangeCancelModalComponent } from './components/pages/exchange/exchange-cancel-modal/exchange-cancel-modal.component';
 import { ExchangePendingModalComponent } from './components/pages/exchange/exchange-pending-modal/exchange-pending-modal.component';
 import { ExchangeListAuthorizedComponent } from './components/pages/exchange/exchange-list-authorized/exchange-list-authorized.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { LogListComponent } from './components/pages/log/log-list/log-list.component';
+import { LogSearchFormComponent } from './components/pages/log/log-search-form/log-search-form.component';
 
 function jwtFactory(authservice: AuthService) {
     return {
@@ -120,7 +123,10 @@ function jwtFactory(authservice: AuthService) {
     ExchangeListConfirmedComponent,
     ExchangeCancelModalComponent,
     ExchangePendingModalComponent,
-    ExchangeListAuthorizedComponent
+    ExchangeListAuthorizedComponent,
+    DashboardComponent,
+    LogListComponent,
+    LogSearchFormComponent
   ],
   imports: [
     BrowserModule,
