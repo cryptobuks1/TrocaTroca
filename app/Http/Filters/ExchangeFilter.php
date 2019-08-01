@@ -59,8 +59,12 @@ class ExchangeFilter extends SimpleQueryFilter
     {
         $query = $query
             ->select('exchanges.*')
-            ->join('groups', 'groups.id', '=', ['exchanges.group1_id', 'exchanges.group2_id'])
-            ->join('users', 'users.id', '=', ['exchanges.user1_id', 'exchanges.user2_id'])
+            ->join('groups', function ($join) {
+                $join->on('groups.id', '=', 'exchanges.group1_id')->orOn('groups.id', '=',  'exchanges.group2_id');
+            })
+            ->join('users', function ($join) {
+                $join->on('users.id', '=', 'exchanges.user1_id')->orOn('users.id', '=',  'exchanges.user2_id');
+            })
             ->join('units', 'units.id', '=', 'exchanges.unit_id')
             ->join('sectors', 'sectors.id', '=', 'exchanges.sector_id');
         return parent::apply($query);

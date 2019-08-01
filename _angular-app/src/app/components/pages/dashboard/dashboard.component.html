@@ -1,6 +1,33 @@
-<h1> Bar Chart </h1>
-<div *ngIf="chart">
-  <canvas id="canvas" width="300" height="123" style="display:block;">
-    {{chart}}
-  </canvas>
+<div class="container">
+  <!--<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/bar-chart">Bar Chart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/doughnut-chart">Doughnut Chart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/radar-chart">Radar Chart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/pie-chart">Pie Chart</a>
+    </li>
+  </ul>
+  <div class="container">
+    <div class="row">
+      <div style="display: block;">
+        <canvas  width="400" height="300"
+                 baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>-->
+    <div *ngIf="chart" style="width: 400px">
+        <canvas id="canvas">{{chart}}</canvas>
+    </div>
 </div>

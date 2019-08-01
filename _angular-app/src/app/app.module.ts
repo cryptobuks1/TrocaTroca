@@ -60,6 +60,7 @@ import { ExchangeListAuthorizedComponent } from './components/pages/exchange/exc
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { LogListComponent } from './components/pages/log/log-list/log-list.component';
 import { LogSearchFormComponent } from './components/pages/log/log-search-form/log-search-form.component';
+import {ChartsModule} from "ng2-charts";
 
 function jwtFactory(authservice: AuthService) {
     return {
@@ -135,6 +136,7 @@ function jwtFactory(authservice: AuthService) {
     NgxPaginationModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    ChartsModule,
     JwtModule.forRoot({
         jwtOptionsProvider: {
             provide: JWT_OPTIONS,
@@ -143,6 +145,7 @@ function jwtFactory(authservice: AuthService) {
         }
       })
   ],
+  exports: [ ChartsModule ],
   providers: [],
   bootstrap: [AppComponent]
 })

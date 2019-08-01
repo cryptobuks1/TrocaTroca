@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
             .subscribe((data) => {
                 const token = data.token;
                 window.localStorage.setItem('token', token);
-                this.router.navigate(['cities/list']);
+                this.router.navigate(['/dashboard']);
             }, error => this.showMessageError = true);
         return false;
     }

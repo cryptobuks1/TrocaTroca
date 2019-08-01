@@ -216,3 +216,14 @@ export interface Log {
     date: Date;
     action: string;
 }
+
+export interface ChartStatus {
+    status_id: number;
+    status_name: string;
+    exchanges_count: number;
+}
+
+export interface Status {
+    id?: number;
+    status_name: string;
+}

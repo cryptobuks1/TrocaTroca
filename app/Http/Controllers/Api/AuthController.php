@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use TrocaTroca\Http\Controllers\Controller;
 use TrocaTroca\Http\Resources\UserResource;
+use Carbon;
 
 class AuthController extends Controller
 {
@@ -25,6 +26,11 @@ class AuthController extends Controller
         $this->validateLogin($request);
         $credentials = $this->credentials($request);
         $token = \JWTAuth::attempt($credentials);
+        \DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon\Carbon::now(),
+            'action' => "Usuário logou"
+        ]);
         return $token ?
             ['token' => $token] :
             response()->json([
@@ -37,6 +43,11 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        \DB::table('logs')->insert([
+            'user_id' => \Auth::getUser()->id,
+            'date' => Carbon\Carbon::now(),
+            'action' => "Usuário saiu"
+        ]);
         \Auth::guard('api')->logout();
         return response()->json([], 204);
     }

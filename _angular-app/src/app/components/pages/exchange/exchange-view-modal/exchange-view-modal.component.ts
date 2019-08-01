@@ -26,7 +26,7 @@ export class ExchangeViewModalComponent implements OnInit {
     constructor(private exchangeHttp: ExchangeHttpService) { }
 
     ngOnInit() {
-        this.exchangeId();
+        //this.exchangeId();
     }
 
     @Input()
