@@ -53,5 +53,10 @@ Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
         Route::resource('exchanges', 'ExchangeController', ['only' => ['index', 'store', 'show']]);
         Route::resource('logs', 'LogController', ['only' => ['index', 'store', 'show']]);
         Route::get('charts/status', 'ChartController@chartStatus');
+        Route::get('charts/groups_cadastradas', 'ChartController@chartGroupsCadastradas');
+        Route::get('charts/groups_confirmed', 'ChartController@chartGroupsConfirmed');
+        Route::get('cards/users', 'ChartController@cardUsers');
+        Route::get('cards/units', 'ChartController@cardUnits');
+        Route::get('cards/sectors', 'ChartController@cardSectors');
     });
 });

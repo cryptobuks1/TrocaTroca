@@ -227,3 +227,27 @@ export interface Status {
     id?: number;
     status_name: string;
 }
+
+export interface ChartGroupsCadastradas {
+    groups_id: number;
+    group_name: string;
+    exchanges_count: number;
+}
+
+export interface ChartGroupsConfirmed {
+    groups_id: number;
+    group_name: string;
+    exchanges_count: number;
+}
+
+export interface CardUser {
+    users_count: number;
+}
+
+export interface CardUnit {
+    units_count: number;
+}
+
+export interface CardSector {
+    sectors_count: number;
+}

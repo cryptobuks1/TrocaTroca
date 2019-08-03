@@ -1,33 +1,50 @@
 <div class="container">
-  <!--<ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/bar-chart">Bar Chart</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/doughnut-chart">Doughnut Chart</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/radar-chart">Radar Chart</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/pie-chart">Pie Chart</a>
-    </li>
-  </ul>
-  <div class="container">
+    <h3>Dashboard</h3>
     <div class="row">
-      <div style="display: block;">
-        <canvas  width="400" height="300"
-                 baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [chartType]="barChartType">
-        </canvas>
-      </div>
+        <div class="col-sm-4">
+            <div class="card text-center bg-success" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Usuários <i class="fas fa-user-circle"></i></h5>
+                    <p class="card-text">{{users_count}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card text-center bg-warning" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Unidades <i class="fas fa-user-circle"></i></h5>
+                    <p class="card-text">{{units_count}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card text-center bg-primary" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Setores <i class="fas fa-user-circle"></i></h5>
+                    <p class="card-text">{{sectors_count}}</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>-->
-    <div *ngIf="chart" style="width: 400px">
-        <canvas id="canvas">{{chart}}</canvas>
+    <p></p>
+    <div class="row">
+        <div class="col-sm-4">
+            <h5>Trocas Por Situação</h5>
+            <div *ngIf="chartStatus" style="height: 400px">
+                <canvas id="canvas1">{{chartStatus}}</canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5>Trocas Cadastradas Por Grupo</h5>
+            <div *ngIf="chartGroupsCadastradas">
+                <canvas id="canvas2">{{chartGroupsCadastradas}}</canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5>Trocas Confirmadas Por Grupo</h5>
+            <div *ngIf="chartGroupsConfirmed">
+                <canvas id="canvas3">{{chartGroupsConfirmed}}</canvas>
+            </div>
+        </div>
     </div>
 </div>
