@@ -56,6 +56,20 @@ export class FirebaseAuthProvider {
         });
     }
 
+    async getToken() : Promise<string> {
+        try {
+            const user = await this.getUser();
+            if (!user) {
+                throw new Error('User notfound!');
+            }
+
+            const token = await user.getIdTokenResult();
+            return token.token;
+        } catch (e) {
+            return Promise.reject(e);
+        }
+    }
+
     private getCurrentUser() : firebase.User | null {
         return this.firebase.auth().currentUser;
     }
