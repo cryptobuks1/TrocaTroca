@@ -240,6 +240,39 @@ export interface ChartGroupsConfirmed {
     exchanges_count: number;
 }
 
+export interface ChartUnitsCadatradas {
+    units_id: number;
+    unit_name: string;
+    exchanges_count: number;
+}
+
+export interface ChartUnitsConfirmed {
+    units_id: number;
+    unit_name: string;
+    exchanges_count: number;
+}
+
+export interface ChartUnitsAuthorized {
+    units_id: number;
+    unit_name: string;
+    exchanges_count: number;
+}
+
+export interface ChartDatesCadastradas {
+    data: string;
+    exchanges_count: number;
+}
+
+export interface ChartDatesConfirmed {
+    data: string;
+    exchanges_count: number;
+}
+
+export interface ChartDatesAuthorized {
+    data: string;
+    exchanges_count: number;
+}
+
 export interface CardUser {
     users_count: number;
 }

@@ -55,6 +55,14 @@ Route::group(['namespace' => 'api', 'as' => 'api.'], function () {
         Route::get('charts/status', 'ChartController@chartStatus');
         Route::get('charts/groups_cadastradas', 'ChartController@chartGroupsCadastradas');
         Route::get('charts/groups_confirmed', 'ChartController@chartGroupsConfirmed');
+        Route::get('charts/groups_conclusion', 'ChartController@chartGroupsConclusion');
+        Route::get('charts/groups_authorized', 'ChartController@chartGroupsAuthorized');
+        Route::get('charts/units_cadastradas', 'ChartController@chartUnitsCadastradas');
+        Route::get('charts/units_authorized', 'ChartController@chartUnitsAuthorized');
+        Route::get('charts/units_confirmed', 'ChartController@chartUnitsConfirmed');
+        Route::get('charts/dates_cadastradas', 'ChartController@chartDatesCadastradas');
+        Route::get('charts/dates_authorized', 'ChartController@chartDatesAuthorized');
+        Route::get('charts/dates_confirmed', 'ChartController@chartDatesConfirmed');
         Route::get('cards/users', 'ChartController@cardUsers');
         Route::get('cards/units', 'ChartController@cardUnits');
         Route::get('cards/sectors', 'ChartController@cardSectors');

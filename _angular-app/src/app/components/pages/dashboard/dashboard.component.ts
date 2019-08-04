@@ -3,11 +3,11 @@ import {Chart} from 'chart.js';
 import {
     CardSector,
     CardUnit,
-    CardUser,
+    CardUser, ChartDatesConfirmed,
     ChartGroupsCadastradas,
     ChartGroupsConfirmed,
-    ChartStatus,
-    Status
+    ChartStatus, ChartUnitsConfirmed, ChartUnitsCadatradas,
+    Status, ChartUnitsAuthorized, ChartDatesCadastradas, ChartDatesAuthorized
 } from "../../../model";
 import {HttpClient} from "@angular/common/http";
 
@@ -22,13 +22,37 @@ export class DashboardComponent implements OnInit {
     months = [];
     groupsCadastradas = [];
     groupsConfirmed = [];
+    groupsConclusion = [];
+    groupsAuthorized = [];
+    unitsCadastradas = [];
+    unitsConfirmed = [];
+    unitsAuthorized = [];
+    datesCadastradas = [];
+    datesConfirmed = [];
+    datesAuthorized = [];
     exchanges = [];
     exchangesGroupsCadastradas = [];
     exchangesGroupsConfirmed = [];
+    exchangesGroupsConclusion = [];
+    exchangesGroupsAuthorized = [];
+    exchangesUnitsCadastradas = [];
+    exchangesUnitsConfirmed = [];
+    exchangesUnitsAuthorized = [];
+    exchangesDatesCadastradas = [];
+    exchangesDatesConfirmed = [];
+    exchangesDatesAuthorized = [];
     status: Status[];
     chartStatus = [];
     chartGroupsCadastradas = [];
     chartGroupsConfirmed = [];
+    chartGroupsConclusion = [];
+    chartGroupsAuthorized = [];
+    chartDatesCadastradas = [];
+    chartDatesConfirmed = [];
+    chartDatesAuthorized = [];
+    chartUnitsCadastradas = [];
+    chartUnitsConfirmed = [];
+    chartUnitsAuthorized = [];
     users = [];
     users_count= [];
     units = [];
@@ -46,6 +70,14 @@ export class DashboardComponent implements OnInit {
         this.getChartStatus();
         this.getChartGroupsCadastradas();
         this.getChartGroupsConfirmed();
+        //this.getChartGroupsConclusion();
+        this.getChartGroupsAuthorized();
+        this.getChartUnitsCadastradas();
+        this.getChartUnitsConfirmed();
+        this.getChartUnitsAuthorized();
+        this.getChartDatesCadastradas();
+        this.getChartDatesConfirmed();
+        this.getChartDatesAuthorized();
         this.getUsersCount();
         this.getUnitsCount();
         this.getSectorsCount();
@@ -154,6 +186,305 @@ export class DashboardComponent implements OnInit {
                         scales: {
                             xAxes: [{display: true}],
                             yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartGroupsConclusion() {
+        return this.http.get('http://localhost:8000/api/charts/groups_conclusion')
+            .subscribe((res: ChartGroupsCadastradas[]) => {
+                res.forEach(ChartGroupsCadastradas => {
+                    this.groupsConclusion.push(ChartGroupsCadastradas.group_name);
+                    this.exchangesGroupsConclusion.push(ChartGroupsCadastradas.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartGroupsConclusion = new Chart('canvas4', {
+                    type: 'bar',
+                    data: {
+                        labels: this.groupsConclusion,
+                        datasets: [
+                            {
+                                data: this.exchangesGroupsConclusion,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Concluidas Por Grupos'
+                        },
+                        scales: {
+                            xAxes: [{display: true}],
+                            yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartGroupsAuthorized() {
+        return this.http.get('http://localhost:8000/api/charts/groups_authorized')
+            .subscribe((res: ChartGroupsConfirmed[]) => {
+                res.forEach(ChartGroupsConfirmed => {
+                    this.groupsAuthorized.push(ChartGroupsConfirmed.group_name);
+                    this.exchangesGroupsAuthorized.push(ChartGroupsConfirmed.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartGroupsAuthorized = new Chart('canvas5', {
+                    type: 'bar',
+                    data: {
+                        labels: this.groupsAuthorized,
+                        datasets: [
+                            {
+                                data: this.exchangesGroupsAuthorized,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Confirmadas Por Grupo'
+                        },
+                        scales: {
+                            xAxes: [{display: true}],
+                            yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartUnitsCadastradas() {
+        return this.http.get('http://localhost:8000/api/charts/units_cadastradas')
+            .subscribe((res: ChartUnitsCadatradas[]) => {
+                res.forEach(ChartUnitsCadastradas => {
+                    this.unitsCadastradas.push(ChartUnitsCadastradas.unit_name);
+                    this.exchangesUnitsCadastradas.push(ChartUnitsCadastradas.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartUnitsCadastradas = new Chart('canvas6', {
+                    type: 'bar',
+                    data: {
+                        labels: this.unitsCadastradas,
+                        datasets: [
+                            {
+                                data: this.exchangesUnitsCadastradas,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Cadastradas Por Unidade'
+                        },
+                        scales: {
+                            xAxes: [{display: true}],
+                            yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartUnitsConfirmed() {
+        return this.http.get('http://localhost:8000/api/charts/units_confirmed')
+            .subscribe((res: ChartUnitsConfirmed[]) => {
+                res.forEach(ChartUnitsConfirmed => {
+                    this.unitsConfirmed.push(ChartUnitsConfirmed.unit_name);
+                    this.exchangesUnitsConfirmed.push(ChartUnitsConfirmed.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartUnitsConfirmed = new Chart('canvas7', {
+                    type: 'bar',
+                    data: {
+                        labels: this.unitsConfirmed,
+                        datasets: [
+                            {
+                                data: this.exchangesUnitsConfirmed,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Confirmadas Por Unidade'
+                        },
+                        scales: {
+                            xAxes: [{display: true}],
+                            yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartUnitsAuthorized() {
+        return this.http.get('http://localhost:8000/api/charts/units_authorized')
+            .subscribe((res: ChartUnitsAuthorized[]) => {
+                res.forEach(ChartUnitsAuthorized => {
+                    this.unitsAuthorized.push(ChartUnitsAuthorized.unit_name);
+                    this.exchangesUnitsAuthorized.push(ChartUnitsAuthorized.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartUnitsAuthorized = new Chart('canvas8', {
+                    type: 'bar',
+                    data: {
+                        labels: this.unitsAuthorized,
+                        datasets: [
+                            {
+                                data: this.exchangesUnitsAuthorized,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Confirmadas Por Unidade'
+                        },
+                        scales: {
+                            xAxes: [{display: true}],
+                            yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartDatesCadastradas() {
+        return this.http.get('http://localhost:8000/api/charts/dates_cadastradas')
+            .subscribe((res: ChartDatesCadastradas[]) => {
+                res.forEach(ChartDatesCadastradas => {
+                    this.datesCadastradas.push(ChartDatesCadastradas.data);
+                    this.exchangesDatesCadastradas.push(ChartDatesCadastradas.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartDatesCadastradas = new Chart('canvas9', {
+                    type: 'bar',
+                    data: {
+                        //labels: this.datesCadastradas,
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        datasets: [
+                            {
+                                data: this.exchangesDatesCadastradas,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Cadastradas Por Mes'
+                        },
+                        scales: {
+                            xAxes: [{display: true}],
+                            yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartDatesConfirmed() {
+        return this.http.get('http://localhost:8000/api/charts/dates_confirmed')
+            .subscribe((res: ChartDatesConfirmed[]) => {
+                res.forEach(ChartDatesConfirmed => {
+                    this.datesConfirmed.push(ChartDatesConfirmed.data);
+                    this.exchangesDatesConfirmed.push(ChartDatesConfirmed.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartDatesConfirmed = new Chart('canvas10', {
+                    type: 'bar',
+                    data: {
+                        //labels: this.datesConfirmed,
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        datasets: [
+                            {
+                                data: this.exchangesDatesConfirmed,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Confirmadas Por Mes'
+                        },
+                        scales: {
+                            xAxes: [{display: true}],
+                            yAxes: [{display: true}]
+
+                        }
+                    }
+                });
+            });
+
+    }
+
+    getChartDatesAuthorized() {
+        return this.http.get('http://localhost:8000/api/charts/dates_authorized')
+            .subscribe((res: ChartDatesAuthorized[]) => {
+                res.forEach(ChartDatesAuthorized => {
+                    this.datesAuthorized.push(ChartDatesAuthorized.data);
+                    this.exchangesDatesAuthorized.push(ChartDatesAuthorized.exchanges_count);
+                });
+                // @ts-ignore
+                this.chartDatesAuthorized = new Chart('canvas11', {
+                    type: 'bar',
+                    data: {
+                        //labels: this.datesAuthorized,
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        datasets: [
+                            {
+                                data: this.exchangesDatesAuthorized,
+                                borderColor: '#f00',
+                                backgroundColor: '#008542',
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: 'Trocas Autorizadas Por Mes'
+                        },
+                        scales: {
+                            xAxes: [{display: true, minBarLength: 0}],
+                            yAxes: [{display: true, minBarLength: 0}]
 
                         }
                     }

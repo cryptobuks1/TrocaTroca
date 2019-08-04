@@ -12,7 +12,7 @@
         <div class="col-sm-4">
             <div class="card text-center bg-warning" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Total de Unidades <i class="fas fa-user-circle"></i></h5>
+                    <h5 class="card-title">Total de Unidades <i class="fas fa-industry"></i></h5>
                     <p class="card-text">{{units_count}}</p>
                 </div>
             </div>
@@ -20,7 +20,7 @@
         <div class="col-sm-4">
             <div class="card text-center bg-primary" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Total de Setores <i class="fas fa-user-circle"></i></h5>
+                    <h5 class="card-title">Total de Setores <i class="fas fa-clipboard"></i></h5>
                     <p class="card-text">{{sectors_count}}</p>
                 </div>
             </div>
@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-sm-4">
             <h5>Trocas Por Situação</h5>
-            <div *ngIf="chartStatus" style="height: 400px">
+            <div *ngIf="chartStatus" style="height: 200px">
                 <canvas id="canvas1">{{chartStatus}}</canvas>
             </div>
         </div>
@@ -44,6 +44,54 @@
             <h5>Trocas Confirmadas Por Grupo</h5>
             <div *ngIf="chartGroupsConfirmed">
                 <canvas id="canvas3">{{chartGroupsConfirmed}}</canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h5>Trocas Autorizadas Por Grupo</h5>
+            <div *ngIf="chartGroupsAuthorized">
+                <canvas id="canvas5">{{chartGroupsAuthorized}}</canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5>Trocas Cadastradas Por Unidade</h5>
+            <div *ngIf="chartUnitsCadastradas">
+                <canvas id="canvas6">{{chartUnitsCadastradas}}</canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5>Trocas Confirmadas Por Unidade</h5>
+            <div *ngIf="chartUnitsConfirmed">
+                <canvas id="canvas7">{{chartUnitsConfirmed}}</canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h5>Trocas Autorizadas Por Unidade</h5>
+            <div *ngIf="chartUnitsAuthorized">
+                <canvas id="canvas8">{{chartUnitsAuthorized}}</canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5>Trocas Cadastradas Por Mes</h5>
+            <div *ngIf="chartDatesCadastradas">
+                <canvas id="canvas9">{{chartDatesCadastradas}}</canvas>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h5>Trocas Confirmadas Por Mes</h5>
+            <div *ngIf="chartDatesConfirmed">
+                <canvas id="canvas10">{{chartDatesConfirmed}}</canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h5>Trocas Autorizadas Por Mes</h5>
+            <div *ngIf="chartDatesAuthorized">
+                <canvas id="canvas11">{{chartDatesAuthorized}}</canvas>
             </div>
         </div>
     </div>

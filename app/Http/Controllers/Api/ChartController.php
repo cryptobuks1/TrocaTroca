@@ -25,42 +25,101 @@ class ChartController extends Controller
 
     public function chartGroupsCadastradas()
     {
-        $dataGroups1 = DB::table('exchanges')
-            ->select('group1_id', 'group_name', DB::raw('COUNT(exchanges.id) as exchanges_count'))
-            ->join('groups', 'groups.id', '=', 'exchanges.group1_id')
-            ->where('status_id', 2)
-            ->groupBy('group1_id')
+        $dataGroupsTotal = DB::table('views_exchanges_groups_total')
+            ->select(  'group_name', 'exchanges_count')
             ->get();
 
-        /*$dataGroups2 = DB::table('exchanges')
-            ->select('group2_id', 'group_name', DB::raw('COUNT(exchanges.id) as exchanges_count'))
-            ->join('groups', 'groups.id', '=', 'exchanges.group2_id')
-            ->where('status_id', 2)
-            ->union($dataGroups1)
-            ->groupBy('group2_id')
-            ->get();*/
-
-        return $dataGroups1;
+        return $dataGroupsTotal;
     }
 
     public function chartGroupsConfirmed()
     {
-        $dataGroupsConfirmed1 = DB::table('exchanges')
-            ->select('group1_id', 'group_name', DB::raw('COUNT(exchanges.id) as exchanges_count'))
-            ->join('groups', 'groups.id', '=', 'exchanges.group1_id')
-            ->where('status_id', 5)
-            ->groupBy('group1_id')
+        $dataGroupsTotalConfirmed = DB::table('views_exchanges_groups_confirmed_total')
+            ->select(  'group_name', 'exchanges_count')
             ->get();
 
-        /*$dataGroupsConfirmed2 = DB::table('exchanges')
-            ->select('group2_id', 'group_name', DB::raw('COUNT(exchanges.id) as exchanges_count'))
-            ->join('groups', 'groups.id', '=', 'exchanges.group2_id')
-            ->where('status_id', 5)
-            ->union($dataGroupsConfirmed1)
-            ->groupBy('group2_id')
-            ->get();*/
+        return $dataGroupsTotalConfirmed;
+    }
 
-        return $dataGroupsConfirmed1;
+    public function chartGroupsConclusion()
+    {
+        $dataGroupsTotalConclusion = DB::table('views_exchanges_groups_conclusion_total')
+            ->select(  'group_name', 'exchanges_count')
+            ->get();
+
+        return $dataGroupsTotalConclusion;
+    }
+
+    public function chartGroupsAuthorized()
+    {
+        $dataGroupsTotalAuthorized = DB::table('views_exchanges_groups_authorized_total')
+            ->select(  'group_name', 'exchanges_count')
+            ->get();
+
+        return $dataGroupsTotalAuthorized;
+    }
+
+    public function chartUnitsCadastradas()
+    {
+        $dataUnits = DB::table('exchanges')
+            ->select('unit_id', 'unit_name', DB::raw('COUNT(exchanges.id) as exchanges_count'))
+            ->join('units', 'units.id', '=', 'exchanges.unit_id')
+            ->where('status_id', 2)
+            ->groupBy('unit_id')
+            ->get();
+
+        return $dataUnits;
+    }
+
+    public function chartUnitsAuthorized()
+    {
+        $dataUnitsAuthorized = DB::table('exchanges')
+            ->select('unit_id', 'unit_name', DB::raw('COUNT(exchanges.id) as exchanges_count'))
+            ->join('units', 'units.id', '=', 'exchanges.unit_id')
+            ->where('status_id', 1)
+            ->groupBy('unit_id')
+            ->get();
+
+        return $dataUnitsAuthorized;
+    }
+
+    public function chartUnitsConfirmed()
+    {
+        $dataUnitsConfirmed = DB::table('exchanges')
+            ->select('unit_id', 'unit_name', DB::raw('COUNT(exchanges.id) as exchanges_count'))
+            ->join('units', 'units.id', '=', 'exchanges.unit_id')
+            ->where('status_id', 5)
+            ->groupBy('unit_id')
+            ->get();
+
+        return $dataUnitsConfirmed;
+    }
+
+    public function chartDatesCadastradas()
+    {
+        $dataMonths = DB::table('views_exchanges_months_cadastradas_total')
+            ->select( 'data', 'exchanges_count')
+            ->get();
+
+        return $dataMonths;
+    }
+
+    public function chartDatesAuthorized()
+    {
+        $dataMonthsAuthorized = DB::table('views_exchanges_months_authorized_total')
+            ->select( 'data', 'exchanges_count')
+            ->get();
+
+        return $dataMonthsAuthorized;
+    }
+
+    public function chartDatesConfirmed()
+    {
+        $dataDatesConfirmed = DB::table('views_exchanges_months_confirmed_total')
+            ->select( 'data', 'exchanges_count')
+            ->get();
+
+        return $dataDatesConfirmed;
     }
 
     public function cardUsers()
