@@ -10,6 +10,7 @@ use TrocaTroca\Http\Resources\UserResource;
 use Carbon;
 use TrocaTroca\Firebase\Auth as FirebaseAuth;
 use TrocaTroca\Models\UserProfile;
+use TrocaTroca\Rules\FirebaseTokenVerification;
 
 class AuthController extends Controller
 {
@@ -42,6 +43,11 @@ class AuthController extends Controller
      */
     public function loginFirebase(Request $request)
     {
+        $this->validate($request, [
+            'token' => new FirebaseTokenVerification()
+        ]);
+
+        /** @var FirebaseAuth $firebaseAuth */
         $firebaseAuth = app(FirebaseAuth::class);
         $user = $firebaseAuth->user($request->token);
         $profile = UserProfile::where('phone_number', $user->phoneNumber)->first();
