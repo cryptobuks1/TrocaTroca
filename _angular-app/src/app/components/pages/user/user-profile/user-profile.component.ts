@@ -29,8 +29,8 @@ export class UserProfileComponent implements OnInit {
         private firebaseAuth: FirebaseAuthService
     ) {
         this.form = this.formBuilder.group({
-            username: ['', [Validators.maxLength(fieldsOptions.name.validationMessage.maxlength)]],
-            email: ['', [Validators.maxLength(fieldsOptions.email.validationMessage.maxlength), Validators.email]],
+            username: ['', [Validators.maxLength(fieldsOptions.username.validationMessage.maxlength)]],
+            email: ['', [Validators.email]],
             password: ['', [Validators.minLength(fieldsOptions.password.validationMessage.minlength), Validators.maxLength(fieldsOptions.password.validationMessage.maxlength)]],
             phone_number: null,
             token: null,
