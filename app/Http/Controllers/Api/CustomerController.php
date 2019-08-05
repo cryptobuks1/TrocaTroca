@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use TrocaTroca\Http\Controllers\Controller;
 use TrocaTroca\Firebase\Auth as FirebaseAuth;
 use TrocaTroca\Http\Requests\CustomerRequest;
+use TrocaTroca\Mail\PhoneNumberChangeMail;
 use TrocaTroca\Models\User;
 use TrocaTroca\Models\UserProfile;
 
@@ -38,6 +39,8 @@ class CustomerController extends Controller
         $user = User::whereEmail($request->email)->first();
         $phoneNumber = $this->getPhoneNumber($request->token);
         $token = UserProfile::createTokenToChangePhoneNumber($user->profile, $phoneNumber);
+        \Mail::to($user)->send(new PhoneNumberChangeMail($user, $token));
+
         return response()->json([], 204);
     }
 
@@ -49,5 +52,15 @@ class CustomerController extends Controller
     {
         $firebaseAuth = app(FirebaseAuth::class);
         return $firebaseAuth->phoneNumber($token);
+    }
+
+    /**
+     * @param $token
+     * @return JsonResponse
+     */
+    public function updatePhoneNumber($token)
+    {
+        UserProfile::updatePhoneNumber($token);
+        return response()->json([], 204);
     }
 }
