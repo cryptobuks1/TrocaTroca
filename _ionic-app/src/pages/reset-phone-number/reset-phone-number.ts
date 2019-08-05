@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {FirebaseAuthProvider} from "../../providers/auth/firebase-auth";
+import {FormControl, Validators} from "@angular/forms";
 
 /**
  * Generated class for the ResetPhoneNumberPage page.
@@ -10,16 +12,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-reset-phone-number',
-  templateUrl: 'reset-phone-number.html',
+    selector: 'page-reset-phone-number',
+    templateUrl: 'reset-phone-number.html',
 })
 export class ResetPhoneNumberPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    email = new FormControl('', [Validators.required, Validators.email]);
+    canShowFirebaseUI = false;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ResetPhoneNumberPage');
-  }
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private firebaseAuth: FirebaseAuthProvider
+    ) {
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad ResetPhoneNumberPage');
+    }
+
+    showFirebaseUI() {
+        this.canShowFirebaseUI = true;
+        this.firebaseAuth.makePhoneNumberForm('#firebase-ui');
+    }
 
 }
