@@ -116,4 +116,17 @@ class UserProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * @param UserProfile $profile
+     * @param $phoneNumber
+     * @return string
+     */
+    public static function createTokenToChangePhoneNumber(UserProfile $profile, $phoneNumber) : string
+    {
+        $token = base64_encode($phoneNumber);
+        $profile->phone_number_token_to_change = $token;
+        $profile->save();
+        return $token;
+    }
 }
