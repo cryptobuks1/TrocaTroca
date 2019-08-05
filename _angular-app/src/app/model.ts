@@ -50,8 +50,14 @@ export interface User {
     username: string;
     email: string;
     password?: string;
+    profile?: UserProfile;
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
+}
+
+export interface UserProfile {
+    photo_url: string;
+    phone_number: string;
 }
 
 export interface UserLogado {
@@ -59,6 +65,7 @@ export interface UserLogado {
     key: string;
     email: string;
     username: string;
+    profile?: UserProfile;
 }
 
 export interface Group {

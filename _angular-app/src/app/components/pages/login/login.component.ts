@@ -10,7 +10,7 @@ import {AuthService} from "../../../services/auth.service";
 export class LoginComponent implements OnInit {
 
     credentials = {
-        key: 'G0U9',
+        key: 'fLpL',
         password: 'secret'
     };
 

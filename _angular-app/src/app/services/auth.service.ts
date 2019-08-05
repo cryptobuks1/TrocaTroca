@@ -57,6 +57,7 @@ export class AuthService {
             key: decodedToken.key,
             email: decodedToken.email,
             username: decodedToken.username,
+            profile: decodedToken.profile
         } : null;
     }
 }
