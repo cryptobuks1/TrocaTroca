@@ -20,6 +20,7 @@ export class CustomerCreatePage {
     @ViewChild('inputFilePhoto')
     inputFilePhoto; TextInput;
     form: FormGroup;
+    photoPreview;
 
     constructor(
         public navCtrl: NavController,
@@ -55,7 +56,17 @@ export class CustomerCreatePage {
         if (!files.length) {
             return;
         }
+        this.makePhotoPreview(files[0]);
         this.form.get('photo').setValue(files[0]);
+    }
+
+    makePhotoPreview(file: File) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = (event: ProgressEvent) => {
+            const target = event.target;
+            this.photoPreview = (<any>target).result;
+        }
     }
 
 }
