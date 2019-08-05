@@ -5,6 +5,7 @@ namespace TrocaTroca\Http\Controllers\Api;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use TrocaTroca\Http\Controllers\Controller;
 use TrocaTroca\Http\Resources\UserResource;
 use Carbon;
@@ -40,10 +41,12 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @return array|JsonResponse
+     * @throws ValidationException
      */
     public function loginFirebase(Request $request)
     {
         $this->validate($request, [
+            'required',
             'token' => new FirebaseTokenVerification()
         ]);
 
