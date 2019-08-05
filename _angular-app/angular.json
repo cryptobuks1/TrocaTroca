@@ -27,7 +27,8 @@
               "node_modules/pnotify/dist/PNotifyBrightTheme.css",
               "node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css",
               "node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/firebaseui/dist/firebaseui.css"
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.bundle.min.js",
