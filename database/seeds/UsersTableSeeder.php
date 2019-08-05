@@ -13,38 +13,42 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory(User::class, 1)->create([
-            'email' => 'admin@user.com'
+            'email' => 'admin@user.com',
+            'role' => User::ROLE_ADMIN
         ])->each(function ($user) {
             $user->profile->phone_number = '+16505551234';
             $user->profile->save();
         });
         factory(User::class, 1)->create([
-            'email' => 'manager@user.com'
+            'email' => 'manager@user.com',
+            'role' => User::ROLE_MANAGER
         ]);
         factory(User::class, 1)->create([
-            'email' => 'super1@user.com'
+            'email' => 'super1@user.com',
+            'role' => User::ROLE_SUPER
         ]);
         factory(User::class, 1)->create([
-            'email' => 'super2@user.com'
+            'email' => 'super2@user.com',
+            'role' => User::ROLE_SUPER
         ]);
         factory(User::class, 1)->create([
-            'email' => 'super3@user.com'
+            'email' => 'super3@user.com',
+            'role' => User::ROLE_SUPER
         ]);
         factory(User::class, 1)->create([
-            'email' => 'oper1@user.com'
+            'email' => 'oper1@user.com',
+            'role' => User::ROLE_OPERATOR
         ]);
         factory(User::class, 1)->create([
-            'email' => 'oper2@user.com'
+            'email' => 'oper2@user.com',
+            'role' => User::ROLE_OPERATOR
         ]);
         factory(User::class, 1)->create([
-            'email' => 'oper3@user.com'
+            'email' => 'oper3@user.com',
+            'role' => User::ROLE_OPERATOR
         ]);
-        factory(User::class, 1)->create([
-            'email' => 'oper4@user.com'
+        factory(User::class, 50)->create([
+            'role' => User::ROLE_OPERATOR
         ]);
-        factory(User::class, 1)->create([
-            'email' => 'oper5@user.com'
-        ]);
-        factory(User::class, 50)->create();
     }
 }

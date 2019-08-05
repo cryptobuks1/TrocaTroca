@@ -15,6 +15,12 @@ class User extends Authenticatable implements JWTSubject
     use SoftDeletes;
     use Filterable;
 
+    const ROLE_ADMIN = 1;
+    const ROLE_MANAGER = 2;
+    const ROLE_SUPER = 3;
+    const ROLE_OPERATOR = 4;
+
+
     /**
      * The attributes that are mass assignable.
      *

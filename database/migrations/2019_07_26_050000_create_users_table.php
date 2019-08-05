@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use TrocaTroca\Models\User;
 
 class CreateUsersTable extends Migration
 {
@@ -19,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
+            $table->smallInteger('role')->unsigned()->default(User::ROLE_OPERATOR);
             $table->bigInteger('unit_id')->unsigned();
             $table->foreign('unit_id')->references('id')->on('units');
             $table->bigInteger('sector_id')->unsigned();
