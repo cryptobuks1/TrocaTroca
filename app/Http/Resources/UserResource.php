@@ -22,7 +22,11 @@ class UserResource extends JsonResource
             'unit' => new UnitResource($this->unit),
             'sector' => new SectorResource($this->sector),
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
+            'profile' => [
+                'photo_url' => $this->profile->photo_url,
+                'phone_number' => $this->profile->phone_number
+            ]
         ];
     }
 }
