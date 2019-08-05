@@ -1,8 +1,9 @@
 <?php
-
+declare(strict_types=1);
 namespace TrocaTroca\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -86,8 +87,29 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
+    /**
+     * @return HasOne
+     */
     public function profile()
     {
         return $this->hasOne(UserProfile::class)->withDefault();
     }
+
+    /**
+     * @param array $data
+     * @return User
+     * @throws \Exception
+     */
+    public static function createCustomer(array $data) : User
+    {
+        try{
+            UserProfile::uploadPhoto($data['photo']);
+            \DB::beginTransaction();
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            throw $e;
+        }
+    }
+
 }
