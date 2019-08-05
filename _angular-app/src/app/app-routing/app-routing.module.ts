@@ -13,6 +13,7 @@ import {ExchangeListConfirmedComponent} from "../components/pages/exchange/excha
 import {ExchangeListAuthorizedComponent} from "../components/pages/exchange/exchange-list-authorized/exchange-list-authorized.component";
 import {DashboardComponent} from "../components/pages/dashboard/dashboard.component";
 import {LogListComponent} from "../components/pages/log/log-list/log-list.component";
+import {UserProfileComponent} from "../components/pages/user/user-profile/user-profile.component";
 
 const routes: Routes =[
     {
@@ -35,6 +36,9 @@ const routes: Routes =[
     },
     {
         path: 'users/list', component: UserListComponent, canActivate: [AuthGuard]
+    },
+    {
+        path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]
     },
     {
         path: 'exchanges/list', component: ExchangeListComponent, canActivate: [AuthGuard]

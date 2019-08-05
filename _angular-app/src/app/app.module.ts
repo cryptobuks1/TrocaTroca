@@ -61,6 +61,7 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { LogListComponent } from './components/pages/log/log-list/log-list.component';
 import { LogSearchFormComponent } from './components/pages/log/log-search-form/log-search-form.component';
 import {ChartsModule} from "ng2-charts";
+import { UserProfileComponent } from './components/pages/user/user-profile/user-profile.component';
 
 function jwtFactory(authservice: AuthService) {
     return {
@@ -127,7 +128,8 @@ function jwtFactory(authservice: AuthService) {
     ExchangeListAuthorizedComponent,
     DashboardComponent,
     LogListComponent,
-    LogSearchFormComponent
+    LogSearchFormComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

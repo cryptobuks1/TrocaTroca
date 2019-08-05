@@ -73,7 +73,7 @@ class UserProfile extends Model
     private static function photosDir()
     {
         $dir = self::DIR_USER_PHOTO;
-        return "{$dir}";
+        return $dir;
     }
 
     /**

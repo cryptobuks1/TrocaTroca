@@ -33,7 +33,8 @@ class UsersTableSeeder extends Seeder
         ])->each(function ($user) {
             Model::reguard();
             $user->updateWithProfile([
-                'phone_number' => '+16505551235'
+                'phone_number' => '+16505551235',
+                'photo' => $this->getManagerPhoto()
             ]);
             Model::unguard();
         });
@@ -43,7 +44,8 @@ class UsersTableSeeder extends Seeder
         ])->each(function ($user) {
             Model::reguard();
             $user->updateWithProfile([
-                'phone_number' => '+16505551236'
+                'phone_number' => '+16505551236',
+                'photo' => $this->getSuperPhoto()
             ]);
             Model::unguard();
         });
@@ -53,7 +55,8 @@ class UsersTableSeeder extends Seeder
         ])->each(function ($user) {
             Model::reguard();
             $user->updateWithProfile([
-                'phone_number' => '+16505551237'
+                'phone_number' => '+16505551237',
+                'photo' => $this->getSuperPhoto()
             ]);
             Model::unguard();
         });
@@ -63,7 +66,8 @@ class UsersTableSeeder extends Seeder
         ])->each(function ($user) {
             Model::reguard();
             $user->updateWithProfile([
-                'phone_number' => '+16505551238'
+                'phone_number' => '+16505551238',
+                'photo' => $this->getSuperPhoto()
             ]);
             Model::unguard();
         });
@@ -73,7 +77,8 @@ class UsersTableSeeder extends Seeder
         ])->each(function ($user) {
             Model::reguard();
             $user->updateWithProfile([
-                'phone_number' => '+16505551239'
+                'phone_number' => '+16505551239',
+                'photo' => $this->getOperatorPhoto()
             ]);
             Model::unguard();
         });
@@ -83,7 +88,8 @@ class UsersTableSeeder extends Seeder
         ])->each(function ($user) {
             Model::reguard();
             $user->updateWithProfile([
-                'phone_number' => '+16505551240'
+                'phone_number' => '+16505551240',
+                'photo' => $this->getOperatorPhoto()
             ]);
             Model::unguard();
         });
@@ -93,7 +99,8 @@ class UsersTableSeeder extends Seeder
         ])->each(function ($user) {
             Model::reguard();
             $user->updateWithProfile([
-                'phone_number' => '+16505551241'
+                'phone_number' => '+16505551241',
+                'photo' => $this->getOperatorPhoto()
             ]);
             Model::unguard();
         });
@@ -108,7 +115,31 @@ class UsersTableSeeder extends Seeder
     public function getAdminPhoto()
     {
         return new UploadedFile(
-            storage_path('app/faker/users/1624_mod.png'),
+            storage_path('app/faker/users/admin.png'),
+            str_random(16) . '.jpg'
+        );
+    }
+
+    public function getManagerPhoto()
+    {
+        return new UploadedFile(
+            storage_path('app/faker/users/manager.jpg'),
+            str_random(16) . '.jpg'
+        );
+    }
+
+    public function getSuperPhoto()
+    {
+        return new UploadedFile(
+            storage_path('app/faker/users/supervisor.png'),
+            str_random(16) . '.jpg'
+        );
+    }
+
+    public function getOperatorPhoto()
+    {
+        return new UploadedFile(
+            storage_path('app/faker/users/operator.jpg'),
             str_random(16) . '.jpg'
         );
     }
