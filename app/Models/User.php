@@ -85,6 +85,7 @@ class User extends Authenticatable implements JWTSubject
             'key' => $this->key,
             'username' => $this->username,
             'profile' => [
+                'has_photo' => $this->profile->photo ? true : false,
                 'photo_url' => $this->profile->photo_url,
                 'phone_number' => $this->profile->phone_number
             ]
