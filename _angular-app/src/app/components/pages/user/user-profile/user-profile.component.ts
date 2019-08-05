@@ -5,6 +5,7 @@ import {NotifyMessageService} from "../../../../services/notify-message.service"
 import {AuthService} from "../../../../services/auth.service";
 import {PhoneNumberAuthModalComponent} from "../../../common/phone-number-auth-modal/phone-number-auth-modal.component";
 import {FirebaseAuthService} from "../../../../services/firebase-auth.service";
+import fieldsOptions from "./user-profile-fields-options";
 
 @Component({
   selector: 'app-user-profile',
@@ -24,13 +25,13 @@ export class UserProfileComponent implements OnInit {
         private formBuilder: FormBuilder,
         private userProfileHttp: UserProfileHttpService,
         private notifyMessage: NotifyMessageService,
-        private authService: AuthService,
+        public authService: AuthService,
         private firebaseAuth: FirebaseAuthService
     ) {
         this.form = this.formBuilder.group({
-            username: ['', [Validators.maxLength(30)]],
-            email: ['', [Validators.maxLength(255), Validators.email]],
-            password: ['', [Validators.minLength(4), Validators.maxLength(16)]],
+            username: ['', [Validators.maxLength(fieldsOptions.name.validationMessage.maxlength)]],
+            email: ['', [Validators.maxLength(fieldsOptions.email.validationMessage.maxlength), Validators.email]],
+            password: ['', [Validators.minLength(fieldsOptions.password.validationMessage.minlength), Validators.maxLength(fieldsOptions.password.validationMessage.maxlength)]],
             phone_number: null,
             token: null,
             photo: false
@@ -88,6 +89,10 @@ export class UserProfileComponent implements OnInit {
 
     private setHasPhoto() {
         this.has_photo = this.authService.me.profile.has_photo;
+    }
+
+    get fieldOptions() : any {
+        return fieldsOptions;
     }
 
 }

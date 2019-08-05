@@ -15,16 +15,24 @@
   <div class="col-md-12">
     <form (submit)="submit()" [formGroup]="form">
       <div class="form-group">
-        <label for="username">Nome</label>
-        <input type="text" class="form-control" id="username" formControlName="username">
+        <label [for]="fieldOptions.username.label">Nome</label>
+        <input type="text" class="form-control" [id]="fieldOptions.username.id" formControlName="username" isInvalid>
+        <field-error [field]="form.get('username')"
+                     [label]="fieldOptions.username.label"
+                     [messages]="fieldOptions.username.validationMessage"></field-error>
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email">
+        <input type="email" class="form-control" [id]="fieldOptions.email.id" formControlName="email" isInvalid>
+        <field-error [field]="form.get('email')"
+                     [label]="fieldOptions.email.label"
+                     [messages]="fieldOptions.email.validationMessage"></field-error>
       </div>
       <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" class="form-control" id="password" formControlName="password">
+        <label [for]="fieldOptions.password.label">Senha</label>
+        <input type="password" class="form-control" [id]="fieldOptions.password.id" formControlName="password" isInvalid>
+        <field-error [field]="form.get('password')"
+                     [label]="fieldOptions.password.label"
+                     [messages]="fieldOptions.password.validationMessage"></field-error>
       </div>
       <div class="form-group">
         <label>Telefone</label>
