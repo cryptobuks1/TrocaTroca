@@ -6,10 +6,15 @@
 -->
 <ion-header>
   <ion-navbar color="green-dark">
-    <button ion-button menuToggle>
+    <!--<button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button>-->
     <ion-title text-center>Main</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentMoreOptions($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

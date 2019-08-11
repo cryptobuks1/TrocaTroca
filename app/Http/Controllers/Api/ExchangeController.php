@@ -39,6 +39,16 @@ class ExchangeController extends Controller
         //$exchanges = Exchange::paginate(10);
         return ExchangeResource::collection($exchanges);
     }
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function indexAll()
+    {
+        $exchanges = Exchange::all();
+        return ExchangeResource::collection($exchanges);
+    }
+
     /**
      * @return AnonymousResourceCollection
      */

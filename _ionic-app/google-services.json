@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "478927477002",
+    "firebase_url": "https://troca-troca-b9507.firebaseio.com",
+    "project_id": "troca-troca-b9507",
+    "storage_bucket": "troca-troca-b9507.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478927477002:android:fefad1d0cd38d4be",
+        "android_client_info": {
+          "package_name": "com.gestao.trocatroca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478927477002-3mkumujubp43flpkmapdeaerr7hf9lbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUlL_okP8JgU9l7iDtLbqpfX4bJmg74nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478927477002-3mkumujubp43flpkmapdeaerr7hf9lbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

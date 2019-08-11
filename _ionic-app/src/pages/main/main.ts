@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {RedirectIfNotAuthProvider} from "../../providers/redirect-if-not-auth/redirect-if-not-auth";
+import {MoreOptionsComponent} from "../../components/more-options/more-options";
 
 /**
  * Generated class for the MainPage page.
@@ -15,11 +17,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MainPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+      public navCtrl: NavController,
+      public navParams: NavParams,
+      private redirectIfNotAuth: RedirectIfNotAuthProvider,
+      private popover: PopoverController
+  ) {
+  }
+
+  ionViewCanEnter(){
+     return this.redirectIfNotAuth.ionViewCanEnter()
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainPage');
+  }
+
+  presentMoreOptions(event){
+      const popover = this.popover.create(MoreOptionsComponent);
+
+      popover.present({
+         ev: event
+      })
   }
 
 }

@@ -10,6 +10,7 @@ import {
     Status, ChartUnitsAuthorized, ChartDatesCadastradas, ChartDatesAuthorized
 } from "../../../model";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
 
 
 @Component({
@@ -18,6 +19,9 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+    baseUrl = `${environment.api.url}/charts`;
+    baseUrl2 = `${environment.api.url}/cards`;
 
     months = [];
     groupsCadastradas = [];
@@ -84,7 +88,7 @@ export class DashboardComponent implements OnInit {
     }
 
     getChartStatus() {
-        return this.http.get('http://localhost:8000/api/charts/status')
+        return this.http.get(`${this.baseUrl}/status`)
             .subscribe((res: ChartStatus[]) => {
                 res.forEach(ChartStatus => {
                     this.months.push(ChartStatus.status_name);
@@ -121,7 +125,7 @@ export class DashboardComponent implements OnInit {
     }
 
     getChartGroupsCadastradas() {
-        return this.http.get('http://localhost:8000/api/charts/groups_cadastradas')
+        return this.http.get(`${this.baseUrl}/groups_cadastradas`)
             .subscribe((res: ChartGroupsCadastradas[]) => {
                 res.forEach(ChartGroupsCadastradas => {
                     this.groupsCadastradas.push(ChartGroupsCadastradas.group_name);
@@ -158,7 +162,7 @@ export class DashboardComponent implements OnInit {
     }
 
     getChartGroupsConfirmed() {
-        return this.http.get('http://localhost:8000/api/charts/groups_confirmed')
+        return this.http.get(`${this.baseUrl}/groups_confirmed`)
             .subscribe((res: ChartGroupsConfirmed[]) => {
                 res.forEach(ChartGroupsConfirmed => {
                     this.groupsConfirmed.push(ChartGroupsConfirmed.group_name);

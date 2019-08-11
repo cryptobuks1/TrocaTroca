@@ -8,7 +8,9 @@ class CorsMiddleware
 {
     private $origins = [
         'http://localhost:4200',
-        'http://localhost:8100'
+        'http://localhost:8100',
+        //'http://192.168.1.104:8100',
+        //'http://192.168.1.104:4200',
     ];
 
     /**
@@ -31,7 +33,7 @@ class CorsMiddleware
             }
             header('Access-Control-Allow-Headers: Content-Type, Authorization');
             header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE');
-            header('Access-Control-Exposure-Headers: GET, Authorization');
+            header('Access-Control-Expose-Headers:  Authorization');
         }
         return $next($request);
     }
