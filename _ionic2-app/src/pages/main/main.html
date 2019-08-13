@@ -4,12 +4,23 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar>
-    <ion-title>main</ion-title>
+<ion-header no-border>
+  <ion-navbar color="green-dark">
+    <ion-title>TrocaTroca</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentMoreOptions($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <super-tabs toolbarBackground="green-dark" toolbarColor="light" indicatorColor="light" style="font-size: 8px">
+    <super-tab [root]="enchangeList" title="Trocas"></super-tab>
+    <!--<super-tab [root]="exchangeListComponent" title="Cadastro"></super-tab>
+    <super-tab [root]="exchangeListComponent" title="Confirmar"></super-tab>
+    <super-tab [root]="exchangeListComponent" title="Autorizar"></super-tab>
+    <super-tab [root]="exchangeListComponent" title="Concluir"></super-tab>-->
+  </super-tabs>
 </ion-content>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {AuthProvider} from "../../providers/auth/auth";
+import {App, ViewController} from "ionic-angular";
+import {LoginPage} from "../../pages/login/login";
 
 /**
  * Generated class for the MoreOptionsComponent component.
@@ -12,11 +15,19 @@ import { Component } from '@angular/core';
 })
 export class MoreOptionsComponent {
 
-  text: string;
 
-  constructor() {
-    console.log('Hello MoreOptionsComponent Component');
-    this.text = 'Hello World';
+  constructor(
+      private auth: AuthProvider,
+      private app: App,
+      private viewCtrl: ViewController
+  ) {
   }
 
+  logout() {
+    this.auth.logout()
+        .subscribe(() => {
+          this.viewCtrl.dismiss();
+          this.app.getRootNav().setRoot(LoginPage);
+        }, (error) => console.log(error));
+  }
 }

@@ -16,6 +16,10 @@ import { ExchangeProvider } from '../providers/exchange/exchange';
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {RefreshTokenInterceptor} from "../providers/auth/refresh-token-interceptor";
 import {RedirectIfNotAuthProvider} from "../providers/auth/redirect-if-not-auth";
+import {SuperTabsModule} from "ionic2-super-tabs";
+import {MainPage} from "../pages/main/main";
+import {ExchangeListComponent} from "../components/exchange-list/exchange-list";
+import {MoreOptionsComponent} from "../components/more-options/more-options";
 
 
 function jwtFactory(authService: AuthProvider) {
@@ -35,12 +39,16 @@ function jwtFactory(authService: AuthProvider) {
     HomePage,
     ListPage,
     LoginPage,
+    MainPage,
+    ExchangeListComponent,
+    MoreOptionsComponent,
     ExchangeListPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    SuperTabsModule.forRoot(),
     JwtModule.forRoot({
         jwtOptionsProvider: {
           provide: JWT_OPTIONS,
@@ -55,6 +63,9 @@ function jwtFactory(authService: AuthProvider) {
     HomePage,
     ListPage,
     LoginPage,
+    MainPage,
+    ExchangeListComponent,
+    MoreOptionsComponent,
     ExchangeListPage
   ],
   providers: [
@@ -68,7 +79,7 @@ function jwtFactory(authService: AuthProvider) {
       useClass: RefreshTokenInterceptor,
       multi: true
     },
-    //RedirectIfNotAuthProvider
+    RedirectIfNotAuthProvider
   ]
 })
 export class AppModule {}

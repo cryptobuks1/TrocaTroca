@@ -18,8 +18,8 @@ export class RedirectIfNotAuthProvider {
         console.log('Hello RedirectIfNotAuthProvider Provider');
     }
 
-    /*ionViewCanEnter(): Promise<boolean> {
-        /!*return this.auth.isAuth()
+    ionViewCanEnter(): Promise<boolean> {
+        return this.auth.isAuth()
             .then((isAuth) => {
                 if(!isAuth){
                     setTimeout(() => {
@@ -27,8 +27,8 @@ export class RedirectIfNotAuthProvider {
                     })
                 }
                 return isAuth;
-            })*!/
-    }*/
+            })
+    }
 
 
 

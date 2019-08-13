@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AuthProvider} from "../../providers/auth/auth";
 import {HomePage} from "../home/home";
 import {ExchangeListPage} from "../exchange-list/exchange-list";
+import {MainPage} from "../main/main";
 
 
 /**
@@ -42,7 +43,7 @@ export class LoginPage {
             .subscribe((data) => {
                 const token = data.token;
                 window.localStorage.setItem('token', token);
-                this.navCtrl.push(ExchangeListPage);
+                this.navCtrl.push(MainPage);
             }, error => this.showMessageError = true);
         return false;
     }

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { MoreOptionsComponent } from './more-options/more-options';
 
 @NgModule({
-	declarations: [MoreOptionsComponent],
+	declarations: [],
 	imports: [],
-	exports: [MoreOptionsComponent]
+	exports: []
 })
 export class ComponentsModule {}

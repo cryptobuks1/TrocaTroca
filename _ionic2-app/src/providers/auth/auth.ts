@@ -40,9 +40,21 @@ export class AuthProvider {
         return window.localStorage.getItem(TOKEN_KEY);
     }
 
-    isAuth(): boolean {
+    async isAuth(): Promise<boolean> {
         const token = this.getToken();
-        return !new JwtHelperService().isTokenExpired(token, 60);
+        if (!token) {
+            return false;
+        }
+        
+        if (this.isTokenExpired(token)) {
+            try {
+                await this.refresh().toPromise();
+            } catch (e) {
+                console.log('erro ao fazer o refresh token', e);
+                return false;
+            }
+        }
+        return true;
     }
 
     logout(): Observable<any> {
