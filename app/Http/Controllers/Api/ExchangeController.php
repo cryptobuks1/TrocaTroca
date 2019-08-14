@@ -35,7 +35,7 @@ class ExchangeController extends Controller
     {
         $filter = app(ExchangeFilter::class);
         $filterQuery = Exchange::with('user1', 'user2', 'unit', 'sector', 'group1', 'turn', 'type1', 'status')->filtered($filter);
-        $exchanges = $filterQuery->paginate(5);
+        $exchanges = $filterQuery->paginate(15);
         //$exchanges = Exchange::paginate(10);
         return ExchangeResource::collection($exchanges);
     }

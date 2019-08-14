@@ -27,14 +27,14 @@ export class ExchangeListPage {
   }
 
   ionViewDidLoad() {
-    this.getExchanges();
+    // this.getExchanges();
   }
 
-    getExchanges() {
-        this.exchange.listAll()
+    /*getExchanges() {
+        this.exchange.list()
             .subscribe(response => {
                 this.exchanges = response.data;
             })
-    }
+    }*/
 
 }

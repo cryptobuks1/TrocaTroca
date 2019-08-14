@@ -1,14 +1,32 @@
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="Puxe para atualizar" refreshingText="Carregando..."></ion-refresher-content>
+  </ion-refresher>
   <ion-grid>
-    <ion-row>
-      <ion-card>
-        <ion-card-content>
-          <ion-card-title>Herval</ion-card-title>
-          <ion-card-title>Herval</ion-card-title>
-          <p>13/08/2019</p>
-          <h1>Cadastrada</h1>
-        </ion-card-content>
-      </ion-card>
+    <ion-row *ngFor="let exchange of exchanges.data">
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>{{exchange.user1.username | slice:0:12}}</ion-card-title>
+            <ion-card-title>{{exchange.user2.username | slice:0:12}}</ion-card-title>
+            <p>{{exchange.date | date: 'dd/MM/yyyy'}}</p>
+            <h1>{{exchange.status.status_name}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <!--<ion-col>
+        <ion-card *ngIf="exchanges.data[i+1]">
+          <ion-card-content>
+            <ion-card-title>{{exchanges.data[i+1].user1.username | slice:0:12}}</ion-card-title>
+            <ion-card-title>{{exchanges.data[i+1].user2.username | slice:0:12}}</ion-card-title>
+            <p>{{exchanges.data[i+1].date | date: 'dd/MM/yyyy'}}</p>
+            <h1>{{exchanges.data[i+1].status.status_name}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>-->
     </ion-row>
   </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="canMoreExchanges">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

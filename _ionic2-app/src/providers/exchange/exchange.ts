@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
@@ -19,8 +19,12 @@ export class ExchangeProvider {
         console.log('Hello ExchangeProvider Provider');
     }
 
-    listAll(): Observable<{ data: Array<Exchange> }> {
-        return this.http.get<{ data: Array<Exchange> }>(`${this.baseUrl}/all`);
+    list(page: number): Observable<{ data: Array<Exchange>, meta: any }> {
+        const fromObject = {
+            page
+        };
+        const params = new HttpParams({fromObject: (<any>fromObject)})
+        return this.http.get<{ data: Array<Exchange>, meta: any }>(this.baseUrl, {params});
     }
 
 }

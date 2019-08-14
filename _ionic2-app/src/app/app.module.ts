@@ -20,6 +20,8 @@ import {SuperTabsModule} from "ionic2-super-tabs";
 import {MainPage} from "../pages/main/main";
 import {ExchangeListComponent} from "../components/exchange-list/exchange-list";
 import {MoreOptionsComponent} from "../components/more-options/more-options";
+import {ExchangeSearchbarComponent} from "../components/exchange-searchbar/exchange-searchbar";
+import { ExchangeSearchProvider } from '../providers/exchange-search/exchange-search';
 
 
 function jwtFactory(authService: AuthProvider) {
@@ -42,6 +44,7 @@ function jwtFactory(authService: AuthProvider) {
     MainPage,
     ExchangeListComponent,
     MoreOptionsComponent,
+    ExchangeSearchbarComponent,
     ExchangeListPage
   ],
   imports: [
@@ -66,6 +69,7 @@ function jwtFactory(authService: AuthProvider) {
     MainPage,
     ExchangeListComponent,
     MoreOptionsComponent,
+    ExchangeSearchbarComponent,
     ExchangeListPage
   ],
   providers: [
@@ -79,7 +83,8 @@ function jwtFactory(authService: AuthProvider) {
       useClass: RefreshTokenInterceptor,
       multi: true
     },
-    RedirectIfNotAuthProvider
+    RedirectIfNotAuthProvider,
+    ExchangeSearchProvider
   ]
 })
 export class AppModule {}
