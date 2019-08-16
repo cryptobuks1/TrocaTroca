@@ -5,6 +5,7 @@ import {environment} from "../../environments/environment";
 import {Exchange} from "../../app/model";
 import {ExchangeSearchProvider} from "../exchange-search/exchange-search";
 import {map} from "rxjs/operators";
+import {SearchParams, SearchParamsBuilder} from "../../../../_angular-app/src/app/services/http/http-resource";
 
 /*
   Generated class for the ExchangeProvider provider.
@@ -34,7 +35,25 @@ export class ExchangeProvider {
         return this.http.get<{ data: Array<Exchange>, meta: any }>(`${this.baseUrl}/all`, {params});
     }
 
+    listCadastradas(page: number): Observable<{ data: Array<Exchange>; meta: any }> {
+        const fromObject = {
+            page,
+            'statuses[]': this.exchangeSearch.options.status,
+            sort: this.exchangeSearch.options.orderBy == 'latest' ? '-date' : 'date',
+            search: this.exchangeSearch.options.search
+        };
+        const params = new HttpParams({fromObject: (<any>fromObject)})
+        return this.http.get<{ data: Array<Exchange>, meta: any }>(`${this.baseUrl}/cadastradas`, {
+            params,
+        });
+    }
+
     get(id: number): Observable<{ exchange: Exchange}> {
+        return this.http.get<{ data: any } >(`${this.baseUrl}/${id}`)
+            .pipe(map(response => response.data));
+    }
+
+    getCadastradas(id: number): Observable<{ exchangeCadastrada: Exchange}> {
         return this.http.get<{ data: any } >(`${this.baseUrl}/${id}`)
             .pipe(map(response => response.data));
     }

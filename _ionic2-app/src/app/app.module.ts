@@ -25,6 +25,8 @@ import { ExchangeSearchProvider } from '../providers/exchange-search/exchange-se
 import { StatusProvider } from '../providers/status/status';
 import {ExchangeSearchOptionsComponent} from "../components/exchange-search-options/exchange-search-options";
 import {ExchangeDetailPage} from "../pages/exchange-detail/exchange-detail";
+import {ExchangeListCadastradaComponent} from "../components/exchange-list-cadastrada/exchange-list-cadastrada";
+import {ExchangeConfirmDetailPage} from "../pages/exchange-confirm-detail/exchange-confirm-detail";
 
 
 function jwtFactory(authService: AuthProvider) {
@@ -46,10 +48,12 @@ function jwtFactory(authService: AuthProvider) {
     LoginPage,
     MainPage,
     ExchangeDetailPage,
+    ExchangeConfirmDetailPage,
     ExchangeListComponent,
     MoreOptionsComponent,
     ExchangeSearchbarComponent,
     ExchangeSearchOptionsComponent,
+    ExchangeListCadastradaComponent,
     ExchangeListPage
   ],
   imports: [
@@ -73,10 +77,12 @@ function jwtFactory(authService: AuthProvider) {
     LoginPage,
     MainPage,
     ExchangeDetailPage,
+    ExchangeConfirmDetailPage,
     ExchangeListComponent,
     MoreOptionsComponent,
     ExchangeSearchbarComponent,
     ExchangeSearchOptionsComponent,
+    ExchangeListCadastradaComponent,
     ExchangeListPage
   ],
   providers: [

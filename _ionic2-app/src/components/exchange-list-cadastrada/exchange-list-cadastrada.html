@@ -3,15 +3,13 @@
     <ion-refresher-content pullingText="Puxe para atualizar" refreshingText="Carregando..."></ion-refresher-content>
   </ion-refresher>
   <ion-grid>
-    <ion-row *ngFor="let exchange of exchanges.data">
+    <ion-row *ngFor="let exchange of exchangesCadastradas.data">
       <ion-col>
-        <ion-card (click)="openExchangeDetail(exchange.id)">
+        <ion-card (click)="openExchangeConfirmDetail(exchange.id)">
           <ion-card-content>
-            <p>{{exchange.id}}</p>
             <ion-card-title>{{exchange.user1.username | slice:0:12}}</ion-card-title>
             <ion-card-title>{{exchange.user2.username | slice:0:12}}</ion-card-title>
-            <p>{{exchange.date | date: 'dd/MM/yyyy'}}</p>
-            <h1>{{exchange.status.status_name}}</h1>
+            <h1>{{exchange.date | date: 'dd/MM/yyyy'}}</h1>
           </ion-card-content>
         </ion-card>
       </ion-col>

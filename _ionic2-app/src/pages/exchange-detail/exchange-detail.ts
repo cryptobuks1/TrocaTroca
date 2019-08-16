@@ -40,10 +40,7 @@ export class ExchangeDetailPage implements OnInit{
     ngOnInit(): void {
         this.exchangeHttp.get(this.exchangeId)
             .subscribe( data => {
-                console.log(data);
                 this.exchangeData = data;
-                console.log(this.exchangeData);
-                console.log(this.exchangeData.id);
             });
     }
 

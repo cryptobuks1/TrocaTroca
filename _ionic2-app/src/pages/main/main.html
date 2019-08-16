@@ -22,9 +22,9 @@
 <ion-content class="hide-scroll-content">
   <super-tabs toolbarBackground="green-dark" toolbarColor="light" indicatorColor="light" (tabSelect)="onTabSelect($event)">
     <super-tab id="exchanges" [root]="enchangeList" title="Trocas"></super-tab>
-    <!--<super-tab [root]="exchangeListComponent" title="Cadastro"></super-tab>
-    <super-tab [root]="exchangeListComponent" title="Confirmar"></super-tab>
-    <super-tab [root]="exchangeListComponent" title="Autorizar"></super-tab>
+    <!--<super-tab [root]="exchangeListComponent" title="Cadastro"></super-tab>-->
+    <super-tab id="exchangesCadastradas" [root]="exchangeListCadastrada" title="Confirmar"></super-tab>
+    <!--<super-tab [root]="exchangeListComponent" title="Autorizar"></super-tab>
     <super-tab [root]="exchangeListComponent" title="Concluir"></super-tab>-->
   </super-tabs>
 </ion-content>

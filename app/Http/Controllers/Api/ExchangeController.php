@@ -60,7 +60,7 @@ class ExchangeController extends Controller
      */
     public function indexCadastro()
     {
-        $filter = app(ExchangeFilter::class);
+        $filter = app(ExchangeMobileFilter::class);
         $filterQuery = Exchange::where('status_id', 2)->filtered($filter);
         $exchanges = $filterQuery->paginate(5);
         //$exchanges = Exchange::where('status_id', 2)->paginate(10);
