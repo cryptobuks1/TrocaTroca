@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ExchangeProvider} from "../../providers/exchange/exchange";
 import {Exchange} from "../../app/model";
-import {InfiniteScroll, Refresher} from "ionic-angular";
+import {App, InfiniteScroll, LoadingController, Refresher, Toast, ToastController} from "ionic-angular";
 import {ExchangeSearchProvider} from "../../providers/exchange-search/exchange-search";
+import {ExchangeDetailPage} from "../../pages/exchange-detail/exchange-detail";
 
 /**
  * Generated class for the ExchangeListComponent component.
@@ -22,17 +23,40 @@ export class ExchangeListComponent implements OnInit{
 
   page = 1;
   canMoreExchanges = true;
+  toastLoading: Toast;
 
   constructor(
-      private exchange: ExchangeProvider,
-      private exchangeSearch: ExchangeSearchProvider
+      private exchangeHttp: ExchangeProvider,
+      private exchangeSearch: ExchangeSearchProvider,
+      private toastCtrl: ToastController,
+      private app: App
   ) {
+  }
+
+  startLoading() {
+    if (this.toastLoading) {
+        this.toastLoading.dismiss();
+    }
+
+    this.toastLoading = this.toastCtrl.create({
+        message: "Carregando..."
+    });
+    this.toastLoading.present();
+  }/**/
+
+  finishLoading() {
+      this.toastLoading.dismiss();
   }
 
   ngOnInit(): void {
       this.exchangeSearch.onUpdate.subscribe(() => {
+          this.startLoading();
+          this.reset();
           this.getExchanges()
-              .subscribe(exchanges => this.exchanges = exchanges);
+              .subscribe(exchanges => {
+                  this.finishLoading();
+                  this.exchanges = exchanges
+              }, () => this.finishLoading());
       });
       this.getExchanges()
           .subscribe(exchanges => this.exchanges = exchanges);
@@ -50,7 +74,7 @@ export class ExchangeListComponent implements OnInit{
   }
 
   getExchanges() {
-      return this.exchange.list(this.page);
+      return this.exchangeHttp.list(this.page);
   }
 
   doRefresh(refresher: Refresher) {
@@ -66,4 +90,7 @@ export class ExchangeListComponent implements OnInit{
       this.canMoreExchanges = true;
   }
 
+  openExchangeDetail(exchangeId) {
+      this.app.getRootNav().push(ExchangeDetailPage, {exchange: exchangeId});
+  }
 }

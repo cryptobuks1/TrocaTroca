@@ -1,0 +1,29 @@
+<!--
+  Generated template for the ExchangeDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="green-dark">
+    <ion-title>Troca nº {{exchangeData?.id}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-title>{{exchangeData?.status.status_name}}</ion-card-title>
+    <ion-card-content>
+        <h1>Unidade: <strong>{{exchangeData?.unit.unit_name}}</strong></h1>
+        <h1>Setor: <strong>{{exchangeData?.sector.sector_name}}</strong></h1>
+        <h1>Usuário: <strong>{{exchangeData?.user1.username}}</strong></h1>
+        <h1>Grupo: <strong>{{exchangeData?.group1.group_name}}</strong></h1>
+        <h1>Tipo: <strong>{{exchangeData?.type1.type_name}}</strong></h1>
+        <h1>Usuário: <strong>{{exchangeData?.user2.username}}</strong></h1>
+        <h1>Grupo: <strong>{{exchangeData?.group2.group_name}}</strong></h1>
+        <h1>Tipo: <strong>{{exchangeData?.type2.type_name}}</strong></h1>
+        <h1>Data: <strong>{{exchangeData?.date | date: "dd/MM/yyyy"}}</strong></h1>
+        <h1>Turno: <strong>{{exchangeData?.turn.turn_name}}</strong></h1>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

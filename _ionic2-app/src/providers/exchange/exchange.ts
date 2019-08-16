@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Exchange} from "../../app/model";
+import {ExchangeSearchProvider} from "../exchange-search/exchange-search";
+import {map} from "rxjs/operators";
 
 /*
   Generated class for the ExchangeProvider provider.
@@ -15,16 +17,26 @@ export class ExchangeProvider {
 
     private baseUrl = `${environment.api.url}/exchanges`;
 
-    constructor(public http: HttpClient) {
-        console.log('Hello ExchangeProvider Provider');
+    constructor(
+        private http: HttpClient,
+        private exchangeSearch: ExchangeSearchProvider
+    ) {
     }
 
     list(page: number): Observable<{ data: Array<Exchange>, meta: any }> {
         const fromObject = {
-            page
+            page,
+            'statuses[]': this.exchangeSearch.options.status,
+            sort: this.exchangeSearch.options.orderBy == 'latest' ? '-date' : 'date',
+            search: this.exchangeSearch.options.search
         };
         const params = new HttpParams({fromObject: (<any>fromObject)})
-        return this.http.get<{ data: Array<Exchange>, meta: any }>(this.baseUrl, {params});
+        return this.http.get<{ data: Array<Exchange>, meta: any }>(`${this.baseUrl}/all`, {params});
+    }
+
+    get(id: number): Observable<{ exchange: Exchange}> {
+        return this.http.get<{ data: any } >(`${this.baseUrl}/${id}`)
+            .pipe(map(response => response.data));
     }
 
 }

@@ -3,7 +3,6 @@ import {Exchange} from "../../../../model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
 import {ExchangeHttpService} from "../../../../services/http/exchange-http.service";
-import set = Reflect.set;
 
 @Component({
   selector: 'exchange-view-modal',

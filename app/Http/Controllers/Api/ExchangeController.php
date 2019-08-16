@@ -12,6 +12,7 @@ use TrocaTroca\Events\ExchangeCreatedEvent;
 use TrocaTroca\Events\ExchangeDeclinedEvent;
 use TrocaTroca\Http\Controllers\Controller;
 use TrocaTroca\Http\Filters\ExchangeFilter;
+use TrocaTroca\Http\Filters\ExchangeMobileFilter;
 use TrocaTroca\Http\Requests\ExchangeAuthorizeRequest;
 use TrocaTroca\Http\Requests\ExchangeCancelRequest;
 use TrocaTroca\Http\Requests\ExchangeConclusionRequest;
@@ -45,7 +46,12 @@ class ExchangeController extends Controller
      */
     public function indexAll()
     {
-        $exchanges = Exchange::all();
+        $filter = app(ExchangeMobileFilter::class);
+        //$filterQuery = Exchange::with('user1', 'user2', 'unit', 'sector', 'group1', 'turn', 'type1', 'status')->filtered($filter);
+        $filterQuery = Exchange::filtered($filter);
+        $exchanges = $filterQuery->paginate(15);
+        //$exchanges = $filter->hasFilterParameter() ? $filterQuery->get() : $filterQuery->paginate(15);
+        //$exchanges = Exchange::paginate(10);
         return ExchangeResource::collection($exchanges);
     }
 

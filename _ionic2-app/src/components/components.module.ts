@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
+import { ExchangeCreateComponent } from './exchange-create/exchange-create';
 
 @NgModule({
-	declarations: [],
+	declarations: [ExchangeCreateComponent],
 	imports: [],
-	exports: []
+	exports: [ExchangeCreateComponent]
 })
 export class ComponentsModule {}

@@ -22,6 +22,9 @@ import {ExchangeListComponent} from "../components/exchange-list/exchange-list";
 import {MoreOptionsComponent} from "../components/more-options/more-options";
 import {ExchangeSearchbarComponent} from "../components/exchange-searchbar/exchange-searchbar";
 import { ExchangeSearchProvider } from '../providers/exchange-search/exchange-search';
+import { StatusProvider } from '../providers/status/status';
+import {ExchangeSearchOptionsComponent} from "../components/exchange-search-options/exchange-search-options";
+import {ExchangeDetailPage} from "../pages/exchange-detail/exchange-detail";
 
 
 function jwtFactory(authService: AuthProvider) {
@@ -42,9 +45,11 @@ function jwtFactory(authService: AuthProvider) {
     ListPage,
     LoginPage,
     MainPage,
+    ExchangeDetailPage,
     ExchangeListComponent,
     MoreOptionsComponent,
     ExchangeSearchbarComponent,
+    ExchangeSearchOptionsComponent,
     ExchangeListPage
   ],
   imports: [
@@ -67,9 +72,11 @@ function jwtFactory(authService: AuthProvider) {
     ListPage,
     LoginPage,
     MainPage,
+    ExchangeDetailPage,
     ExchangeListComponent,
     MoreOptionsComponent,
     ExchangeSearchbarComponent,
+    ExchangeSearchOptionsComponent,
     ExchangeListPage
   ],
   providers: [
@@ -84,7 +91,8 @@ function jwtFactory(authService: AuthProvider) {
       multi: true
     },
     RedirectIfNotAuthProvider,
-    ExchangeSearchProvider
+    ExchangeSearchProvider,
+    StatusProvider
   ]
 })
 export class AppModule {}

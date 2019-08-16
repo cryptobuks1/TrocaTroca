@@ -91,7 +91,7 @@ export interface Status {
 }
 
 export interface Exchange {
-    id?: number;
+    id: number;
     unit: Unit;
     sector: Sector;
     user1: User;

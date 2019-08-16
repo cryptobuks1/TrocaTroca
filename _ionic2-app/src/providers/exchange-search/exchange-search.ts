@@ -13,7 +13,8 @@ export class ExchangeSearchProvider {
 
   options = {
     orderBy: 'latest',
-    search: ''
+    search: '',
+    status: []
   };
 
   onUpdate = new Subject<any>();

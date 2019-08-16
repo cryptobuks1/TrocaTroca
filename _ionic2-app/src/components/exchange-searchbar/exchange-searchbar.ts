@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {ExchangeSearchProvider} from "../../providers/exchange-search/exchange-search";
+import {ModalController} from "ionic-angular";
+import {ExchangeSearchOptionsComponent} from "../exchange-search-options/exchange-search-options";
 
 /**
  * Generated class for the ExchangeSearchbarComponent component.
@@ -16,7 +18,10 @@ export class ExchangeSearchbarComponent {
   @Output()
   onBack: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public exchangeSearch: ExchangeSearchProvider) {
+  constructor(
+      public exchangeSearch: ExchangeSearchProvider,
+      private modalCtrl: ModalController
+  ) {
   }
 
   back() {
@@ -27,4 +32,8 @@ export class ExchangeSearchbarComponent {
     this.exchangeSearch.onUpdate.next(true);
   }
 
+  openExchangeSearchbarOptions() {
+    const  modal = this.modalCtrl.create(ExchangeSearchOptionsComponent);
+    modal.present();
+  }
 }

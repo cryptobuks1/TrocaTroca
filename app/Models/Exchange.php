@@ -71,4 +71,8 @@ class Exchange extends Model
     {
         return $this->belongsTo(Status::class);
     }
+    public function statuses()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
