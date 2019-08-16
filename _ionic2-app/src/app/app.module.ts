@@ -29,6 +29,8 @@ import {ExchangeListCadastradaComponent} from "../components/exchange-list-cadas
 import {ExchangeConfirmDetailPage} from "../pages/exchange-confirm-detail/exchange-confirm-detail";
 import {ExchangeListConfirmedComponent} from "../components/exchange-list-confirmed/exchange-list-confirmed";
 import {ExchangeAuthorizeDetailPage} from "../pages/exchange-authorize-detail/exchange-authorize-detail";
+import {ExchangeListAuthorizedComponent} from "../components/exchange-list-authorized/exchange-list-authorized";
+import {ExchangeConclusionDetailPage} from "../pages/exchange-conclusion-detail/exchange-conclusion-detail";
 
 
 function jwtFactory(authService: AuthProvider) {
@@ -52,12 +54,14 @@ function jwtFactory(authService: AuthProvider) {
     ExchangeDetailPage,
     ExchangeConfirmDetailPage,
     ExchangeAuthorizeDetailPage,
+    ExchangeConclusionDetailPage,
     ExchangeListComponent,
     MoreOptionsComponent,
     ExchangeSearchbarComponent,
     ExchangeSearchOptionsComponent,
     ExchangeListCadastradaComponent,
     ExchangeListConfirmedComponent,
+    ExchangeListAuthorizedComponent,
     ExchangeListPage
   ],
   imports: [
@@ -83,12 +87,14 @@ function jwtFactory(authService: AuthProvider) {
     ExchangeDetailPage,
     ExchangeConfirmDetailPage,
     ExchangeAuthorizeDetailPage,
+    ExchangeConclusionDetailPage,
     ExchangeListComponent,
     MoreOptionsComponent,
     ExchangeSearchbarComponent,
     ExchangeSearchOptionsComponent,
     ExchangeListCadastradaComponent,
     ExchangeListConfirmedComponent,
+    ExchangeListAuthorizedComponent,
     ExchangeListPage
   ],
   providers: [

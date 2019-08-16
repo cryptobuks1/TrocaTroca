@@ -122,3 +122,20 @@ export interface ExchangeConfirm {
     status_id: number;
     date_confirmation: Date;
 }
+
+export interface ExchangeAuthorize {
+    id: number;
+    unit_id: number;
+    sector_id: number;
+    user1: User;
+    group1_id: number;
+    user2: User;
+    group2_id: number;
+    date: Date;
+    turn_id: number;
+    type1_id: number;
+    type2_id: number;
+    status_id: number;
+    date_confirmation: Date;
+    date_autorization: Date;
+}

@@ -2,7 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {Exchange, ExchangeConfirm} from "../../app/model";
+import {Exchange, ExchangeAuthorize, ExchangeConfirm} from "../../app/model";
 import {ExchangeSearchProvider} from "../exchange-search/exchange-search";
 import {map} from "rxjs/operators";
 import {SearchParams, SearchParamsBuilder} from "../../../../_angular-app/src/app/services/http/http-resource";
@@ -61,6 +61,19 @@ export class ExchangeProvider {
         });
     }
 
+    listAutorizadas(page: number): Observable<{ data: Array<ExchangeAuthorize>; meta: any }> {
+        const fromObject = {
+            page,
+            'statuses[]': this.exchangeSearch.options.status,
+            sort: this.exchangeSearch.options.orderBy == 'latest' ? '-date' : 'date',
+            search: this.exchangeSearch.options.search
+        };
+        const params = new HttpParams({fromObject: (<any>fromObject)})
+        return this.http.get<{ data: Array<ExchangeAuthorize>, meta: any }>(`${this.baseUrl}/authorize`, {
+            params,
+        });
+    }
+
     get(id: number): Observable<{ exchange: Exchange}> {
         return this.http.get<{ data: any } >(`${this.baseUrl}/${id}`)
             .pipe(map(response => response.data));
@@ -72,6 +85,11 @@ export class ExchangeProvider {
     }
 
     getConfirmadas(id: number): Observable<{ exchangeConfirmada: ExchangeConfirm}> {
+        return this.http.get<{ data: any } >(`${this.baseUrl}/${id}`)
+            .pipe(map(response => response.data));
+    }
+
+    getAutorizadas(id: number): Observable<{ exchangeAutorizada: ExchangeAuthorize}> {
         return this.http.get<{ data: any } >(`${this.baseUrl}/${id}`)
             .pipe(map(response => response.data));
     }
