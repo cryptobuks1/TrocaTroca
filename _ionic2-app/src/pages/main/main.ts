@@ -5,6 +5,7 @@ import {RedirectIfNotAuthProvider} from "../../providers/auth/redirect-if-not-au
 import {MoreOptionsComponent} from "../../components/more-options/more-options";
 import {SuperTabs} from "ionic2-super-tabs";
 import {ExchangeListCadastradaComponent} from "../../components/exchange-list-cadastrada/exchange-list-cadastrada";
+import {ExchangeListConfirmedComponent} from "../../components/exchange-list-confirmed/exchange-list-confirmed";
 
 /**
  * Generated class for the MainPage page.
@@ -22,6 +23,7 @@ export class MainPage {
 
   enchangeList = ExchangeListComponent;
   exchangeListCadastrada = ExchangeListCadastradaComponent;
+  exchangeListConfirmada = ExchangeListConfirmedComponent;
 
   canShowSearchbar = false;
 
@@ -50,11 +52,11 @@ export class MainPage {
 
   get canShowSearchIcon() {
     const superTab = this.superTabs.getActiveTab();
-    return superTab.tabId === "exchanges" || superTab.tabId === "exchangesCadastradas";
+    return superTab.tabId === "exchanges" || superTab.tabId === "exchangesCadastradas" || superTab.tabId === "exchangesConfirmadas";
   }
 
   onTabSelect(event) {
-    if (event.id !== "exchanges" || event.id !== "exchangesCadastradas") {
+    if (event.id !== "exchanges" || event.id !== "exchangesCadastradas"|| event.id !== "exchangesConfirmadas") {
       this.canShowSearchbar = false;
     }
   }

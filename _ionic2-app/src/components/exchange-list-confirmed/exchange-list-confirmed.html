@@ -1,0 +1,22 @@
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="Puxe para atualizar" refreshingText="Carregando..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row *ngFor="let exchange of exchangesConfirmadas.data">
+      <ion-col>
+        <ion-card (click)="openExchangeAuthorizeDetail(exchange.id)">
+          <ion-card-content>
+            <ion-card-title>{{exchange.user1.username | slice:0:12}}</ion-card-title>
+            <ion-card-title>{{exchange.user2.username | slice:0:12}}</ion-card-title>
+            <h1>{{exchange.date_confirmation | date: 'dd/MM/yyyy'}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="canMoreExchanges">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+

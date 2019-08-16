@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ExchangeConfirmDetailPage page.
+  Generated template for the ExchangeAuthorizeDetailPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -22,10 +22,11 @@
       <h1>Grupo: <strong>{{exchangeData?.group2.group_name}}</strong></h1>
       <h1>Tipo: <strong>{{exchangeData?.type2.type_name}}</strong></h1>
       <h1>Data: <strong>{{exchangeData?.date | date: "dd/MM/yyyy"}}</strong></h1>
+      <h1>Data de Confirmação: <strong>{{exchangeData?.date_confirmation | date: "dd/MM/yyyy"}}</strong></h1>
       <h1>Turno: <strong>{{exchangeData?.turn.turn_name}}</strong></h1>
       <p text-center>
-        <button ion-button color="green-dark">Confirmar</button>
-        <button ion-button color="danger">Rejeitar</button>
+        <button ion-button color="green-dark">Autorizar</button>
+        <button ion-button color="danger">Cancelar</button>
       </p>
     </ion-card-content>
   </ion-card>
