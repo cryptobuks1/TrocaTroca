@@ -20,7 +20,7 @@
 </ion-header>
 
 <ion-content class="hide-scroll-content">
-  <super-tabs toolbarBackground="green-dark" toolbarColor="light" indicatorColor="light" (tabSelect)="onTabSelect($event)">
+  <super-tabs toolbarBackground="green-dark" toolbarColor="light" indicatorColor="light" (tabSelect)="onTabSelect($event)" >
     <super-tab id="exchangeCreate" [root]="exchangeCreate" title="Criar"></super-tab>
     <super-tab id="exchanges" [root]="enchangeList" title="Trocas"></super-tab>
     <super-tab id="exchangesCadastradas" [root]="exchangeListCadastrada" title="Confirmar"></super-tab>

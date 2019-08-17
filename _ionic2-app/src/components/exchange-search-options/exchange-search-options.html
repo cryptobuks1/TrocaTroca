@@ -38,7 +38,7 @@
   </ion-item>
   <ion-item color="green-dark">
     <ion-label color="light">Situação</ion-label>
-    <ion-select [(ngModel)]="exchangeSearch.options.statuses" multiple="true" cancelText="Cancelar" okText="Ok">
+    <ion-select [(ngModel)]="exchangeSearch.options.status" multiple="true" cancelText="Cancelar" okText="Ok">
       <ion-option *ngFor="let status of statuses" [value]="status.id">{{status.status_name}}</ion-option>
     </ion-select>
   </ion-item>

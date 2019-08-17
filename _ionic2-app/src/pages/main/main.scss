@@ -2,4 +2,19 @@ page-main {
   .hide-content>.scroll-content{
     overflow-y: hidden;
   }
+
+  super-tabs-toolbar {
+    > ion-toolbar.toolbar {
+      .tab-buttons-container {
+        .tab-buttons {
+          super-tab-button {
+            font-size: 11px;
+            ion-icon {
+              font-size: 29px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

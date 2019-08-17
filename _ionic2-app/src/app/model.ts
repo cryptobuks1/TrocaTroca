@@ -1,5 +1,5 @@
 export interface State {
-    id?: number;
+    id: number;
     state_name: string;
     initials: string;
     readonly created_at?: {date: string};
@@ -7,7 +7,7 @@ export interface State {
 }
 
 export interface City {
-    id?: number;
+    id: number;
     city_name: string;
     state: State;
     readonly created_at?: {date: string};
@@ -15,7 +15,7 @@ export interface City {
 }
 
 export interface CityUpdated {
-    id?: number;
+    id: number;
     city_name: string;
     state_id: number;
     readonly created_at?: {date: string};
@@ -23,14 +23,14 @@ export interface CityUpdated {
 }
 
 export interface Sector {
-    id?: number;
+    id: number;
     sector_name: string;
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
 
 export interface Unit {
-    id?: number;
+    id: number;
     unit_name: string;
     city: City;
     readonly created_at?: {date: string};
@@ -44,7 +44,7 @@ export interface UnitSector {
 
 
 export interface User {
-    id?: number;
+    id: number;
     unit: Unit;
     sector: Sector;
     key: string;
@@ -63,7 +63,7 @@ export interface UserProfile {
 }
 
 export interface UserLogado {
-    id?: number;
+    id: number;
     key: string;
     email: string;
     username: string;
@@ -71,27 +71,27 @@ export interface UserLogado {
 }
 
 export interface Group {
-    id?: number;
+    id: number;
     group_name: string;
 }
 
 export interface Turn {
-    id?: number;
+    id: number;
     turn_name: string;
 }
 
 export interface Type {
-    id?: number;
+    id: number;
     type_name: string;
 }
 
 export interface Status {
-    id?: number;
+    id: number;
     status_name: string;
 }
 
 export interface Exchange {
-    id: number;
+    id?: number;
     unit: Unit;
     sector: Sector;
     user1: User;
@@ -141,7 +141,7 @@ export interface ExchangeAuthorize {
 }
 
 export interface ExchangeConclusion {
-    id?: number;
+    id: number;
     unit_id: number;
     sector_id: number;
     user1: User;
@@ -157,7 +157,7 @@ export interface ExchangeConclusion {
 }
 
 export interface ExchangeCancel {
-    id?: number;
+    id: number;
     unit_id: number;
     sector_id: number;
     user1: User;
@@ -173,7 +173,7 @@ export interface ExchangeCancel {
 }
 
 export interface ExchangePending {
-    id?: number;
+    id: number;
     unit_id: number;
     sector_id: number;
     user1: User;
@@ -189,7 +189,7 @@ export interface ExchangePending {
 }
 
 export interface ExchangeDecline {
-    id?: number;
+    id: number;
     unit_id: number;
     sector_id: number;
     user1: User;

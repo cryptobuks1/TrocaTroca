@@ -26,7 +26,19 @@ export class ExchangeCreateComponent implements OnInit {
     groups: Group[] = [];
     turns: Turn[] = [];
     types: Type[] = [];
-    exchange: Exchange;
+    exchange: Exchange = {
+        unit: null,
+        sector: null,
+        user1: null,
+        group1: null,
+        user2: null,
+        group2: null,
+        date: null,
+        turn: null,
+        type1: null,
+        type2: null,
+        status: null
+    };
 
     constructor(
         private unitHttp: UnitProvider,
