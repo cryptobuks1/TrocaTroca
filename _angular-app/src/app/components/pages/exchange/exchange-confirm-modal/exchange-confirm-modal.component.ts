@@ -38,8 +38,8 @@ export class ExchangeConfirmModalComponent implements OnInit {
         // @ts-ignore
         this.exchangeConfirm.date_confirmation = moment().format('YYYY-MM-DD');
         this.exchangeHttp.updateConfirm(this._exchangeId, this.exchangeConfirm)
-            .subscribe((city) => {
-                this.onSuccess.emit(city);
+            .subscribe((exchange) => {
+                this.onSuccess.emit(exchange);
                 this.modal.hide();
             }, error => this.onError.emit(error));
     }

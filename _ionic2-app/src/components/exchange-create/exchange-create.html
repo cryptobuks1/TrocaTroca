@@ -1,0 +1,67 @@
+<ion-content>
+  <ion-grid>
+      <form>
+          <ion-item color="green-dark">
+              <ion-label color="light">Unidade</ion-label>
+              <ion-select [(ngModel)]="exchange.unit" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let unit of units" [value]="unit.id">{{unit.unit_name}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Setor</ion-label>
+              <ion-select [(ngModel)]="exchange.sector" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let sector of sectors" [value]="sector.id">{{sector.sector_name}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Usuário</ion-label>
+              <ion-select [(ngModel)]="exchange.user1" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let user of users" [value]="user.id">{{user.username}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Grupo</ion-label>
+              <ion-select [(ngModel)]="exchange.group1" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let group of groups" [value]="group.id">{{group.group_name}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Usuário</ion-label>
+              <ion-select [(ngModel)]="exchange.user2" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let user of users" [value]="user.id">{{user.username}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Grupo</ion-label>
+              <ion-select [(ngModel)]="exchange.group2" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let group of groups" [value]="group.id">{{group.group_name}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Data</ion-label>
+              <ion-datetime [(ngModel)]="exchange.date" displayFormat="DD/MM/YYYY" min="2019" max="2100"></ion-datetime>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Turno</ion-label>
+              <ion-select [(ngModel)]="exchange.turn" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let turn of turns" [value]="turn.id">{{turn.turn_name}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Tipo</ion-label>
+              <ion-select [(ngModel)]="exchange.type1" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let type of types" [value]="type.id">{{type.type_name}}</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item color="green-dark">
+              <ion-label color="light">Tipo</ion-label>
+              <ion-select [(ngModel)]="exchange.type2" cancelText="Cancelar" okText="Ok">
+                  <ion-option *ngFor="let type of types" [value]="type.id">{{type.type_name}}</ion-option>
+              </ion-select>
+          </ion-item>
+      </form>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+    <button ion-button block color="green-dark" outline no-margin (click)="submit()">Cadastrar Troca</button>
+</ion-footer>

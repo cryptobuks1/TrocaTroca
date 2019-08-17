@@ -25,8 +25,8 @@
       <h1>Data de Confirmação: <strong>{{exchangeData?.date_confirmation | date: "dd/MM/yyyy"}}</strong></h1>
       <h1>Turno: <strong>{{exchangeData?.turn.turn_name}}</strong></h1>
       <p text-center>
-        <button ion-button color="green-dark">Autorizar</button>
-        <button ion-button color="danger">Cancelar</button>
+        <button ion-button color="green-dark" (click)="authorize()">Autorizar</button>
+        <button ion-button color="danger" (click)="cancel()">Cancelar</button>
       </p>
     </ion-card-content>
   </ion-card>

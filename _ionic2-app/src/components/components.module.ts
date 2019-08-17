@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ExchangeCreateComponent } from './exchange-create/exchange-create';
-import { ExchangeListCadastradaComponent } from './exchange-list-cadastrada/exchange-list-cadastrada';
-import { ExchangeListConfirmedComponent } from './exchange-list-confirmed/exchange-list-confirmed';
-import { ExchangeListAuthorizedComponent } from './exchange-list-authorized/exchange-list-authorized';
 
 @NgModule({
-	declarations: [ExchangeCreateComponent],
+	declarations: [],
 	imports: [],
-	exports: [ExchangeCreateComponent]
+	exports: []
 })
 export class ComponentsModule {}

@@ -26,8 +26,8 @@
       <h1>Data de Autorização: <strong>{{exchangeData?.date_autorization | date: "dd/MM/yyyy"}}</strong></h1>
       <h1>Turno: <strong>{{exchangeData?.turn.turn_name}}</strong></h1>
       <p text-center>
-        <button ion-button color="green-dark">Concluir</button>
-        <button ion-button color="danger">Pendente</button>
+        <button ion-button color="green-dark" (click)="conclusion()">Concluir</button>
+        <button ion-button color="danger" (click)="pending()">Pendente</button>
       </p>
     </ion-card-content>
   </ion-card>

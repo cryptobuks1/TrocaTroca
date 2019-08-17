@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Exchange} from "../../app/model";
+import {Exchange, ExchangeConfirm, ExchangeDecline} from "../../app/model";
 import {ExchangeProvider} from "../../providers/exchange/exchange";
+import * as moment from 'moment';
 
 /**
  * Generated class for the ExchangeConfirmDetailPage page.
@@ -19,6 +20,8 @@ export class ExchangeConfirmDetailPage {
 
     exchangeId: number;
     exchangeData: {exchangeCadastrada: Exchange};
+    exchangeConfirm: ExchangeConfirm;
+    exchangeDecline: ExchangeDecline;
 
     constructor(
         public navCtrl: NavController,
@@ -42,6 +45,22 @@ export class ExchangeConfirmDetailPage {
             .subscribe( data => {
                 this.exchangeData = data;
             });
+    }
+
+    confirm() {
+        this.exchangeConfirm.status_id = 5;
+        // @ts-ignore
+        this.exchangeConfirm.date_confirmation = moment().format('YYYY-MM-DD');
+        this.exchangeHttp.updateConfirm(this.exchangeId, this.exchangeConfirm)
+            .subscribe(exchangeConfirm => this.exchangeConfirm = exchangeConfirm)
+    }
+
+    decline() {
+        this.exchangeDecline.status_id = 7;
+        // @ts-ignore
+        this.exchangeDecline.date_declination = moment().format('YYYY-MM-DD');
+        this.exchangeHttp.updateDecline(this.exchangeId, this.exchangeDecline)
+            .subscribe(exchangeDecline => this.exchangeDecline = exchangeDecline)
     }
 
 }

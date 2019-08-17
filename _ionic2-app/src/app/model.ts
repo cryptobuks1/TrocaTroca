@@ -139,3 +139,67 @@ export interface ExchangeAuthorize {
     date_confirmation: Date;
     date_autorization: Date;
 }
+
+export interface ExchangeConclusion {
+    id?: number;
+    unit_id: number;
+    sector_id: number;
+    user1: User;
+    group1_id: number;
+    user2: User;
+    group2_id: number;
+    date: Date;
+    turn_id: number;
+    type1_id: number;
+    type2_id: number;
+    status_id: number;
+    date_conclusion: Date;
+}
+
+export interface ExchangeCancel {
+    id?: number;
+    unit_id: number;
+    sector_id: number;
+    user1: User;
+    group1_id: number;
+    user2: User;
+    group2_id: number;
+    date: Date;
+    turn_id: number;
+    type1_id: number;
+    type2_id: number;
+    status_id: number;
+    date_cancelation: Date;
+}
+
+export interface ExchangePending {
+    id?: number;
+    unit_id: number;
+    sector_id: number;
+    user1: User;
+    group1_id: number;
+    user2: User;
+    group2_id: number;
+    date: Date;
+    turn_id: number;
+    type1_id: number;
+    type2_id: number;
+    status_id: number;
+    date_pending: Date;
+}
+
+export interface ExchangeDecline {
+    id?: number;
+    unit_id: number;
+    sector_id: number;
+    user1: User;
+    group1_id: number;
+    user2: User;
+    group2_id: number;
+    date: Date;
+    turn_id: number;
+    type1_id: number;
+    type2_id: number;
+    status_id: number;
+    date_declination: Date;
+}

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Exchange, ExchangeConfirm} from "../../app/model";
+import {Exchange, ExchangeAuthorize, ExchangeCancel, ExchangeConfirm} from "../../app/model";
 import {ExchangeProvider} from "../../providers/exchange/exchange";
+import * as moment from "moment";
 
 /**
  * Generated class for the ExchangeAuthorizeDetailPage page.
@@ -19,6 +20,8 @@ export class ExchangeAuthorizeDetailPage {
 
     exchangeId: number;
     exchangeData: {exchangeConfirmada: ExchangeConfirm};
+    exchangeAuthorize: ExchangeAuthorize;
+    exchangeCancel: ExchangeCancel;
 
     constructor(
         public navCtrl: NavController,
@@ -42,6 +45,22 @@ export class ExchangeAuthorizeDetailPage {
             .subscribe( data => {
                 this.exchangeData = data;
             });
+    }
+
+    authorize() {
+        this.exchangeAuthorize.status_id = 1;
+        // @ts-ignore
+        this.exchangeAuthorize.date_autorization = moment().format('YYYY-MM-DD');
+        this.exchangeHttp.updateAutorize(this.exchangeId, this.exchangeAuthorize)
+            .subscribe(exchangeAuthorize => this.exchangeAuthorize = exchangeAuthorize)
+    }
+
+    cancel() {
+        this.exchangeCancel.status_id = 3;
+        // @ts-ignore
+        this.exchangeCancel.date_cancelation = moment().format('YYYY-MM-DD');
+        this.exchangeHttp.updateCancel(this.exchangeId, this.exchangeCancel)
+            .subscribe(exchangeCancel => this.exchangeCancel = exchangeCancel)
     }
 
 }

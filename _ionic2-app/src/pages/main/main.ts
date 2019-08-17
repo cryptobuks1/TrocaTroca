@@ -7,6 +7,7 @@ import {SuperTabs} from "ionic2-super-tabs";
 import {ExchangeListCadastradaComponent} from "../../components/exchange-list-cadastrada/exchange-list-cadastrada";
 import {ExchangeListConfirmedComponent} from "../../components/exchange-list-confirmed/exchange-list-confirmed";
 import {ExchangeListAuthorizedComponent} from "../../components/exchange-list-authorized/exchange-list-authorized";
+import {ExchangeCreateComponent} from "../../components/exchange-create/exchange-create";
 
 /**
  * Generated class for the MainPage page.
@@ -22,6 +23,7 @@ import {ExchangeListAuthorizedComponent} from "../../components/exchange-list-au
 })
 export class MainPage {
 
+  exchangeCreate = ExchangeCreateComponent;
   enchangeList = ExchangeListComponent;
   exchangeListCadastrada = ExchangeListCadastradaComponent;
   exchangeListConfirmada = ExchangeListConfirmedComponent;

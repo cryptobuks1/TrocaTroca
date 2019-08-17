@@ -31,6 +31,13 @@ import {ExchangeListConfirmedComponent} from "../components/exchange-list-confir
 import {ExchangeAuthorizeDetailPage} from "../pages/exchange-authorize-detail/exchange-authorize-detail";
 import {ExchangeListAuthorizedComponent} from "../components/exchange-list-authorized/exchange-list-authorized";
 import {ExchangeConclusionDetailPage} from "../pages/exchange-conclusion-detail/exchange-conclusion-detail";
+import {ExchangeCreateComponent} from "../components/exchange-create/exchange-create";
+import { UnitProvider } from '../providers/unit/unit';
+import { UserProvider } from '../providers/user/user';
+import { SectorProvider } from '../providers/sector/sector';
+import { GroupProvider } from '../providers/group/group';
+import { TurnProvider } from '../providers/turn/turn';
+import { TypeProvider } from '../providers/type/type';
 
 
 function jwtFactory(authService: AuthProvider) {
@@ -62,6 +69,7 @@ function jwtFactory(authService: AuthProvider) {
     ExchangeListCadastradaComponent,
     ExchangeListConfirmedComponent,
     ExchangeListAuthorizedComponent,
+    ExchangeCreateComponent,
     ExchangeListPage
   ],
   imports: [
@@ -95,6 +103,7 @@ function jwtFactory(authService: AuthProvider) {
     ExchangeListCadastradaComponent,
     ExchangeListConfirmedComponent,
     ExchangeListAuthorizedComponent,
+    ExchangeCreateComponent,
     ExchangeListPage
   ],
   providers: [
@@ -103,6 +112,12 @@ function jwtFactory(authService: AuthProvider) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     ExchangeProvider,
+    UnitProvider,
+    SectorProvider,
+    UserProvider,
+    GroupProvider,
+    TurnProvider,
+    TypeProvider,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RefreshTokenInterceptor,
@@ -110,7 +125,13 @@ function jwtFactory(authService: AuthProvider) {
     },
     RedirectIfNotAuthProvider,
     ExchangeSearchProvider,
-    StatusProvider
+    StatusProvider,
+    UnitProvider,
+    UserProvider,
+    SectorProvider,
+    GroupProvider,
+    TurnProvider,
+    TypeProvider
   ]
 })
 export class AppModule {}

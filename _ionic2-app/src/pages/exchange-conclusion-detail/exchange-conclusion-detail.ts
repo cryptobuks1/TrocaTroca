@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {ExchangeAuthorize} from "../../app/model";
+import {ExchangeAuthorize, ExchangeConclusion, ExchangePending} from "../../app/model";
 import {ExchangeProvider} from "../../providers/exchange/exchange";
+import * as moment from "moment";
 
 /**
  * Generated class for the ExchangeConclusionDetailPage page.
@@ -19,6 +20,8 @@ export class ExchangeConclusionDetailPage {
 
     exchangeId: number;
     exchangeData: {exchangeAutorizada: ExchangeAuthorize};
+    exchangeConclusion: ExchangeConclusion;
+    exchangePending: ExchangePending;
 
     constructor(
         public navCtrl: NavController,
@@ -42,6 +45,22 @@ export class ExchangeConclusionDetailPage {
             .subscribe( data => {
                 this.exchangeData = data;
             });
+    }
+
+    conclusion() {
+        this.exchangeConclusion.status_id = 4;
+        // @ts-ignore
+        this.exchangeConclusion.date_conclusion = moment().format('YYYY-MM-DD');
+        this.exchangeHttp.updateConclusion(this.exchangeId, this.exchangeConclusion)
+            .subscribe(exchangeConclusion => this.exchangeConclusion = exchangeConclusion)
+    }
+
+    pending() {
+        this.exchangePending.status_id = 6;
+        // @ts-ignore
+        this.exchangePending.date_pending = moment().format('YYYY-MM-DD');
+        this.exchangeHttp.updatePending(this.exchangeId, this.exchangePending)
+            .subscribe(exchangePending => this.exchangePending = exchangePending)
     }
 
 }
